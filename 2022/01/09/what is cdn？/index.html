@@ -63,18 +63,21 @@
         </section>
         <article class="post-content">
         
-            <h1 id="到底什么是cdn？"><a href="#到底什么是cdn？" class="headerlink" title="到底什么是cdn？"></a>到底什么是cdn？</h1><p>原理：<br>1.最初的核心理念，就是将内容缓存在终端用户附近，<code>CDN——Content Delivery Network，内容分发网络</code><br><img src="https://img-blog.csdnimg.cn/b346477399744074b1b53f27e83f9096.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_19,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br> 具体来说，CDN就是采用更多的缓存服务器（CDN边缘节点），分布放在用户访问相对集中的地区或网络中。当用户访问网站时，利用全局负载技术，<code>将用户的访问指向距离最近的缓存服务器上，由缓存服务器响应用户请求</code></p>
+            <h1 id="到底什么是cdn？"><a href="#到底什么是cdn？" class="headerlink" title="到底什么是cdn？"></a>到底什么是cdn？</h1><p><strong>一般上线一个网站</strong>：一定要有一台服务器，存放网站文件，再买一个域名，通过DNS域名解析设置，把域名指向服务器的IP地址，配置好服务器我们就能用浏览器通过网络访问域名打开网站</p>
+<p>但随着互联网和快速增长和中小型网站的出现，有两个致命的问题：<br>1.<strong>物理位置</strong>，离服务器相对远的，速度就越慢<br>2.一旦<strong>同时访问的人多</strong>，即使距离很近，但速度依旧很慢</p>
+<p>而已CDN的出现可以解决上述问题，让每一个网站实现服务器自由：</p>
+<h2 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h2><p>1.最初的核心理念，就是将内容缓存在终端用户附近，<code>CDN——Content Delivery Network，内容分发网络</code><br><img src="https://img-blog.csdnimg.cn/b346477399744074b1b53f27e83f9096.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_19,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br>    具体来说，CDN就是采用更多的缓存服务器（CDN边缘节点），分布放在用户访问相对集中的地区或网络中。当用户访问网站时，利用全局负载技术，<code>将用户的访问指向距离最近的缓存服务器上，由缓存服务器响应用户请求</code><br>    和电商的仓储配送机制非常类似，而近几年电商又新出了前置仓，速度更快</p>
 <p><strong>CDN = 更智能的镜像+缓存+流量导流</strong></p>
-<p><strong>网页内容：静态内容 + 动态内容</strong><br>静态内容：长期不需要改变的内容<br>动态内容：经常需要改变的，固定不了</p>
+<h2 id="网页内容：静态内容-动态内容"><a href="#网页内容：静态内容-动态内容" class="headerlink" title="网页内容：静态内容 + 动态内容"></a><strong>网页内容：静态内容 + 动态内容</strong></h2><p>静态内容：长期不需要改变的内容<br>动态内容：经常需要改变的，固定不了</p>
 <p><strong>注意</strong>：CDN并不是只能缓存视频内容，它还可以对网站的静态资源（例如各类型图片、html、css、js等）进行分发，对移动应用APP的静态内容（例如安装包apk文件、APP内的图片视频等）进行分发</p>
 <p>利用头部的cache-control，可以设置文件的缓存形式（知道哪些资源可以保存，哪些不能，哪些要保存多久等等）     </p>
-<p><strong>cdn分发内容的流程</strong>：<br>（静态）<br>1.cdn没有网站的源内容，因此源服务器就会把静态内容提前备份给CDN，push<br>2.用户需要访问网页时，就近的cdn服务器就会把静态内容提供给用户，不需要每次都劳烦源服务器<br>3.如果源服务器没有把静态内容提前备份给CDN，那么当用户访问时，CDN就得去源服务器索取相应的静态内容，pull<br>4.源服务器还可以让CDN备份，cdn得到内容以后再提供给用户，因为有了备份，其他同时做出请求的用户也可以马上拿到内容</p>
+<h2 id="cdn分发内容的流程："><a href="#cdn分发内容的流程：" class="headerlink" title="cdn分发内容的流程："></a><strong>cdn分发内容的流程</strong>：</h2><p>（静态）<br>1.cdn没有网站的源内容，因此源服务器就会把静态内容提前备份给CDN，push<br>2.用户需要访问网页时，就近的cdn服务器就会把静态内容提供给用户，不需要每次都劳烦源服务器<br>3.如果源服务器没有把静态内容提前备份给CDN，那么当用户访问时，CDN就得去源服务器索取相应的静态内容，pull<br>4.源服务器还可以让CDN备份，cdn得到内容以后再提供给用户，因为有了备份，其他同时做出请求的用户也可以马上拿到内容</p>
 <p><img src="https://img-blog.csdnimg.cn/d0fb39e7052c42fca4e6efe2b322f768.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
 <p><code>负载均衡：利用任播，把流量转移到另外没有超载的服务器</code></p>
 <p>还会采用TLS/SSL证书来给网站进行保护</p>
 <p><code>CDN还可以把文件压缩或者最小化</code></p>
-<p><strong>具体步骤</strong>：<br>① 当用户点击APP上的内容，APP会根据URL地址去本地DNS（域名解析系统）寻求IP地址解析<br>② 本地DNS系统会将域名的解析权交给CDN专用DNS服务器<br>③ CDN专用DNS服务器，将CDN的全局负载均衡设备IP地址返回用户<br>④ 用户向CDN的负载均衡设备发起内容URL访问请求。<br>⑤ CDN负载均衡设备根据用户IP地址，以及用户请求的内容URL，选择一台用户所属区域的缓存服务器<br>⑥ 负载均衡设备告诉用户这台缓存服务器的IP地址，让用户向所选择的缓存服务器发起请求<br>⑦ 用户向缓存服务器发起请求，缓存服务器响应用户请求，将用户所需内容传送到用户终端<br>⑧ 如果这台缓存服务器上并没有用户想要的内容，那么这台缓存服务器就要网站的源服务器请求内容<br>⑨ 源服务器返回内容给缓存服务器，缓存服务器发给用户，并根据用户自定义的缓存策略，判断要不要把内容缓存到缓存服务器上</p>
-<p><strong>CDN的优势</strong>：<br>1.<strong>加速了网站的访问</strong>——用户与内容之间的物理距离缩短，用户的等待时间也得以缩短<br>2.<strong>分发至不同线路的缓存服务器</strong>，也让跨运营商之间的访问得以加速<br>3.<strong>源服务器的IP被隐藏</strong>，受到攻击的概率会大幅下降<br>4.当某个服务器故障时，系统会调用临近的健康服务器，进行服务，<strong>避免对用户造成影响</strong></p>
+<h2 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤</strong>：</h2><p>① 当用户点击网站上的内容，浏览器会根据URL地址去本地DNS（域名解析系统）寻求IP地址解析<br>② 本地DNS系统会将域名的解析权交给CDN专用DNS服务器<br>③ CDN专用DNS服务器，将CDN的全局负载均衡设备IP地址返回用户<br>④ 用户向CDN的负载均衡设备发起内容URL访问请求。<br>⑤ CDN负载均衡设备根据用户IP地址，以及用户请求的内容URL，选择一台用户所属区域的cdn缓存服务器<br>⑥ 负载均衡设备告诉用户这台cdn缓存服务器的IP地址，让用户向所选择的cdn缓存服务器发起请求<br>⑦ 用户向cdn缓存服务器发起请求，cdn缓存服务器响应用户请求，将用户所需内容传送到用户终端<br>⑧ 如果这台缓存服务器上并没有用户想要的内容，那么这台缓存服务器就要网站的源服务器请求内容<br>⑨ 源服务器返回内容给缓存服务器，缓存服务器发给用户，并根据用户自定义的缓存策略，判断要不要把内容缓存到cdn缓存服务器上</p>
+<h2 id="CDN的优势："><a href="#CDN的优势：" class="headerlink" title="CDN的优势："></a><strong>CDN的优势</strong>：</h2><p>1.<strong>加速了网站的访问</strong>——用户与内容之间的物理距离缩短，用户的等待时间也得以缩短<br>2.<strong>分发至不同线路的缓存服务器</strong>，也让跨运营商之间的访问得以加速<br>3.<strong>源服务器的IP被隐藏</strong>，受到攻击的概率会大幅下降<br>4.当某个服务器故障时，系统会调用临近的健康服务器，进行服务，<strong>避免对用户造成影响</strong></p>
 
         </article>
         <section class="post-near">
