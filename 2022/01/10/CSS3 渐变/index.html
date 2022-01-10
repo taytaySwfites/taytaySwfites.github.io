@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>css3渐变 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="css3渐变"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=421787162,1051545340&fm=253&fmt=auto&app=120&f=PNG?w=899&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/css/">css</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>css3渐变</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.10</time>
+            
+                <span class="category"><a class="category-link" href="/categories/css/">css</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="一、线性渐变linear-gradient"><a href="#一、线性渐变linear-gradient" class="headerlink" title="一、线性渐变linear-gradient"></a>一、线性渐变linear-gradient</h2><p>为了创建一个线性渐变，必须至少定义两种颜色。这个颜色就是你想呈现的平稳过渡的颜色，同时也可以设置一个起点和一个方向（或一个角度）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(direction, color1, color2……)</span><br></pre></td></tr></table></figure>
+
+<p><br/><br/></p>
+<h3 id="例1：线性渐变—从上到下（默认情况下）"><a href="#例1：线性渐变—从上到下（默认情况下）" class="headerlink" title="例1：线性渐变—从上到下（默认情况下）"></a>例1：线性渐变—从上到下（默认情况下）</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.e1</span> &#123;</span><br><span class="line">    <span class="comment">/* 标准的语法 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(hotpink, deepskyblue);</span><br><span class="line">    <span class="comment">/* 谷歌，Safari */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(hotpink, deepskyblue);</span><br><span class="line">    <span class="comment">/* Opera */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(hotpink, deepskyblue);</span><br><span class="line">    <span class="comment">/* Firefox */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(hotpink, deepskyblue);</span><br><span class="line">    <span class="comment">/* IE */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-ms-linear-gradient</span>(hotpink, deepskyblue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/09bf822148d349d383540e7fb2449a18.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="例2：线性渐变—从右到左"><a href="#例2：线性渐变—从右到左" class="headerlink" title="例2：线性渐变—从右到左"></a>例2：线性渐变—从右到左</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.f1</span> &#123;</span><br><span class="line">    <span class="comment">/* –webkit前缀的浏览器要注意一下，假如默认情况下是to left，</span></span><br><span class="line"><span class="comment">    如果想要达到相同的效果，这里需要写right，否则渐变方向相反 */</span></span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to left, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(right, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(left, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-ms-linear-gradient</span>(left, red, pink, skyblue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/5ea8271d964e4b40a89450cfdcb1dbb7.png#pic_center" alt="在这里插入图片描述"></p>
+<p>另外需要注意的是：默认写法方向需要加to，而加浏览器前缀后，不需要加to</p>
+<h3 id="例3：线性渐变—对角-角度"><a href="#例3：线性渐变—对角-角度" class="headerlink" title="例3：线性渐变—对角/角度"></a>例3：线性渐变—对角/角度</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.g1</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to right bottom, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(left top, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(right bottom, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(right bottom, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-ms-linear-gradient</span>(right bottom, red, pink, skyblue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/1c45f617e1d8435e881299a1fa21f0c0.png#pic_center" alt="在这里插入图片描述"></p>
+<p>还可以使用角度达到同样效果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.h1</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">45deg</span>, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(<span class="number">45deg</span>, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(<span class="number">45deg</span>, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(<span class="number">45deg</span>, red, pink, skyblue);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-ms-linear-gradient</span>(<span class="number">45deg</span>, red, pink, skyblue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/0764442b74de46a39767bd9a458d0acc.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="例4：线性渐变—平铺-重复"><a href="#例4：线性渐变—平铺-重复" class="headerlink" title="例4：线性渐变—平铺/重复"></a>例4：线性渐变—平铺/重复</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.k1</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">repeating-linear-gradient</span>(<span class="number">0deg</span>, pink <span class="number">20px</span>, skyblue <span class="number">40px</span>);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-repeating-linear-gradient</span>(<span class="number">90deg</span>, pink <span class="number">20px</span>, skyblue <span class="number">40px</span>);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-repeating-linear-gradient</span>(<span class="number">0deg</span>, pink <span class="number">20px</span>, skyblue <span class="number">40px</span>);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-repeating-linear-gradient</span>(<span class="number">0deg</span>, pink <span class="number">20px</span>, skyblue <span class="number">40px</span>);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-ms-repeating-linear-gradient</span>(<span class="number">0deg</span>, pink <span class="number">20px</span>, skyblue <span class="number">40px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/ec471f9a9a3b446fbe0b64f335c50c4f.png#pic_center" alt="在这里插入图片描述"></p>
+<p>平铺个数的算法是：div的总高度/40-20<br>例子是div的高度是100px，所以平铺的个数为100/20=5个</p>
+<h3 id="例5：线性渐变—控制渐变的区域范围"><a href="#例5：线性渐变—控制渐变的区域范围" class="headerlink" title="例5：线性渐变—控制渐变的区域范围"></a>例5：线性渐变—控制渐变的区域范围</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.i1</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(pink <span class="number">10px</span>, skyblue <span class="number">100px</span>);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(pink <span class="number">10px</span>, skyblue <span class="number">100px</span>);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-o-linear-gradient</span>(pink <span class="number">10px</span>, skyblue <span class="number">100px</span>);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-moz-linear-gradient</span>(pink <span class="number">10px</span>, skyblue <span class="number">100px</span>);</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-ms-linear-gradient</span>(pink <span class="number">10px</span>, skyblue <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/004f8901a9ab42bc9dfbfb99728c62c7.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="例6：用线性渐变写绿草"><a href="#例6：用线性渐变写绿草" class="headerlink" title="例6：用线性渐变写绿草"></a>例6：用线性渐变写绿草</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item11</span> &#123;</span><br><span class="line">     <span class="attribute">width</span>: <span class="number">900px</span>;</span><br><span class="line">     <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">     <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">45deg</span>, green <span class="number">40px</span>, transparent <span class="number">40px</span>);</span><br><span class="line">     <span class="attribute">background-size</span>: <span class="number">30px</span> <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/98c3c1c0122343bdba102751985c1eef.png#pic_center" alt="在这里插入图片描述"></p>
+<p><br/><br/><br/><br/></p>
+<h2 id="二、径向渐变radial-gradient"><a href="#二、径向渐变radial-gradient" class="headerlink" title="二、径向渐变radial-gradient"></a>二、径向渐变radial-gradient</h2><p>径向渐变不同于线性渐变，线性渐变是从“一个方向”向“另一个方向”的颜色渐变，而径向渐变是从“一个点”向四周的颜色渐变</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(center, shape, size, start-color, ..., last-color);</span><br><span class="line">或</span><br><span class="line"><span class="attribute">background</span>: <span class="built_in">-webkit-radial-gradient</span>(center, shape, size, start-color, ..., last-color);</span><br></pre></td></tr></table></figure>
+
+<p>① center：渐变起点的位置，可以为百分比，默认是图形的正中心<br>② shape：渐变的形状，ellipse表示椭圆形，circle表示圆形。默认为ellipse，如果元素形状为正方形的元素，则ellipse和circle显示一样<br>③ size：渐变的大小，即渐变到哪里停止，它有四个值。 closest-side：最近边； farthest-side：最远边； closest-corner：最近角； farthest-corner：最远角</p>
+<p><br/><br/></p>
+<h3 id="例1：多颜色点均匀分布"><a href="#例1：多颜色点均匀分布" class="headerlink" title="例1：多颜色点均匀分布"></a>例1：多颜色点均匀分布</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a2</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-radial-gradient</span>(<span class="number">50%</span> <span class="number">50%</span>, farthest-corner, purple, pink, skyblue);</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="selector-class">.a3</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-radial-gradient</span>(center, farthest-corner, purple, pink, skyblue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/972da0fb1852431ea2498753090d9e3f.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="例2：多颜色节点不均匀分布"><a href="#例2：多颜色节点不均匀分布" class="headerlink" title="例2：多颜色节点不均匀分布"></a>例2：多颜色节点不均匀分布</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a4</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(purple <span class="number">10%</span>, pink <span class="number">80%</span>, skyblue <span class="number">10%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/c9a899d7c9124f5db091cbfd1b4403f9.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="例3：设置渐变形状"><a href="#例3：设置渐变形状" class="headerlink" title="例3：设置渐变形状"></a>例3：设置渐变形状</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a5</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(circle, purple, pink, skyblue);</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="selector-class">.a6</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(ellipse, purple, pink, skyblue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/199a8a5047fa4270b22722453a389257.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="例4：不同尺寸的渐变"><a href="#例4：不同尺寸的渐变" class="headerlink" title="例4：不同尺寸的渐变"></a>例4：不同尺寸的渐变</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.b1</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-radial-gradient</span>(<span class="number">60%</span> <span class="number">40%</span>, closest-side, purple, pink, skyblue, palegoldenrod);</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="selector-class">.b2</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-radial-gradient</span>(<span class="number">60%</span> <span class="number">40%</span>, farthest-side, purple, pink, skyblue, palegoldenrod);</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="selector-class">.b3</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-radial-gradient</span>(<span class="number">60%</span> <span class="number">40%</span>, closest-corner, purple, pink, skyblue, palegoldenrod);</span><br><span class="line">&#125;</span><br><span class="line">        </span><br><span class="line"><span class="selector-class">.b4</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">-webkit-radial-gradient</span>(<span class="number">60%</span> <span class="number">40%</span>, farthest-corner, purple, pink, skyblue, palegoldenrod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/40361e6eb066476495cbab8c1fa7a49b.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="例5：重复性径向渐变"><a href="#例5：重复性径向渐变" class="headerlink" title="例5：重复性径向渐变"></a>例5：重复性径向渐变</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.c1</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">repeating-radial-gradient</span>(purple, pink <span class="number">10%</span>, skyblue <span class="number">20%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/64ef918c70374a088518c6bba91f7bab.png#pic_center" alt="在这里插入图片描述"></p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/09/box%20shadow%20AND%20text%20show/">盒子阴影 和 文本阴影</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/css/" rel="tag">css</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/10/CSS3%20%E6%B8%90%E5%8F%98/">css3渐变</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/09/box%20shadow%20AND%20text%20show/">盒子阴影 和 文本阴影</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/09/what%20is%20cdn%EF%BC%9F/">到底什么是cdn？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/Flex/">Flex布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/hello-world/">Hello World</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
