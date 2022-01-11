@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>SCSS的基本使用 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="SCSS的基本使用"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=1430010478,3806283367&fm=253&fmt=auto&app=120&f=JPEG?w=775&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/css/">css</a><a class="category-link" href="/categories/js/">js</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>SCSS的基本使用</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.11</time>
+            
+                <span class="category"><a class="category-link" href="/categories/css/">css</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h3 id="什么是SASS？"><a href="#什么是SASS？" class="headerlink" title="什么是SASS？"></a>什么是SASS？</h3><p>Sass 是采用 Ruby 语言编写的一款 CSS 预处理语言，它诞生于2007年，是最大的成熟的 CSS 预处理语言。最初它是为了配合HAML（一种缩进式 HTML 预编译器）而设计的，因此有着和 HTML 一样的缩进式风格</p>
+<h3 id="SASS-和-SCSS-的区别"><a href="#SASS-和-SCSS-的区别" class="headerlink" title="SASS 和 SCSS 的区别"></a>SASS 和 SCSS 的区别</h3><p>Sass 和 SCSS 其实是同一种东西，我们平时都称之为 Sass，两者之间不同之处有以下两点：<br>（1）<strong>文件扩展名不同</strong>：<br>Sass 是以“.sass”后缀为扩展名<br>SCSS 是以“.scss”后缀为扩展名</p>
+<p>（2）<strong>语法书写方式不同</strong><br>Sass 是以严格的缩进式语法规则来书写，不带大括号( { } )和分号( ; )，而 SCSS 的语法书写和我们的 CSS 语法书写方式非常类似</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// Sass语法</span><br><span class="line">$font-stac: Helvetica, sans-serif  //定义变量</span><br><span class="line">$primary-color: #333 //定义变量</span><br><span class="line">body </span><br><span class="line">  font: 100% $font-stack;</span><br><span class="line">  color: $primary-color; // 没有 &#123;&#125; 和 ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// Scss语法</span><br><span class="line">$font-stack: Helvetica, sans-serif;</span><br><span class="line">$primary-color: #333;</span><br><span class="line">body &#123;</span><br><span class="line">  font: 100% $font-stack;</span><br><span class="line">  color: $primary-color;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 编译出来的css</span><br><span class="line">body &#123;</span><br><span class="line">  font: 100% Helvetica, sans-serif;</span><br><span class="line">  color: #333;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>Sass官网：<a target="_blank" rel="noopener" href="https://www.sass.hk/docs/">SACC官网</a><br>菜鸟教程Sass：<a target="_blank" rel="noopener" href="https://www.runoob.com/sass/sass-tutorial.html">菜鸟教程Sass</a></p>
+<p><code>Sass就是css的预处理器，Scss是Sass3版本中引入的新语法特性</code></p>
+<p>vue中使用scss，安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm i -S node-sass sass-loader</span><br></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=&quot;scss&quot; scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="一、变量"><a href="#一、变量" class="headerlink" title="一、变量"></a>一、变量</h3><p>① <strong>以$开头</strong>，定义和使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$div-color: red;</span><br><span class="line">.item &#123;</span><br><span class="line">    $width: 100px;</span><br><span class="line">    width: $width;</span><br><span class="line">    color: $div-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>② <strong>后赋值的会覆盖先赋值的</strong> </p>
+<p>③ 可以在变量结尾添加 <strong>!default</strong> 给一个未通过!default声明赋值的变量赋值，<br><strong>变量已经被赋值时：不会再被重新赋值<br>变量还没有被赋值：则会被赋予新的值</strong><br>就如同<code>备胎</code></p>
+<p>④ 如果变量<strong>需要写在字符串中，就必须写在#{}中</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$side: right;</span><br><span class="line">$color: blue;</span><br><span class="line">.main &#123;</span><br><span class="line">    color: $color;</span><br><span class="line">    border-#&#123;$side&#125;: 2px solid $color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>⑤ <strong>!global</strong>：将变量提升为<strong>全局变量</strong>，不到万不得已不要用，不然会影响全局</p>
+<h3 id="二、嵌套"><a href="#二、嵌套" class="headerlink" title="二、嵌套"></a>二、嵌套</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.a &#123;</span><br><span class="line">    background: #000;</span><br><span class="line">    .b &#123;</span><br><span class="line">        color: #fff;</span><br><span class="line">        font-size: 40px;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>① 在嵌套的代码块中，可以<strong>使用&amp;引用父元素，比如a:hover</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a &#123;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">        color: yellow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="三、继承-extend"><a href="#三、继承-extend" class="headerlink" title="三、继承 @extend"></a>三、继承 @extend</h3><p>SASS允许一个选择器，<strong>继承</strong>另一个选择器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.c &#123;</span><br><span class="line">    @extend .a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="四、混入-mixin-include"><a href="#四、混入-mixin-include" class="headerlink" title="四、混入 @mixin @include"></a>四、混入 @mixin @include</h3><p><code>@mixin 是可以重用的代码块</code><br><code>@include 是调用mixin</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@mixin mycss &#123;</span><br><span class="line">    color: pink;</span><br><span class="line">    background: paleturquoise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.includeMycss &#123;</span><br><span class="line">    @include mycss;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>① 还可以指定参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@mixin mycss2($mycolor) &#123;</span><br><span class="line">    color: $mycolor;</span><br><span class="line">    background: palegoldenrod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.includeMycss2 &#123;</span><br><span class="line">    @include mycss2(plum);</span><br><span class="line">    font-size: 26px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>② 还可以给参数<strong>指定默认值</strong>，如果在使用时没有提供参数，则会使用默认值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@mixin mycss3($mycolor: skyblue) &#123;</span><br><span class="line">    color: $mycolor;</span><br><span class="line">    background: palegoldenrod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.includeMycss3 &#123;</span><br><span class="line">    @include mycss3();</span><br><span class="line">    font-size: 26px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>③ 还可以<strong>指定多个参数</strong>（<strong>参数会按照顺序依次赋值</strong>）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@mixin mycss4($mycolor: skyblue, $backgroundColor: palegoldenrod) &#123;</span><br><span class="line">    color: $mycolor;</span><br><span class="line">    background: $backgroundColor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.includeMycss4 &#123;</span><br><span class="line">    @include mycss4(red, blue);</span><br><span class="line">    font-size: 26px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>④ 可以<strong>按照自己的顺序来</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@mixin mycss5($mycolor: skyblue, $backgroundColor: palegoldenrod) &#123;</span><br><span class="line">    color: $mycolor;</span><br><span class="line">    background: $backgroundColor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.includeMycss5 &#123;</span><br><span class="line">    @include mycss5($backgroundColor: red, $mycolor: blue);</span><br><span class="line">    font-size: 26px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="五、引入外部文件"><a href="#五、引入外部文件" class="headerlink" title="五、引入外部文件"></a>五、引入外部文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@import</span><br><span class="line">@import &quot;../static/css/mySCSS.scss&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>如果需要引入SCSS文件，但又不希望其编译为CSS，只需要在文件名前添加下划线，这样告诉SASS不要编译这些文件，但导入语句却不需要添加下划线</p>
+<p>注意：不可以同时存在添加下划线与未添加下划线同名的文件，否则添加下划线的文件将会被忽略</p>
+<h3 id="六、语句"><a href="#六、语句" class="headerlink" title="六、语句"></a>六、语句</h3><p>① 条件语句：**@if、@else if、@else**</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.ifDemo &#123;</span><br><span class="line">    @if 1 == 2 &#123;</span><br><span class="line">        color: red;</span><br><span class="line">    &#125; @else if 3 &gt; 5 &#123;</span><br><span class="line">        color: blue;</span><br><span class="line">    &#125; @else &#123;</span><br><span class="line">        color: yellow;</span><br><span class="line">    &#125;</span><br><span class="line">    font-size: 40px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>② 循环语句：@for、@while、@each（使用较少）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@for $i from &lt;start&gt; through &lt;end&gt;</span><br><span class="line">@for $i from &lt;start&gt; to &lt;end&gt;</span><br></pre></td></tr></table></figure>
+
+<p>$i 表示变量、start 表示起始值、end 表示结束值</p>
+<p>through 表示<strong>包括</strong> end 这个数<br>而 to 则<strong>不包括</strong> end 这个数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@for $i from 1 to 5 &#123; </span><br><span class="line">    .border-#&#123;$i&#125; &#123;</span><br><span class="line">        border: #&#123;$i&#125;px solid blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$i: 6;</span><br><span class="line">@while $i &gt; 0 &#123;</span><br><span class="line">    .item-#&#123;$i&#125; &#123;</span><br><span class="line">        width: 2em * $i;</span><br><span class="line">        background: pink;</span><br><span class="line">    &#125;</span><br><span class="line">    $i: $i - 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="七、自定义函数-function"><a href="#七、自定义函数-function" class="headerlink" title="七、自定义函数 @function"></a>七、自定义函数 @function</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@function double($n) &#123;</span><br><span class="line">    @return $n * 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.functionDemo &#123;</span><br><span class="line">    font-size: double(20px * 2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="八、颜色函数"><a href="#八、颜色函数" class="headerlink" title="八、颜色函数"></a>八、颜色函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">colorDemo &#123;</span><br><span class="line">    color: green;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">        color: lighten(green, 10%);</span><br><span class="line">        // color: darken(green, 20%);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/11/==%20%E5%92%8C%20===%20%E7%9A%84%E5%8C%BA%E5%88%AB%20%EF%BC%9F%EF%BC%9F%EF%BC%9F/">== 和 === 的区别</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/css/" rel="tag">css</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/SCSS%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">SCSS的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/==%20%E5%92%8C%20===%20%E7%9A%84%E5%8C%BA%E5%88%AB%20%EF%BC%9F%EF%BC%9F%EF%BC%9F/">== 和 === 的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/10/CSS3%20%E6%B8%90%E5%8F%98/">CSS3 渐变</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/09/box%20shadow%20AND%20text%20show/">盒子阴影 和 文本阴影</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/09/what%20is%20cdn%EF%BC%9F/">到底什么是cdn？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/Flex/">Flex布局</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
