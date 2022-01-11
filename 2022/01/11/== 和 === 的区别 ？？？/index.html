@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>== 和 === 的区别 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="== 和 === 的区别"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=421787162,1051545340&fm=253&fmt=auto&app=120&f=PNG?w=899&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/css/">css</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>== 和 === 的区别</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.11</time>
+            
+                <span class="category"><a class="category-link" href="/categories/css/">css</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="和-的区别"><a href="#和-的区别" class="headerlink" title="== 和 === 的区别"></a>== 和 === 的区别</h1><p><code>相等运算符 ==    会进行类型的转换</code><br><code>全等运算符 ===   不会进行类型的转换</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> == &quot;<span class="number">6</span>&quot; // true</span><br><span class="line"><span class="number">6</span> === &quot;<span class="number">6</span>&quot; // false</span><br><span class="line"></span><br><span class="line">true == <span class="number">1</span> // true</span><br><span class="line">false == <span class="number">0</span> // true</span><br></pre></td></tr></table></figure>
+<p><strong>true、false可以转为0、1</strong></p>
+<br/>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">true === <span class="number">1</span> // false</span><br><span class="line">false === <span class="number">0</span> // false</span><br><span class="line"></span><br><span class="line">&#x27;&#x27; == <span class="number">0</span> // true</span><br><span class="line">&#x27;   &#x27; == <span class="number">0</span> // true</span><br></pre></td></tr></table></figure>
+<p><strong>0表示空，如果一个字符串里面什么都没有或者只有空格，那么都等于空</strong></p>
+<br/>
+
+
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">null == undefined // true</span><br><span class="line">null == <span class="number">0</span> // false</span><br><span class="line">null == &#x27;&#x27; // false</span><br><span class="line">undefined == <span class="number">0</span> // false</span><br><span class="line">undefined == &#x27;&#x27; // false</span><br></pre></td></tr></table></figure>
+<p><strong>null 空值 或者 此处不应该有值<br>undefined 未声明的变量 或 没有赋值的变量（应该有值但还没有定义）</strong></p>
+<br/>
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x27;false&#x27; == false // false</span><br><span class="line">NaN == NaN  // false</span><br><span class="line">NaN == false // false</span><br><span class="line">NaN === false // false</span><br></pre></td></tr></table></figure>
+<p><strong>NaN：不是数值，并不是确切的值，不等于自身</strong></p>
+<br/>
+
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = &#123;&#125;;</span><br><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">b</span> = &#123;&#125;;</span><br><span class="line"><span class="selector-tag">var</span> c = <span class="selector-tag">a</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> == <span class="selector-tag">b</span>; // false</span><br><span class="line"><span class="selector-tag">a</span> === <span class="selector-tag">b</span>; // false</span><br><span class="line"><span class="selector-tag">a</span> == c; // true</span><br><span class="line"><span class="selector-tag">a</span> === c; // true</span><br></pre></td></tr></table></figure>
+<p><strong>引用类型，==比较的是地址</strong></p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/10/CSS3%20%E6%B8%90%E5%8F%98/">css3渐变</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/css/" rel="tag">css</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/==%20%E5%92%8C%20===%20%E7%9A%84%E5%8C%BA%E5%88%AB%20%EF%BC%9F%EF%BC%9F%EF%BC%9F/">== 和 === 的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/10/CSS3%20%E6%B8%90%E5%8F%98/">css3渐变</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/09/box%20shadow%20AND%20text%20show/">盒子阴影 和 文本阴影</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/09/what%20is%20cdn%EF%BC%9F/">到底什么是cdn？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/07/Flex/">Flex布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/05/hello-world/">Hello World</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
