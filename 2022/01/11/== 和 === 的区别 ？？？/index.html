@@ -63,30 +63,47 @@
         </section>
         <article class="post-content">
         
-            <h1 id="和-的区别"><a href="#和-的区别" class="headerlink" title="== 和 === 的区别"></a>== 和 === 的区别</h1><p><code>相等运算符 ==    会进行类型的转换</code><br><code>全等运算符 ===   不会进行类型的转换</code></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> == &quot;<span class="number">6</span>&quot; // true</span><br><span class="line"><span class="number">6</span> === &quot;<span class="number">6</span>&quot; // false</span><br><span class="line"></span><br><span class="line">true == <span class="number">1</span> // true</span><br><span class="line">false == <span class="number">0</span> // true</span><br></pre></td></tr></table></figure>
-<p><strong>true、false可以转为0、1</strong></p>
-<br/>
+            <h1 id="和-的区别"><a href="#和-的区别" class="headerlink" title="== 和 === 的区别"></a>== 和 === 的区别</h1><h3 id="相等运算符-会进行类型的转换"><a href="#相等运算符-会进行类型的转换" class="headerlink" title="相等运算符 ==    会进行类型的转换"></a>相等运算符 ==    会进行类型的转换</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> == &quot;<span class="number">6</span>&quot; // true</span><br></pre></td></tr></table></figure>
 
+<h3 id="全等运算符-不会进行类型的转换"><a href="#全等运算符-不会进行类型的转换" class="headerlink" title="全等运算符 ===   不会进行类型的转换"></a>全等运算符 ===   不会进行类型的转换</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">6</span> === &quot;<span class="number">6</span>&quot; // false</span><br></pre></td></tr></table></figure>
+
+<h3 id="true、false可以转为0、1"><a href="#true、false可以转为0、1" class="headerlink" title="true、false可以转为0、1**"></a>true、false可以转为0、1**</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">true == <span class="number">1</span> // true</span><br><span class="line">false == <span class="number">0</span> // true</span><br></pre></td></tr></table></figure>
+
+<h3 id="0表示空"><a href="#0表示空" class="headerlink" title="0表示空"></a>0表示空</h3><p><strong>如果一个字符串里面什么都没有或者只有空格，那么都等于空</strong></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">true === <span class="number">1</span> // false</span><br><span class="line">false === <span class="number">0</span> // false</span><br><span class="line"></span><br><span class="line">&#x27;&#x27; == <span class="number">0</span> // true</span><br><span class="line">&#x27;   &#x27; == <span class="number">0</span> // true</span><br></pre></td></tr></table></figure>
-<p><strong>0表示空，如果一个字符串里面什么都没有或者只有空格，那么都等于空</strong></p>
-<br/>
 
 
-
-
+<h3 id="null-和-undefined"><a href="#null-和-undefined" class="headerlink" title="null 和 undefined"></a>null 和 undefined</h3><p><strong>null 空值 或者 此处不应该有值<br>undefined 未声明的变量 或 没有赋值的变量（应该有值但还没有定义）</strong></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">null == undefined // true</span><br><span class="line">null == <span class="number">0</span> // false</span><br><span class="line">null == &#x27;&#x27; // false</span><br><span class="line">undefined == <span class="number">0</span> // false</span><br><span class="line">undefined == &#x27;&#x27; // false</span><br></pre></td></tr></table></figure>
-<p><strong>null 空值 或者 此处不应该有值<br>undefined 未声明的变量 或 没有赋值的变量（应该有值但还没有定义）</strong></p>
-<br/>
 
-
+<h3 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h3><p><strong>NaN：不是数值，并不是确切的值，不等于自身</strong></p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x27;false&#x27; == false // false</span><br><span class="line">NaN == NaN  // false</span><br><span class="line">NaN == false // false</span><br><span class="line">NaN === false // false</span><br></pre></td></tr></table></figure>
-<p><strong>NaN：不是数值，并不是确切的值，不等于自身</strong></p>
-<br/>
 
 
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = &#123;&#125;;</span><br><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">b</span> = &#123;&#125;;</span><br><span class="line"><span class="selector-tag">var</span> c = <span class="selector-tag">a</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> == <span class="selector-tag">b</span>; // false</span><br><span class="line"><span class="selector-tag">a</span> === <span class="selector-tag">b</span>; // false</span><br><span class="line"><span class="selector-tag">a</span> == c; // true</span><br><span class="line"><span class="selector-tag">a</span> === c; // true</span><br></pre></td></tr></table></figure>
-<p><strong>引用类型，==比较的是地址</strong></p>
+<h3 id="引用类型，比较的是地址"><a href="#引用类型，比较的是地址" class="headerlink" title="引用类型，比较的是地址"></a>引用类型，比较的是地址</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = &#123;&#125;;</span><br><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">b</span> = &#123;&#125;;</span><br><span class="line"><span class="selector-tag">var</span> c = <span class="selector-tag">a</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> == <span class="selector-tag">b</span>; // false</span><br><span class="line"><span class="selector-tag">a</span> === <span class="selector-tag">b</span>; // false</span><br><span class="line"><span class="selector-tag">a</span> == c; // true</span><br><span class="line"><span class="selector-tag">a</span> === c; // true</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </article>
         <section class="post-near">
