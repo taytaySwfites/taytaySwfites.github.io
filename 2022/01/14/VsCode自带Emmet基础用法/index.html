@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>VsCode自带Emmet基础用法 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="VsCode自带Emmet基础用法"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=1430010478,3806283367&fm=253&fmt=auto&app=120&f=JPEG?w=775&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/css/">css</a><a class="category-link" href="/categories/js/">js</a><a class="category-link" href="/categories/vscode/">vscode</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>VsCode自带Emmet基础用法</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.14</time>
+            
+                <span class="category"><a class="category-link" href="/categories/vscode/">vscode</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="VsCode自带Emmet基础用法"><a href="#VsCode自带Emmet基础用法" class="headerlink" title="VsCode自带Emmet基础用法"></a>VsCode自带Emmet基础用法</h1><h2 id="1-生成HTML结构："><a href="#1-生成HTML结构：" class="headerlink" title="1.生成HTML结构："></a>1.生成HTML结构：</h2><p>! + Tab键</p>
+<h2 id="2-生成完整标签："><a href="#2-生成完整标签：" class="headerlink" title="2.生成完整标签："></a>2.生成完整标签：</h2><p>标签名（不用&lt;&gt;）+ Tab键</p>
+<h2 id="3-生成标签名和id："><a href="#3-生成标签名和id：" class="headerlink" title="3.生成标签名和id："></a>3.生成标签名和id：</h2><p>标签名#id名 + Tab键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// div#demo</span><br><span class="line">&lt;div id=&quot;demo&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="4-生成标签名和class值："><a href="#4-生成标签名和class值：" class="headerlink" title="4.生成标签名和class值："></a>4.生成标签名和class值：</h2><p>标签名.class名 + Tab键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// div.demo</span><br><span class="line">&lt;div class=&quot;demo&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="5-元素绑定多个类名："><a href="#5-元素绑定多个类名：" class="headerlink" title="5.元素绑定多个类名："></a>5.元素绑定多个类名：</h2><p>标签名.class名1.class名2… + Tab键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// div.demo1.demo2</span><br><span class="line">&lt;div class=&quot;demo1 demo2&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="6-输入标签和标签中的值："><a href="#6-输入标签和标签中的值：" class="headerlink" title="6.输入标签和标签中的值："></a>6.输入标签和标签中的值：</h2><p>标签名｛标签内容｝ + Tab键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// div&#123;demo&#125;</span><br><span class="line">&lt;div&gt;demo&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="7-同时输入多个同级标签："><a href="#7-同时输入多个同级标签：" class="headerlink" title="7.同时输入多个同级标签："></a>7.同时输入多个同级标签：</h2><p>标签名 + 标签名 + 标签名… + Tab键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// li+li+li</span><br><span class="line">&lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;li&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="8-同时输入父级标签和子标签："><a href="#8-同时输入父级标签和子标签：" class="headerlink" title="8.同时输入父级标签和子标签："></a>8.同时输入父级标签和子标签：</h2><p>父级标签名 &gt; 子级标签名…+ Tab键</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// table&gt;ul&gt;li+li</span><br><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-输入子级元素的父级元素的同级元素："><a href="#9-输入子级元素的父级元素的同级元素：" class="headerlink" title="9.输入子级元素的父级元素的同级元素："></a>9.输入子级元素的父级元素的同级元素：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// div&gt;p&gt;span^ul&gt;li</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="10-输入超链接的链接href值："><a href="#10-输入超链接的链接href值：" class="headerlink" title="10.输入超链接的链接href值："></a>10.输入超链接的链接href值：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// a:mail</span><br><span class="line">&lt;a href=&quot;mailto:&quot;&gt;&lt;/a&gt;</span><br><span class="line"></span><br><span class="line">// a:link</span><br><span class="line">&lt;a href=&quot;http://&quot;&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="11-输入标签的某个属性值："><a href="#11-输入标签的某个属性值：" class="headerlink" title="11.输入标签的某个属性值："></a>11.输入标签的某个属性值：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// span[style=color:red]</span><br><span class="line">&lt;span style=&quot;color:red&quot;&gt;&lt;/span&gt;</span><br><span class="line"></span><br><span class="line">// span[style=color:red].Sp#sp</span><br><span class="line">&lt;span style=&quot;color:red&quot; class=&quot;Sp&quot; id=&quot;sp&quot;&gt;&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="12-同级标签输入多个使用乘法："><a href="#12-同级标签输入多个使用乘法：" class="headerlink" title="12.同级标签输入多个使用乘法："></a>12.同级标签输入多个使用乘法：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// li*3</span><br><span class="line">&lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;li&gt;&lt;/li&gt;</span><br><span class="line">&lt;li&gt;&lt;/li&gt;</span><br></pre></td></tr></table></figure>
+
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/11/SCSS%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">SCSS的基本使用</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/vscode/" rel="tag">vscode</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/14/VsCode%E8%87%AA%E5%B8%A6Emmet%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">VsCode自带Emmet基础用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/SCSS%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">SCSS的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/==%20%E5%92%8C%20===%20%E7%9A%84%E5%8C%BA%E5%88%AB%20%EF%BC%9F%EF%BC%9F%EF%BC%9F/">== 和 === 的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/10/CSS3%20%E6%B8%90%E5%8F%98/">CSS3 渐变</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/09/box%20shadow%20AND%20text%20show/">盒子阴影 和 文本阴影</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/09/what%20is%20cdn%EF%BC%9F/">到底什么是cdn？</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
