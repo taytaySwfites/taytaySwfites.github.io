@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>vue(4) 脚手架 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="vue(4) 脚手架"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=1430010478,3806283367&fm=253&fmt=auto&app=120&f=JPEG?w=775&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/css/">css</a><a class="category-link" href="/categories/js/">js</a><a class="category-link" href="/categories/vscode/">vscode</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>vue(4) 脚手架</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.15</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Vue/">Vue</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p><code>ctrl + </code>：vscode打开终端`</p>
+<h2 id="脚手架项目分析"><a href="#脚手架项目分析" class="headerlink" title="脚手架项目分析"></a>脚手架项目分析</h2><p>CLI：command line interface<br><img src="https://img-blog.csdnimg.cn/ec22e5267b72450f9703ed0d2e86cce1.png#pic_center" alt="在这里插入图片描述"><br>（1）.gitmore：git的忽略文件，哪些文件夹或者文件不想受到git的管理<br>（2）babel.config.js：babel的配置文件<br>（3）符合npm规范一定会有以下两个文件，npm说明书：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">package-lock.json：包版本控制文件，保证最快速度安装到指定版本</span><br><span class="line">package.json：</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/eeb2676018be4c379949c7a1e67af4b8.png#pic_center" alt="在这里插入图片描述"><br>webpack中的短命令：<br>① build：项目写完了，构建项目<br>② lint：语法检查</p>
+<p>（4）README.md：对整个项目进行描述</p>
+<br/>
+
+<p><strong>另外</strong>：<br>（5）build:负责针对不同编译环境, webpack采用哪些配置，摒弃哪些机制相关<br>（6）config：build编译文件的另外扩展，把需要用到的配置提取出来，让配置更模块化<br>（7）src：代码<br>（8）static：静态资源文件夹，注意当打包时这个文件夹下的文件都不会被打包</p>
+<br/>
+
+<p><img src="https://img-blog.csdnimg.cn/ec66420f522946de87e17f96050a2d40.png#pic_center" alt="在这里插入图片描述"><code>脚手架的高级功能，热部署，热更新</code></p>
+<h2 id="脚手架项目下的src分析"><a href="#脚手架项目下的src分析" class="headerlink" title="脚手架项目下的src分析"></a>脚手架项目下的src分析</h2><p><img src="https://img-blog.csdnimg.cn/7e0e4b7dece349d9af2cfb21ef2e35f0.png#pic_center" alt="在这里插入图片描述"></p>
+<p>（1）main.js：vue整个项目入口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 引入Vue</span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">// 引入App组件，它是所有组件的父组件</span><br><span class="line">import App from &#x27;./App.vue&#x27;</span><br><span class="line">// 引入路由</span><br><span class="line">import router from &#x27;./router&#x27;</span><br><span class="line"></span><br><span class="line">// 关闭vue的生成提示</span><br><span class="line">Vue.config.productionTip = false</span><br><span class="line"></span><br><span class="line">// 创建Vue实例对象</span><br><span class="line">new Vue(&#123;</span><br><span class="line">    router,</span><br><span class="line">    // 将App组件放入容器中</span><br><span class="line">    render: h =&gt; h(App)</span><br><span class="line">&#125;).$mount(&#x27;#app&#x27;) // el: &#x27;#app&#x27;另外的写法</span><br></pre></td></tr></table></figure>
+
+<p><br/><br/></p>
+<p><img src="https://img-blog.csdnimg.cn/fc5c934f74c3493baea21aa2c3248cf1.png#pic_center" alt="在这里插入图片描述"></p>
+<p>（2）App.vue：<br>（3）assets：静态资源，比如图片<br>（4）components：放组件</p>
+<p>（1）favicon.ico项目的图标<br>（2）index.html：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;!-- 针对IE浏览器一个特殊配置，让IE浏览器以最高的渲染级别渲染页面 --&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;!-- 开启移动端的理想视口 --&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;!-- 配置页签的图标，部署时容易产生错误，BASE_URL可以直接访问到pulic下的资源 --&gt;</span><br><span class="line">    &lt;link rel=&quot;icon&quot; href=&quot;&lt;%= BASE_URL %&gt;favicon.ico&quot;&gt;</span><br><span class="line">    &lt;title&gt;</span><br><span class="line">        &lt;!-- 在webpack的插件，找到package.json里的title --&gt;</span><br><span class="line">        &lt;%= htmlWebpackPlugin.options.title %&gt;</span><br><span class="line">    &lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- 当浏览器不支持js时，noscript里的元素就会被渲染 --&gt;</span><br><span class="line">    &lt;noscript&gt;</span><br><span class="line">      &lt;strong&gt;We&#x27;re sorry but &lt;%= htmlWebpackPlugin.options.title %&gt; doesn&#x27;t work properly without JavaScript enabled. Please enable it to continue.&lt;/strong&gt;</span><br><span class="line">    &lt;/noscript&gt;</span><br><span class="line">    &lt;!-- 容器 --&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;!-- built files will be auto injected --&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="render"><a href="#render" class="headerlink" title="render"></a>render</h2><p>render函数：使用import引入的vue不是完整的，需要render渲染。引入不完全版本的vue，是因为一可以省下打包之后的体积，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render: h =&gt; h(App)</span><br></pre></td></tr></table></figure>
+
+<p>标签类型的template<template>：引入了专门解析的<br><img src="https://img-blog.csdnimg.cn/fcf4f6b4d74e4dab8030aac59d989d63.png#pic_center" alt="在这里插入图片描述"></p>
+<p>使用commonJS模块化使用一下的vue.js<br><img src="https://img-blog.csdnimg.cn/5bc8539ef6744065910f4a788eb27947.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="修改脚手架的默认配置："><a href="#修改脚手架的默认配置：" class="headerlink" title="修改脚手架的默认配置："></a>修改脚手架的默认配置：</h2><p>使用一下命令，可以将脚手架默认的配置全都整理成一个js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue inspect &gt; output.js</span><br></pre></td></tr></table></figure>
+<p>生成的js默认会报错，因为是对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const a </span><br><span class="line">或</span><br><span class="line">export default</span><br></pre></td></tr></table></figure>
+
+<p>如果使用脚手架的默认配置：<br><img src="https://img-blog.csdnimg.cn/6e573ae5cf7b4949a52ce28fcbde0990.png#pic_center" alt="在这里插入图片描述"></p>
+<p>public文件夹、src文件夹、main.js不能修改名</p>
+<p>如果要改：<a target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/config/#vue-config-js"></a></p>
+<p>添加vue.config.js下使用，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  pages: &#123;</span><br><span class="line">    index: &#123;</span><br><span class="line">      // page 的入口</span><br><span class="line">      entry: &#x27;src/index/main.js&#x27;,</span><br><span class="line">      // 模板来源</span><br><span class="line">      template: &#x27;public/index.html&#x27;,</span><br><span class="line">      // 在 dist/index.html 的输出</span><br><span class="line">      filename: &#x27;index.html&#x27;,</span><br><span class="line">      // 当使用 title 选项时，</span><br><span class="line">      // template 中的 title 标签需要是 &lt;title&gt;&lt;%= htmlWebpackPlugin.options.title %&gt;&lt;/title&gt;</span><br><span class="line">      title: &#x27;Index Page&#x27;,</span><br><span class="line">      // 在这个页面中包含的块，默认情况下会包含</span><br><span class="line">      // 提取出来的通用 chunk 和 vendor chunk。</span><br><span class="line">      chunks: [&#x27;chunk-vendors&#x27;, &#x27;chunk-common&#x27;, &#x27;index&#x27;]</span><br><span class="line">    &#125;,</span><br><span class="line">    // 当使用只有入口的字符串格式时，</span><br><span class="line">    // 模板会被推导为 `public/subpage.html`</span><br><span class="line">    // 并且如果找不到的话，就回退到 `public/index.html`。</span><br><span class="line">    // 输出文件名会被推导为 `subpage.html`。</span><br><span class="line">    subpage: &#x27;src/subpage/main.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="ref属性"><a href="#ref属性" class="headerlink" title="ref属性"></a>ref属性</h2><p>（1）被用来给元素或子组件注册引用信息(id的替代)<br>（2）<strong>应用在html标签上获取的是真实DOM元素，应用在组件标签上是组件实例对象(vc)</strong><br>（3）使用方式:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 ref=&quot;xxx&quot;&gt;.....&lt;/h1&gt; </span><br><span class="line">或</span><br><span class="line">&lt;School ref=&quot;xxx&quot; &gt;&lt;/School&gt;</span><br><span class="line"></span><br><span class="line">// 获取</span><br><span class="line">this. $refs . xx </span><br></pre></td></tr></table></figure>
+
+
+<h2 id="props配置"><a href="#props配置" class="headerlink" title="props配置"></a>props配置</h2><p>（1）让组件接收外部传过来的数据<br>（2）props是只读的，Vue底层会监测你对props的修改，如果进行了修改，就会发出警告，若业务需求确实需要修改，那么复制props的内容到data中一份，然后去修改data中<br>的数据。<br>（3）使用方式:<br>// ① 简单声明接收<br>props: [‘name’, ‘age’] </p>
+<p>// ② 接收的同时对数据竞选类型限制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">props: [</span><br><span class="line">    name: String,</span><br><span class="line">    age: Number</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">// ③ 接收的同时对数据竞选类型限制</span><br><span class="line">props: [</span><br><span class="line">    name: &#123;</span><br><span class="line">        type: String,</span><br><span class="line">        required: true</span><br><span class="line">    &#125;, </span><br><span class="line">    age: &#123;</span><br><span class="line">        type: String,</span><br><span class="line">        default: 19</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="mixin混入"><a href="#mixin混入" class="headerlink" title="mixin混入"></a>mixin混入</h2><p>（1） 把说多组件共用的配置提取成个混入对象<br>（2）使用方式:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 定义混合</span><br><span class="line">&#123;</span><br><span class="line">    data() &#123; ... &#125;,</span><br><span class="line">    methods: &#123; ... &#125;,</span><br><span class="line">    mouted: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 全局混入:</span><br><span class="line">Vue mixin(xxx)</span><br><span class="line">// 局部混入:</span><br><span class="line">mixins:[ &#x27;xxx&#x27;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>（1）用于增强Vue<br>（2）包含install方法的一个对象，install的第二个参数是Vue，第二个以后的参数是插件使用者传递的数据<br>（3）定义插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">对象.install = function (Vue, options) &#123;</span><br><span class="line">    // 1.添加全局过滤器</span><br><span class="line">    Vue. filter( ... )</span><br><span class="line">    // 2.添加全局指令</span><br><span class="line">    Vue . directive( ... )</span><br><span class="line">    // 3.配置全局混入(合)</span><br><span class="line">    Vue . mixin( ... )</span><br><span class="line">    // 4.添加实例方法</span><br><span class="line">    Vue.prototype.$myMethod = function() &#123; ... &#125;</span><br><span class="line">    Vue.prototype.$myProperty = xxx</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>（4）使用插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.use()</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="scoped样式"><a href="#scoped样式" class="headerlink" title="scoped样式"></a>scoped样式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=&quot;&quot; scoped&gt;</span><br><span class="line">&lt;/style&gt; </span><br></pre></td></tr></table></figure>
+
+<p>命令行查看webpack版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm view webpack versions</span><br></pre></td></tr></table></figure>
+
+<p>less-loader安装指定版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i less-loader@7</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/15/vue(3)%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E7%BB%84%E4%BB%B6/">vue(3) 生命周期、组件</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/Vue/" rel="tag">Vue</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(4)%20%E8%84%9A%E6%89%8B%E6%9E%B6/">vue(4) 脚手架</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(3)%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E7%BB%84%E4%BB%B6/">vue(3) 生命周期、组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(2)%20%E6%B8%B2%E6%9F%93%E3%80%81%E8%BF%87%E6%BB%A4%E3%80%81%E6%8E%92%E5%BA%8F%E3%80%81vue%E7%9B%91%E6%B5%8B%E6%95%B0%E6%8D%AE%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81%E6%8C%87%E4%BB%A4/">vue(2) 渲染、过滤、排序、vue监测数据、过滤器、指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(1)%20%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E3%80%81%E4%BB%A3%E7%90%86%E3%80%81%E4%BA%8B%E4%BB%B6%E3%80%81%E8%AE%A1%E7%AE%97%E5%92%8C%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7%E3%80%81%E6%A0%B7%E5%BC%8F/">vue(1) 数据绑定、代理、事件、计算和监视属性、样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/14/VsCode%E8%87%AA%E5%B8%A6Emmet%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">VsCode自带Emmet基础用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/SCSS%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">SCSS的基本使用</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
