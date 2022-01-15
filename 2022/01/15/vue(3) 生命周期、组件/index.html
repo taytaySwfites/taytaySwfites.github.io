@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>vue(3) 生命周期、组件 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="vue(3) 生命周期、组件"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=1430010478,3806283367&fm=253&fmt=auto&app=120&f=JPEG?w=775&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/css/">css</a><a class="category-link" href="/categories/js/">js</a><a class="category-link" href="/categories/vscode/">vscode</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>vue(3) 生命周期、组件</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.15</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Vue/">Vue</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="生命周期："><a href="#生命周期：" class="headerlink" title="生命周期："></a>生命周期：</h2><p>也叫生命周期回调函数、生命周期函数、生命周期钩子<br>    生命周期函数的名字是不可更改的，但函数的具体内容是程序员根据需求编写的，生命周期函数中的this指向是vm 或 组件实例对象<br>    <strong>mouted</strong>：vue完成模板的解析并把初始的真实DOM元素放入页面后（挂载完毕）调用mouted<br><img src="https://img-blog.csdnimg.cn/a2bd6575cd034006970a553ea50b42fb.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>常用的生命周期钩子：</strong><br>1.mounted：发送ajax请求、启动定时器、绑定自定义事件、订阅消息等（初始化操作）<br>2. beforeDestroy：清除定时器、解绑自定义事件、取消订阅消息等（收尾工作）</p>
+<p><strong>关于销毁Vue实例：</strong><br>1.销毁后借助Vue开发者工具看不到任何信息<br>2.销毁后自定义事件会失效，但原生DOM事件依然有效<br>3.-般不会再beforeDestroy操作数据，因为即便操作数据，也不会再触发更新流程了</p>
+<h2 id="组件："><a href="#组件：" class="headerlink" title="组件："></a>组件：</h2><p>传统的方式编写应用存在的问题：<br>1.依赖关系混乱，不好维护<br>2.代码复用率不高<br>（后引入js模块化：当应用中的js都以模块来编写的, 那这个应用就是一个模块化的应用）</p>
+<p><strong>组件：实现应用中局部功能代码和资源的结合</strong><br>作用: 复用编码, 简化项目编码, 提高运行效率</p>
+<p><img src="https://img-blog.csdnimg.cn/55bc38a0bfe24c36961cb67427f3b6cd.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br>组件student：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const student = Vue.extend(&#123;</span><br><span class="line">    template: `</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h2&gt;学生姓名：&#123;&#123;studentName&#125;&#125;&lt;/h2&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    `,</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            studentName: &#x27;taytay&#x27;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>注册组件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">    el: &#x27;#root&#x27;,</span><br><span class="line">    components: &#123;</span><br><span class="line">        xuesheng: student</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>全局注册组件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const student = Vue.extend(&#123;</span><br><span class="line">    template: `</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h2&gt;hello&lt;/h2&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    `,</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>// 全局注册组件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&#x27;hello&#x27;, hello) </span><br></pre></td></tr></table></figure>
+
+
+<p><strong>Vue中使用组件的三步骤：定义组件(创建组件)、注册组件、使用组件(写组件标签)</strong></p>
+<p>如何定义组件?<br>  使用Vue.extend(options)创建，其中options 和new Vue(options)时传入的那个options儿乎一样， 但也有点区别:<br>  1.el不要写，因为所有的组件都要经过一个vm的管理，由vm中的el决定服务哪个容器<br>  2.<strong>data必须写成函数，因为避免组件被复用时，数据存在引用关系</strong><br>data() {<br>    return {<br>    }<br>}</p>
+<p>  <strong>使用template 可以配置组件结构</strong></p>
+<p>如何注册组件?<br>1.<strong>局部注册</strong>：靠new Vue的时候传入components选项<br>2.<strong>全局注册</strong>：靠Vue component(‘组件名’，组件)</p>
+<p>如何编写组件标签: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;student&gt;&lt;/student&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>组件的命名：</strong><br>① 全小写<br>② 首字母大写<br>③ 使用-<br>④ 每次单词首字母大写（脚手架推荐） html处理不了</p>
+<p>注意：<br>① 避免和HTML中已有的元素名称相撞<br>② 可以使用name配置项指定组件在开发者工具中呈现的名字（第三方库和大型项目中会使用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const student = Vue.extend(&#123;</span><br><span class="line">    name: &#x27;boss&#x27;,</span><br><span class="line">    template: ``,</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<p>关于组件标签：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;school&gt;&lt;/school&gt;</span><br><span class="line">&lt;school/&gt; //使用脚手架可以</span><br></pre></td></tr></table></figure>
+
+
+<p>简写：表面没有调用Vue.extend，但底层会判断有没有调用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const school = Vue.extend(options)</span><br><span class="line">// 简写为：</span><br><span class="line">const school = options</span><br></pre></td></tr></table></figure>
+
+
+<p>组件的嵌套：<br><img src="https://img-blog.csdnimg.cn/1c7d01d2eb954c399cc7a85ee33d538b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_8,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br><strong>VueComponent：</strong><br>① 组件的本质是一个名为VueComponent的构造函数，且不是程序员定义的，是Vue.extend生成的</p>
+<p>② 我们只需要写&lt;组件名&gt; 或 &lt;组件名&gt; &lt;/组件名&gt; ，Vue解析时会帮我们创建组件的实例对象，即Vue帮我们执行的：new VueComponent(options)</p>
+<p>③ 特别注意：**<strong>每次调用Vue.extend，返回的都是一个全新的VueComponent</strong></p>
+<p>④ <strong>关于this的指向问题：</strong><br>（1）组件配置中：data函数、methods中的函数、watch中的函数、computed中的函数都指向【<strong>VueComponent实例对象</strong>】<br>（2）new Vue()：data函数、methods中的函数、watch中的函数、computed中的函数都指向【<strong>Vue实例对象</strong>】</p>
+<p>⑤ <strong>VueComponent的实例对象，简称vc（组件实例对象）<br>Vue的实例对象，简称vm</strong></p>
+<p>一个重要的内置关系：<br><img src="https://img-blog.csdnimg.cn/d6bf4b1cdae14aceaf94ba40fe68e2b2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>所以组件实例对象可以访问到Vue原型上的属性、方法</p>
+<h2 id="单元组组件："><a href="#单元组组件：" class="headerlink" title="单元组组件："></a>单元组组件：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;student&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">// 模块化引入</span><br><span class="line">import ... from ...</span><br><span class="line"></span><br><span class="line">// 默认暴露，引入简单（分别和引入比较麻烦）</span><br><span class="line">export default&#123;</span><br><span class="line">    name: &#x27;student&#x27;,</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">// scoped：不污染其他的vue的样式</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/15/vue(2)%20%E6%B8%B2%E6%9F%93%E3%80%81%E8%BF%87%E6%BB%A4%E3%80%81%E6%8E%92%E5%BA%8F%E3%80%81vue%E7%9B%91%E6%B5%8B%E6%95%B0%E6%8D%AE%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81%E6%8C%87%E4%BB%A4/">vue(2) 渲染、过滤、排序、vue监测数据、过滤器、指令</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/Vue/" rel="tag">Vue</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(3)%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E7%BB%84%E4%BB%B6/">vue(3) 生命周期、组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(2)%20%E6%B8%B2%E6%9F%93%E3%80%81%E8%BF%87%E6%BB%A4%E3%80%81%E6%8E%92%E5%BA%8F%E3%80%81vue%E7%9B%91%E6%B5%8B%E6%95%B0%E6%8D%AE%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81%E6%8C%87%E4%BB%A4/">vue(2) 渲染、过滤、排序、vue监测数据、过滤器、指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(1)%20%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E3%80%81%E4%BB%A3%E7%90%86%E3%80%81%E4%BA%8B%E4%BB%B6%E3%80%81%E8%AE%A1%E7%AE%97%E5%92%8C%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7%E3%80%81%E6%A0%B7%E5%BC%8F/">vue(1) 数据绑定、代理、事件、计算和监视属性、样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/14/VsCode%E8%87%AA%E5%B8%A6Emmet%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">VsCode自带Emmet基础用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/SCSS%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">SCSS的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/==%20%E5%92%8C%20===%20%E7%9A%84%E5%8C%BA%E5%88%AB%20%EF%BC%9F%EF%BC%9F%EF%BC%9F/">== 和 === 的区别</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

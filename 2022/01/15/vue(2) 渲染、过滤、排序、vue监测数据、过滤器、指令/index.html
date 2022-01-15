@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>vue(2) 渲染、过滤、排序、vue监测数据、过滤器、指令 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="vue(2) 渲染、过滤、排序、vue监测数据、过滤器、指令"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=1430010478,3806283367&fm=253&fmt=auto&app=120&f=JPEG?w=775&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/css/">css</a><a class="category-link" href="/categories/js/">js</a><a class="category-link" href="/categories/vscode/">vscode</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>vue(2) 渲染、过滤、排序、vue监测数据、过滤器、指令</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.15</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Vue/">Vue</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="条件渲染："><a href="#条件渲染：" class="headerlink" title="条件渲染："></a>条件渲染：</h2><p>1.v-show：只修改样式<br>2.v-if：会从DOM树种删除<br>3.v-else-if：结构和if else一样，但中间不能被隔开<br>4.v-else</p>
+<p><strong>template不影响结构，但只能和v-if配合使用</strong></p>
+<h2 id="列表渲染："><a href="#列表渲染：" class="headerlink" title="列表渲染："></a>列表渲染：</h2><p><strong>v-for：遍历数组、遍历对象、次数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li v-for=&quot;(item, value) in XXX&quot; :key=&quot;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>key的作用与原理：</code><br><strong>作用：</strong><br>    key是虚拟DOM的标识，当数据发生变化时，Vue会根据【新数据】生成【新的虚拟DOM】，随后Vue进行【新虚拟DOM】与【旧虚拟DOM】的差异比较</p>
+<br/>
+
+<p><strong>规则：</strong><br>    1.旧虚拟DOM中找到了与新虚拟DOM相同的key<br>    ① 内容没变，直接用之前的真实DOM；<br>    ② 内容变了，则生成新真的DOM，替换之前的真实DOM<br>    2.旧虚拟DOM中未找到与新虚拟DOM相同的key<br>    ① 创建新的真实DOM，随后渲染到页面</p>
+<br/>
+
+<p><strong>用index可能会出现的问题：</strong><br>    1.逆序添加、逆袭删除等会破坏顺序<br>    （会产生没有必要的真实DOM更新，效率低）<br>    2.如果结构中还包含输入类的DOM（会产生错误DOM更新）</p>
+<br/>
+
+<p><strong>开发中如何选择key：</strong><br>    1.使用唯一标识作为key<br>    2.如果不存在对数据的逆序添加、逆序删除等破坏顺序的操作，仅用于渲染列表用于展示，则使用index是没有问题的</p>
+<h2 id="列表过滤："><a href="#列表过滤：" class="headerlink" title="列表过滤："></a>列表过滤：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;filterWatchComputed&quot;&gt;</span><br><span class="line">        &lt;h2&gt;遍历人数列表&lt;/h2&gt;</span><br><span class="line">        &lt;input v-model=&quot;keyword&quot;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li v-for=&quot;(p, index) of filterPersons&quot; :key=&quot;p.id&quot;&gt;</span><br><span class="line">                &#123;&#123;p.name&#125;&#125; - &#123;&#123;p.age&#125;&#125;</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用watch：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default&#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            keyword: &#x27;&#x27;,</span><br><span class="line">            persons: [</span><br><span class="line">                &#123;id: &#x27;001&#x27;, name: &#x27;tay&#x27;, age: &#x27;13&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;002&#x27;, name: &#x27;demi&#x27;, age: &#x27;17&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;003&#x27;, name: &#x27;andrew&#x27;, age: &#x27;21&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;004&#x27;, name: &#x27;betty&#x27;, age: &#x27;19&#x27;&#125;,</span><br><span class="line">            ],</span><br><span class="line">            filterPersons: [],</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">        keyword: &#123;</span><br><span class="line">            immediate: true, //立即</span><br><span class="line">            handler(val) &#123;</span><br><span class="line">                this.filterPersons = this.persons.filter((p) =&gt; &#123;</span><br><span class="line">                    return p.name.indexOf(val) != -1;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用computed:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default&#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            keyword: &#x27;&#x27;,</span><br><span class="line">            persons: [</span><br><span class="line">                &#123;id: &#x27;001&#x27;, name: &#x27;tay&#x27;, age: &#x27;13&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;002&#x27;, name: &#x27;demi&#x27;, age: &#x27;17&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;003&#x27;, name: &#x27;andrew&#x27;, age: &#x27;21&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;004&#x27;, name: &#x27;betty&#x27;, age: &#x27;19&#x27;&#125;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    //#endregion</span><br><span class="line">    computed: &#123;</span><br><span class="line">        filterPersons() &#123;</span><br><span class="line">            return this.persons.filter((p) =&gt; &#123;</span><br><span class="line">                return p.name.indexOf(val) != -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>能使用computed的尽量使用computed</strong></p>
+<h2 id="列表排序："><a href="#列表排序：" class="headerlink" title="列表排序："></a>列表排序：</h2><p>使用computed：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;filterWatchComputed&quot;&gt;</span><br><span class="line">        &lt;h2&gt;遍历人数列表&lt;/h2&gt;</span><br><span class="line">        &lt;input v-model=&quot;keyword&quot;&gt;</span><br><span class="line">        &lt;button @click=&quot;sortType = 2&quot;&gt;年龄升序&lt;/button&gt;</span><br><span class="line">        &lt;button @click=&quot;sortType = 1&quot;&gt;年龄降序&lt;/button&gt;</span><br><span class="line">        &lt;button @click=&quot;sortType = 0&quot;&gt;原顺序&lt;/button&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">            &lt;li v-for=&quot;(p, index) of filterPersons&quot; :key=&quot;p.id&quot;&gt;</span><br><span class="line">                &#123;&#123;p.name&#125;&#125; - &#123;&#123;p.age&#125;&#125;</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default&#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            keyword: &#x27;&#x27;,</span><br><span class="line">            sortType: 0,</span><br><span class="line">            persons: [</span><br><span class="line">                &#123;id: &#x27;001&#x27;, name: &#x27;tay&#x27;, age: &#x27;13&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;002&#x27;, name: &#x27;demi&#x27;, age: &#x27;17&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;003&#x27;, name: &#x27;andrew&#x27;, age: &#x27;21&#x27;&#125;,</span><br><span class="line">                &#123;id: &#x27;004&#x27;, name: &#x27;betty&#x27;, age: &#x27;19&#x27;&#125;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        filterPersons() &#123;</span><br><span class="line">            const arr = this.persons.filter((p) =&gt; &#123;</span><br><span class="line">                return p.name.indexOf(this.keyword) !== -1;</span><br><span class="line">            &#125;);</span><br><span class="line">            if(this.sortType) &#123;</span><br><span class="line">                arr.sort((p1, p2) =&gt; &#123;</span><br><span class="line">                    return this.sortType == 1 ? p2.age - p1.age : p1.age - p2.age;</span><br><span class="line">                &#125;) </span><br><span class="line">            &#125;</span><br><span class="line">            return arr</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>数组：push新增最后一个、pop删除最后一个、<br>      shift删除第一个、unshift新增第一个、<br>      splice在指定位置添加删除或者改变、<br>      sort排序、reverse反转</p>
+<h2 id="vue监测数据："><a href="#vue监测数据：" class="headerlink" title="vue监测数据："></a>vue监测数据：</h2><p><strong>原理：</strong><br>1.<strong>vue会监测data中所有层次的数据</strong><br>2.如何监测对象中的数据？<br><strong>通过setter实现监视</strong>，且要在new Vue时就传入要监测的数据<br>（1）对象中追加属性，vue默认不做响应式处理<br>（2）如需添加后做响应式，使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vue.set(target, propertyName/index, value)</span><br><span class="line">vm.$set(target, propertyName/index, value)</span><br></pre></td></tr></table></figure>
+<p>3.如何监测数组中的数据？<br>通过包裹数组更新元素的方法实现，本质就是做两件事：<br>（1）<strong>调用原生对应的方法对数组进行更新</strong><br>（2）<strong>重新解析模板，进而更新页面</strong></p>
+<p>4.在Vue修改数组中的某个元素一定要用的方法：<br>1.push新增最后一个、pop删除最后一个、shift删除第一个、unshift新增第一个、plice在指定位置添加删除或者改变、sort排序、reverse反转<br>2.Vue.set()或vm/$set()</p>
+<p><code>特别注意：Vue.set()或vm.$set()不能给vm或vm的根数据对象添加属性</code></p>
+<h2 id="收集表单数据："><a href="#收集表单数据：" class="headerlink" title="收集表单数据："></a>收集表单数据：</h2><p>// 关联起来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;label for=&quot;demo&quot;&gt;&lt;/label&gt;</span><br><span class="line">&lt;input type=&quot;text&quot; id=&quot;demo&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>① 多选块对应的v-model：要是数组<br>② 将数据转为JSON格式：JSON.stringfy()<br>③ v-model.number：将输入的值转为数值<br>④ 失去焦点的瞬间收集：v-model.lazy<br>⑤ 去掉前后的空格：v-model.trim</strong></p>
+<h2 id="过滤器："><a href="#过滤器：" class="headerlink" title="过滤器："></a>过滤器：</h2><p>定义:<br>  对要显示的数据进行特定格式化后再显示(适用于一些简单逻辑的处理)<br>语法:<br>1.注册过滤器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.filter(name,callback)或new Vue(filters:&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<p>2.使用过滤器:：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; xxx│过滤器名&#125;&#125;或v-bind:属性= “xxx│过滤器名&quot;备注:</span><br></pre></td></tr></table></figure>
+
+<p>注意：<br>1.过滤器也可以接收额外参数、多个过滤器也可以串联<br>2.并没有改变原本的数据,是产生新的对应的数据</p>
+<p>使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;time | timeFormater(&#x27;YYYY-MM-DD&#x27;) | mySlice&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>过滤器会默认带上value的参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">filters: &#123;</span><br><span class="line">    // 可以设置默认值</span><br><span class="line">    timeFormater(value, str = (&#x27;YYYY-MM-DD HH:mm:ss&#x27;) &#123;</span><br><span class="line">        return dayjs(value).format(str)</span><br><span class="line">    &#125;,</span><br><span class="line">    mySlice(value) &#123;</span><br><span class="line">        return value.slice(0, 4);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>全局过滤器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.filter(&#x27;mySlice&#x27;, function(value) &#123;</span><br><span class="line">    return value.slice(0, 4);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="内置指令："><a href="#内置指令：" class="headerlink" title="内置指令："></a>内置指令：</h2><p><strong>v-bind</strong> 单向绑定解折表达式,可简写为:xxx<br><strong>v-model</strong> 双向数据绑定<br><strong>v-for</strong> 遍历数组/对象/字符串<br><strong>v-on</strong> 绑定事件监听,可简写为@<br><strong>v-if</strong> 条件渲染(动态控制节点是否存存在)<br><strong>v-else</strong> 条件渲染(动态控制节点是否存存在)<br><strong>v-show</strong> 条件渲染(动态控制节点是否展示)</p>
+<p>① <strong>v-text</strong>：向其所在的节点中渲染文本内容，会替换值，用插值语法更好</p>
+<p>② <strong>v-html</strong>：向指定节点中渲染包含本ml结构的内容</p>
+<br/>
+
+<p><strong>与插值语法的区别：</strong><br>(1) v-html会替换掉节点中所有的内容, 则不会<br>(2) v-htm1可以识别html结构。</p>
+<p><code>严重注意: v-html有安全性问题！！！</code><br>(1)在网站上动态渲染任意HTML是非常危险的，容易导致XSS攻击<br>(2).一定要在可信的内容上使用v-html，永不要用在用户提交的内容上</p>
+<p>③ <strong>v-cloak</strong>：Vue实例创建完毕并接管容器后，会朋掉v-cloak属性<br>使用css配合v-cloak可以解决网速慢时页面展示出的问题</p>
+<p>④ <strong>v-once</strong>：在节点在初次动态渲染后，就视为静态内容了，以后数据的改变不会引起v- once所在结构的更新，可以用于优化性能</p>
+<p>⑤ <strong>v-pre</strong>：跳过其所在节点的编译过程，可利用它跳过，没有使用指令语法、没有使用插值语法的节点，会加快编译</p>
+<h2 id="自定义指令："><a href="#自定义指令：" class="headerlink" title="自定义指令："></a>自定义指令：</h2><p>局部指令: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">    directives: &#123;指令名: 配置对象&#125; 或 directives: &#123;指令名: 回调函数&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>全局指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(指令名, 配置对象) 或 Vue.directive(指令名, 回调函数)</span><br></pre></td></tr></table></figure>
+
+<p>配置对象中常用的3个回调:<br><strong>(1)bind：指令与元素成功绑定时调用<br>(2)inserted：指令所在元素被插入页面时调用<br>(3)update：指令所在模板结构被重新解析时调用</strong></p>
+<p>注意：<br>1.指令定义时不加v-，但使用时要加v-:<br>2.指令名如果是多个单词，要用kebab-case命名方式，不要用camelCase命名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;bindDemo&quot;&gt;</span><br><span class="line">        &lt;h2&gt;当前值为：&lt;span v-text=&quot;n&quot; v-value=&quot;n&quot;&gt;&lt;/span&gt;&lt;/h2&gt;</span><br><span class="line">        &lt;button @click=&quot;n++&quot;&gt;n++&lt;/button&gt;</span><br><span class="line">        &lt;h2&gt;放大10倍的值为：&lt;span v-big=&quot;n&quot;&gt;&lt;/span&gt;&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">        &lt;h2&gt;&lt;input type=&quot;text&quot; v-fbind:value=&quot;n&quot; v-model=&quot;n&quot;&gt;&lt;/h2&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default&#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            n: 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    directives: &#123;</span><br><span class="line">        big(element, binding) &#123;</span><br><span class="line">            element.innerText = binding.value * 10;</span><br><span class="line">        &#125;,</span><br><span class="line">        fbind: &#123;</span><br><span class="line">            // 当指令与元素成功绑定时</span><br><span class="line">            bind(element, binding) &#123;</span><br><span class="line">                element.value = binding.value;</span><br><span class="line">            &#125;,</span><br><span class="line">            // 指令所在元素被插入页面时</span><br><span class="line">            inserted(element, binding) &#123;</span><br><span class="line">                element.focus();</span><br><span class="line">            &#125;,</span><br><span class="line">            // 指令所在的模板被重新解析时</span><br><span class="line">            update(element, binding) &#123;</span><br><span class="line">                element.value = binding.value;</span><br><span class="line">                element.focus();</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        value(element, binding) &#123;</span><br><span class="line">            element.innerText = binding.value;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2022/01/15/vue(3)%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E7%BB%84%E4%BB%B6/">vue(3) 生命周期、组件</a></li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/15/vue(1)%20%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E3%80%81%E4%BB%A3%E7%90%86%E3%80%81%E4%BA%8B%E4%BB%B6%E3%80%81%E8%AE%A1%E7%AE%97%E5%92%8C%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7%E3%80%81%E6%A0%B7%E5%BC%8F/">vue(1) 数据绑定、代理、事件、计算和监视属性、样式</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/Vue/" rel="tag">Vue</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(3)%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E7%BB%84%E4%BB%B6/">vue(3) 生命周期、组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(2)%20%E6%B8%B2%E6%9F%93%E3%80%81%E8%BF%87%E6%BB%A4%E3%80%81%E6%8E%92%E5%BA%8F%E3%80%81vue%E7%9B%91%E6%B5%8B%E6%95%B0%E6%8D%AE%E3%80%81%E8%BF%87%E6%BB%A4%E5%99%A8%E3%80%81%E6%8C%87%E4%BB%A4/">vue(2) 渲染、过滤、排序、vue监测数据、过滤器、指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/15/vue(1)%20%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E3%80%81%E4%BB%A3%E7%90%86%E3%80%81%E4%BA%8B%E4%BB%B6%E3%80%81%E8%AE%A1%E7%AE%97%E5%92%8C%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7%E3%80%81%E6%A0%B7%E5%BC%8F/">vue(1) 数据绑定、代理、事件、计算和监视属性、样式</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/14/VsCode%E8%87%AA%E5%B8%A6Emmet%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">VsCode自带Emmet基础用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/SCSS%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">SCSS的基本使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/11/==%20%E5%92%8C%20===%20%E7%9A%84%E5%8C%BA%E5%88%AB%20%EF%BC%9F%EF%BC%9F%EF%BC%9F/">== 和 === 的区别</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
