@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>Flex布局 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="Flex布局"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=1430010478,3806283367&fm=253&fmt=auto&app=120&f=JPEG?w=775&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>Flex布局</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.07</time>
+            
+                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="Flex布局"><a href="#Flex布局" class="headerlink" title="Flex布局"></a>Flex布局</h1><p>Flexible Box，弹性布局，用来为盒状模型提供最大的灵活性，且任何容器都能使用FLex布局：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">display</span>: flex;  </span><br></pre></td></tr></table></figure>
+<p>行内也可以：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">display</span>: inline-flex;</span><br></pre></td></tr></table></figure>
+<p>Webkit内核的浏览器，需加上：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">display</span>: -webkit-flex;</span><br><span class="line"><span class="attribute">display</span>: flex;</span><br></pre></td></tr></table></figure>
+<p>但是，设为Flex布局之后，<strong>子元素的float、clear和vertical-align属性将失效</strong>      </p>
+<p><code>采用Flex布局的元素，称为Flex容器，而它所有子元素为容器成员</code>             </p>
+<p>  <img src="https://img-blog.csdnimg.cn/44682ff65f6741f3a62b06e4453e7189.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_17,color_FFFFFF,t_70,g_se,x_16##pic_center"><br><strong>容器默认存在两根轴</strong>：<br>① 水平的主轴 main axis ，主轴开始的位置为main start，结束的位置为main end；<br>② 和垂直的交叉轴 cross axis，交叉轴开始位置为cross start，结束位置为cross end；<br>③ 项目默认沿主轴排列，单个项目占据的主轴空间叫做main size，占据的交叉空间为cross size。</p>
+<h2 id="容器的属性："><a href="#容器的属性：" class="headerlink" title="容器的属性："></a><strong>容器的属性</strong>：</h2><p>（1） <strong>flex-direction</strong>：主轴的方向，即项目的排列方向  </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">① row：主轴为水平方向，起点在左端 （默认）</span><br><span class="line">② row-reverse：主轴为水平方向，起点在右端</span><br><span class="line">③ column：主轴为垂直方向，起点在上沿</span><br><span class="line">④ column-reverse：主轴为垂直方向，起点在下沿</span><br></pre></td></tr></table></figure>
+
+<p>（2）<strong>flex-wrap</strong>：如果一条轴线排不下，如何换行</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">① nowrap：不换行（默认）</span><br><span class="line">② wrap：换行，第一行在上方</span><br><span class="line">③ wrap-reverse：换行，第一行在下方</span><br></pre></td></tr></table></figure>
+
+<p>（3） <strong>flex-flow</strong>：flex-direction 和 flex-wrap和组合</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flex-direction</span> | <span class="attribute">flex-wrap</span></span><br></pre></td></tr></table></figure>
+
+<p>（4） <strong>justify-content</strong>:项目在主轴上的排列方式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">① <span class="attribute">flex</span>-start：左对齐 （默认）</span><br><span class="line">② <span class="attribute">flex</span>-end：右对齐</span><br><span class="line">③ center：居中对齐</span><br><span class="line">④ space-between：两端对齐</span><br><span class="line">⑤ space-around：每个项目两侧间隔对齐（隔间比项目与边框的间隔大一倍）</span><br></pre></td></tr></table></figure>
+
+<p>（5）<strong>align-items</strong>：项目在交叉轴上的对齐方式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">① <span class="attribute">flex</span>-start：交叉轴的起点对齐</span><br><span class="line">② <span class="attribute">flex</span>-end：交叉轴的终点对齐</span><br><span class="line">③ center：交叉轴的中点对齐</span><br><span class="line">④ baseline：项目的第一行文字的基线对齐</span><br><span class="line">⑤ stretch：如果项目未设置高度或设为<span class="attribute">auto</span>，将占满整个容器的高度 （默认）</span><br></pre></td></tr></table></figure>
+
+<p>（6）<strong>align-content</strong>：定义了多跟轴线的对齐方式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">① <span class="attribute">flex</span>-start：交叉轴的起点对齐</span><br><span class="line">② <span class="attribute">flex</span>-end：交叉轴的终点对齐</span><br><span class="line">③ center：交叉轴的中点对齐</span><br><span class="line">④ space-between：交叉轴的两端对齐，轴线之间的间隔平均分布</span><br><span class="line">⑤ space-around：每个项目两侧间隔对齐（隔间比项目与边框的间隔大一倍）</span><br><span class="line">⑥ stretch：轴线占满整个容器的高度（默认）</span><br></pre></td></tr></table></figure>
+
+<h2 id="属性的属性："><a href="#属性的属性：" class="headerlink" title="属性的属性："></a><strong>属性的属性</strong>：</h2><p>（1）<strong>order</strong>：项目的排列顺序，数值越小，排序越靠前</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;integer&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（2）<strong>flex-grow</strong>：项目的放大比例，默认为0，即如果存在剩余空间，也不放大</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;number&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（3）<strong>flex-shrink</strong>：项目的缩小比例，默认为0，即如果存在剩余空间，也不缩小</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;number&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（4）<strong>justify-basis</strong>：在分配多余空间之前，项目占据的主轴空间。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;length&gt; | <span class="attribute">auto</span></span><br></pre></td></tr></table></figure>
+
+<p>（5）<strong>flex</strong>：x-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto，后两个属性可选</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">none</span> | <span class="selector-attr">[ &lt;<span class="string">&#x27;flex-grow&#x27;</span>&gt; &lt;<span class="string">&#x27;flex-shrink&#x27;</span>&gt; ? || &lt;<span class="string">&#x27;flex-basis&#x27;</span>&gt; ]</span></span><br></pre></td></tr></table></figure>
+<p><code>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)</code></p>
+<p>（6）<strong>align-self</strong>：允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">① <span class="attribute">auto</span></span><br><span class="line">② <span class="attribute">flex</span>-start：交叉轴的起点对齐</span><br><span class="line">③ <span class="attribute">flex</span>-end：交叉轴的终点对齐</span><br><span class="line">④ center：交叉轴的中点对齐</span><br><span class="line">⑤ baseline：项目的第一行文字的基线对齐</span><br><span class="line">⑥ stretch：如果项目未设置高度或设为<span class="attribute">auto</span>，将占满整个容器的高度 （默认）</span><br></pre></td></tr></table></figure>
+
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2022/01/09/what%20is%20cdn%EF%BC%9F/">到底什么是cdn？</a></li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/05/hello-world/">Hello World</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a><a class="-none-link" href="/tags/Flex%E5%B8%83%E5%B1%80/" rel="tag">Flex布局</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84Destructuring%E8%B5%8B%E5%80%BC/">变量的解构Destructuring赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4/">let和const命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/H5%E5%92%8CCSS3%E6%8F%90%E9%AB%98/">H5和CSS3提高</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/vue(8)%20Router%E8%B7%AF%E7%94%B1/">vue(8) Router路由</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/vue(7)%20Vuex%E3%80%81ElementUI/">vue(7) Vuex、ElementUI</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/19/vue(6)%20%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E6%8F%92%E6%A7%BD/">vue(6) 代理服务器、插槽</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12.5px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JS/" style="font-size: 15px;">JS</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>

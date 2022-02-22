@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>H5和CSS3提高 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="H5和CSS3提高"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=1430010478,3806283367&fm=253&fmt=auto&app=120&f=JPEG?w=775&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>H5和CSS3提高</h2>
+            <div class="post-meta">
+                <time class="date">2022.01.24</time>
+            
+                <span class="category"><a class="category-link" href="/categories/HTML/">HTML</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p><img src="https://img-blog.csdnimg.cn/494e4861198246d985359fdd3efe07ed.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="一、H5新增语义标签"><a href="#一、H5新增语义标签" class="headerlink" title="一、H5新增语义标签"></a>一、H5新增语义标签</h2><p>（都有兼容性问题，IE9+才支持）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span> 头部标签</span><br><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span> 导航标签</span><br><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span> 内容标签</span><br><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span> 定义文档某个区域</span><br><span class="line"><span class="tag">&lt;<span class="name">aside</span>&gt;</span> 侧边栏标签</span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span> 尾部标签</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/5c71bd72230e4b83a51d80bd7d9293d0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_10,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br><strong>注意：</strong><br>① 语义化标准主要是针对<strong>搜索引擎</strong>的<br>② 新标签页面中可以<strong>使用多次</strong><br>③ 在IE9中,需要把这些元素转换为<strong>块级元素</strong><br>④ 移动端更常用这些标签<br>⑤ HTML5还增加了很多其他标签</p>
+<h2 id="二、H5音频和视频标签"><a href="#二、H5音频和视频标签" class="headerlink" title="二、H5音频和视频标签"></a>二、H5音频和视频标签</h2><p><img src="https://img-blog.csdnimg.cn/8e7ce4f229ca470999e71dc65b4d9908.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="音频属性："><a href="#音频属性：" class="headerlink" title="音频属性："></a>音频属性：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">&#x27;media/test.mp3 &#x27;</span> <span class="attr">controls</span>=<span class="string">&#x27;controls&#x27;</span>&gt;</span> 音频 <span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/c0669388980342f9843b93f142a0ca55.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/11cf71448b9f4ad18a67876411b93213.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="视频属性："><a href="#视频属性：" class="headerlink" title="视频属性："></a>视频属性：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">controls</span>=<span class="string">&quot;controls&quot;</span>&gt;</span> 视频<span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/4ff0eecf84a040c58ef668ef49dd6032.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_14,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<ul>
+<li>注意：<code>谷歌把音频和视频的自动播放禁用了</code>，视频可以通过muted属性来静音播放解决，音频不可以（js解决）<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>=<span class="string">&quot;controls&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;media/test.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/mpeg&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;media/test.mp3&quot;</span> <span class="attr">type</span>=<span class="string">&quot;audio/ogg&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="三、H5表单和表单属性"><a href="#三、H5表单和表单属性" class="headerlink" title="三、H5表单和表单属性"></a>三、H5表单和表单属性</h2><p>我们验证的时候submit，必须添加表单域</p>
+<h3 id="表单："><a href="#表单：" class="headerlink" title="表单："></a>表单：</h3><p><img src="https://img-blog.csdnimg.cn/9736e76e10df40b19365dcd5faec8ade.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="表单属性："><a href="#表单属性：" class="headerlink" title="表单属性："></a>表单属性：</h3><p><img src="https://img-blog.csdnimg.cn/d0f5053f9f9d44d0a7a4eaec48324882.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="四、CSS新增选择器"><a href="#四、CSS新增选择器" class="headerlink" title="四、CSS新增选择器"></a>四、CSS新增选择器</h2><h3 id="1-属性选择器："><a href="#1-属性选择器：" class="headerlink" title="1.属性选择器："></a>1.属性选择器：</h3><p>（1）简单属性选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type]</span></span><br></pre></td></tr></table></figure>
+<p>（2）精准属性值选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type = text]</span></span><br></pre></td></tr></table></figure>
+<p>（3）匹配部分属性值选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[href*=<span class="string">&quot;&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+<p>（4）匹配属性值开头的选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[class^=icon]</span></span><br></pre></td></tr></table></figure>
+<p>（5）匹配属性值结尾的选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[class$=data]</span></span><br></pre></td></tr></table></figure>
+<p>（6）自定义属性选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-attr">[data-*=<span class="string">&quot;&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+<p>（7）匹配带有空格属性的值：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-attr">[foo~=<span class="string">&quot;&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-结构伪类选择器："><a href="#2-结构伪类选择器：" class="headerlink" title="2.结构伪类选择器："></a>2.结构伪类选择器：</h3><p>（1）第一个子元素选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:first</span>-child</span><br></pre></td></tr></table></figure>
+<p>（2）最后一个子元素选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:last-child</span></span><br></pre></td></tr></table></figure>
+<p>（3）选择第n个元素选择器：n还可以是公式，n是所有</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:nth-child</span>(n) <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(odd/even)</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">section</span> <span class="selector-tag">div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) </span><br><span class="line">// 先看第一个孩子，再看是不是<span class="selector-tag">div</span>，不是就没有被选择</span><br></pre></td></tr></table></figure>
+
+<p>（4）从后往前计算选择每第n个元素选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:nth-last-child</span>(n) </span><br></pre></td></tr></table></figure>
+<p> （5）选择该类型的第一个元素选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:first</span>-of-type </span><br><span class="line">X<span class="selector-pseudo">:last-of-type</span></span><br></pre></td></tr></table></figure>
+<p>（6）选择每第n个某种元素选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:nth-of-type</span>(n)</span><br></pre></td></tr></table></figure>
+<p>（7）从后往前计算选择每第n个某种元素选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:nth-last-of-type</span>(n)</span><br></pre></td></tr></table></figure>
+<p>（8）选择唯一的子元素：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:only-child</span></span><br></pre></td></tr></table></figure>
+<p>（9）匹配父元素里没有邻近兄弟元素的选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:only-of-type</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-伪类选择器："><a href="#3-伪类选择器：" class="headerlink" title="3.伪类选择器："></a>3.伪类选择器：</h3><p>（1）选中状态选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:checked</span></span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=radio]</span><span class="selector-pseudo">:checked</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>注意：**前置内容元素选择器X::before 和 后置内容元素选择器X::after里面必须有content  **<br>（2）鼠标悬停状态选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:hover</span> </span><br></pre></td></tr></table></figure>
+<p>（3）否定伪类选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X<span class="selector-pseudo">:not</span>(selector) </span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:not</span>(<span class="selector-id">#container</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>（4）伪元素选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">X::pseudoElement</span><br><span class="line">/* 匹配第一个字母 */</span><br><span class="line">p::first-letter &#123;&#125;</span><br><span class="line"><span class="comment">/* 匹配段落的第一行内容 */</span></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">::first-line</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="五、过渡"><a href="#五、过渡" class="headerlink" title="五、过渡"></a>五、过渡</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transition</span>:要过渡的属性 花费时间 运动曲线 何时开始</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/a4752033fb4143c0abb209278c2b7609.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p><code>运动曲线：</code><br><img src="https://img-blog.csdnimg.cn/c1541e8380904c4b87c8ffbe370c8b02.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="六、CSS3盒子模型"><a href="#六、CSS3盒子模型" class="headerlink" title="六、CSS3盒子模型"></a>六、CSS3盒子模型</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">box-sizing</span>: content-box | border-box</span><br></pre></td></tr></table></figure>
+
+<p>border-box不会撑大盒子（前提padding和border不会超过width）<br><code>总结：</code><br>① 也就是说content-box的盒子模型，width、padding、border的值是分开的，会撑开盒子；<br>② 而border-box（只要padding+border不会超过width的值）就不会撑开盒子</p>
+<h2 id="七、其他特性"><a href="#七、其他特性" class="headerlink" title="七、其他特性"></a>七、其他特性</h2><h3 id="1-CSS3滤镜filter："><a href="#1-CSS3滤镜filter：" class="headerlink" title="1.CSS3滤镜filter："></a>1.CSS3滤镜filter：</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">filter</span>: 函数(); (blur(<span class="number">5px</span>) | contrast(<span class="number">200%</span>) | grayscale(<span class="number">80%</span>) | hue-rotate(<span class="number">90deg</span>) | drop-shadow(<span class="number">16px</span> <span class="number">16px</span> <span class="number">20px</span> res) invert(<span class="number">75%</span>))</span><br><span class="line"><span class="attribute">filter</span>: <span class="built_in">blur</span>(<span class="number">5px</span>) blur模糊处理，数值越大越模糊</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-calc函数"><a href="#2-calc函数" class="headerlink" title="2.calc函数"></a>2.calc函数</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">700px</span> - <span class="number">100px</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-属性过渡"><a href="#3-属性过渡" class="headerlink" title="3.属性过渡"></a>3.属性过渡</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transition</span>: 要过渡的属性 花费时间 运动曲线 何时开始</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/956780b61fa446bc9ac32ce96340a0d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_19,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="八、web服务器"><a href="#八、web服务器" class="headerlink" title="八、web服务器"></a>八、web服务器</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;服务器（主机）提供计算服务的设备，它也是一台计算机，在网络环境下，根据服务器提供的服务类型不同，<code>服务器分为文件服务器、数据库服务器、应用程序服务器、Web服务器等</code><br>&nbsp;&nbsp;&nbsp;&nbsp;Web服务器一般指网站服务器，是指引留于因特网上某种类型计算机的程序，可以向浏览器等Web客户端提供文档，也可以放置网站文件，让全世界浏览;可以放置数据文件，让全世界下载</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;根据服务器在网络中所在的位苦不同，又可分为<code>本地服务器和远程服务器</code></p>
+<h2 id="九、2D转换translate"><a href="#九、2D转换translate" class="headerlink" title="九、2D转换translate"></a>九、2D转换translate</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(x, y)</span><br><span class="line">transform: <span class="built_in">translateX</span>(n)</span><br><span class="line">transform: <span class="built_in">translateY</span>(n)</span><br></pre></td></tr></table></figure>
+<p><code>不会影响其他元素的位置</code>，单位为百分比是<code>相对于自身元素</code>，对行内元素无用</p>
+<p>让一个盒子垂直水平居中：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">position</span>: absolute;</span><br><span class="line"><span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line"><span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">50%</span>, -<span class="number">50%</span>)</span><br></pre></td></tr></table></figure>
+<p>百分比是根据盒子自身的宽度和高度的</p>
+<h3 id="2D旋转rotate："><a href="#2D旋转rotate：" class="headerlink" title="2D旋转rotate："></a>2D旋转rotate：</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>: <span class="built_in">rotate</span>(度数deg)</span><br></pre></td></tr></table></figure>
+
+<p>三角形：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">     <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">     postion: absolute;</span><br><span class="line">     <span class="attribute">top</span>: <span class="number">8px</span>;</span><br><span class="line">     <span class="attribute">right</span>: <span class="number">15px</span>;</span><br><span class="line">     <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">     <span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line">     <span class="attribute">border-right</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">     <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">45deg</span>);</span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.2s</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>鼠标经过div，三角旋转：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    trandform: <span class="built_in">rotate</span>(<span class="number">225deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2D转换中心点："><a href="#2D转换中心点：" class="headerlink" title="2D转换中心点："></a>2D转换中心点：</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform-origin</span>: x y;</span><br></pre></td></tr></table></figure>
+<p>① <code>可以方位名词</code> top bottom left right center<br>② <code>可以是百分比或者px</code></p>
+<h3 id="缩放scale："><a href="#缩放scale：" class="headerlink" title="缩放scale："></a>缩放scale：</h3><p>不会影响其他盒子，可以设置缩放的中心点</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>: <span class="built_in">scale</span>(x, y);</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1</span>, <span class="number">1</span>); // 没变</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">2</span>, <span class="number">2</span>); // 放大了<span class="number">2</span>陪</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">2</span>); // 都放大了<span class="number">2</span>陪</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0.5</span> <span class="number">0.5</span>); // 缩小</span><br></pre></td></tr></table></figure>
+<p><code>综合写法会有顺序的问题</code></p>
+<h2 id="十、动画animation"><a href="#十、动画animation" class="headerlink" title="十、动画animation"></a>十、动画animation</h2><p>① 用<strong>keyframes</strong>定义动画（类似定义类选择器）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> 动画名称 &#123;</span><br><span class="line">    <span class="comment">/* 开始状态 */</span></span><br><span class="line">    <span class="number">0%</span>  或 <span class="selector-tag">from</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 结束状态 */</span></span><br><span class="line">    <span class="number">100%</span>  或 <span class="selector-tag">to</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>② 调用动画：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 动画名称 */</span></span><br><span class="line"><span class="attribute">animation-name</span>: 动画名称;</span><br><span class="line"><span class="comment">/* 持续时间 */</span></span><br><span class="line"><span class="attribute">animation-duration</span>: <span class="number">2s</span>;</span><br></pre></td></tr></table></figure>
+
+<p>也可以做多个状态的变化 keyframes关键帧</p>
+<h3 id="动画常见属性："><a href="#动画常见属性：" class="headerlink" title="动画常见属性："></a>动画常见属性：</h3><p><img src="https://img-blog.csdnimg.cn/389ba74340774a01bf68f22d46bc4da2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* animation: name duration timing-function delay </span></span><br><span class="line"><span class="comment">iteration-count direction fill-mode; */</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">animation</span>: move <span class="number">2s</span> linear <span class="number">0s</span> <span class="number">1</span> alternate forwands;</span><br><span class="line"></span><br><span class="line">// name duration 不能省略</span><br></pre></td></tr></table></figure>
+
+<h3 id="animation-timing-function："><a href="#animation-timing-function：" class="headerlink" title="animation-timing-function："></a>animation-timing-function：</h3><p><img src="https://img-blog.csdnimg.cn/4151f152f1b04be3a1faa2e4b3d52c8d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="十一、3D转换"><a href="#十一、3D转换" class="headerlink" title="十一、3D转换"></a>十一、3D转换</h2><h3 id="三维坐标系："><a href="#三维坐标系：" class="headerlink" title="三维坐标系："></a>三维坐标系：</h3><p><img src="https://img-blog.csdnimg.cn/b9b9dcd502ec4e13bbee5fd1e64dc7bb.png#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>: <span class="built_in">translateX</span>(n)</span><br><span class="line">transform: <span class="built_in">translateY</span>(n)</span><br><span class="line">transform: <span class="built_in">translateZ</span>(n) // 一般都是用px</span><br><span class="line">transform: <span class="built_in">translate3d</span>(x, y, z)</span><br></pre></td></tr></table></figure>
+
+<h3 id="透视perspective："><a href="#透视perspective：" class="headerlink" title="透视perspective："></a>透视perspective：</h3><p>写在被观察元素的父盒子上面</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">perspective</span>: </span><br></pre></td></tr></table></figure>
+
+<h3 id="3d旋转："><a href="#3d旋转：" class="headerlink" title="3d旋转："></a>3d旋转：</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>: <span class="built_in">rotateX</span>(deg)</span><br><span class="line">transform: <span class="built_in">rotateY</span>(deg)</span><br><span class="line">transform: <span class="built_in">rotateZ</span>(deg)</span><br><span class="line">transform: <span class="built_in">rotate3d</span>(x, y, z, deg)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/495dbf2184394878809ee388b9eb4779.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_10,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br><br/><br><img src="https://img-blog.csdnimg.cn/f591c2310afe441b8755212e1637aebe.png#pic_center" alt="在这里插入图片描述"><br><br/><br><img src="https://img-blog.csdnimg.cn/0435bf3def504bc888bf421fc719ed1d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_10,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="3D呈现："><a href="#3D呈现：" class="headerlink" title="3D呈现："></a>3D呈现：</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d; // 写在父级上</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="十二、浏览器私有前缀"><a href="#十二、浏览器私有前缀" class="headerlink" title="十二、浏览器私有前缀"></a>十二、浏览器私有前缀</h2><p>浏览器私有前缀是为了兼容老版本的写法，比较新版本的浏览器无需添加<br>私有前缀：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-moz-：代表firefox浏览器私有属性</span><br><span class="line">-ms-：代表ie浏览器私有属性</span><br><span class="line">-webkit-：代表safari、chrome私有属性</span><br><span class="line">-o-：代表Opera私有属性</span><br></pre></td></tr></table></figure>
+<p>提倡的写法：<br><img src="https://img-blog.csdnimg.cn/1de07dc9121d4a10bc1455833410b847.png#pic_center" alt="在这里插入图片描述"></p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2022/01/31/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4/">let和const命令</a></li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/24/vue(8)%20Router%E8%B7%AF%E7%94%B1/">vue(8) Router路由</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a><a class="-none-link" href="/tags/HTML/" rel="tag">HTML</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84Destructuring%E8%B5%8B%E5%80%BC/">变量的解构Destructuring赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4/">let和const命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/H5%E5%92%8CCSS3%E6%8F%90%E9%AB%98/">H5和CSS3提高</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/vue(8)%20Router%E8%B7%AF%E7%94%B1/">vue(8) Router路由</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/vue(7)%20Vuex%E3%80%81ElementUI/">vue(7) Vuex、ElementUI</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/19/vue(6)%20%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E6%8F%92%E6%A7%BD/">vue(6) 代理服务器、插槽</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12.5px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JS/" style="font-size: 15px;">JS</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
