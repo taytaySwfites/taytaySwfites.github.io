@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>正则表达式 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="正则表达式"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img1.baidu.com/it/u=1430010478,3806283367&fm=253&fmt=auto&app=120&f=JPEG?w=775&h=500) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>正则表达式</h2>
+            <div class="post-meta">
+                <time class="date">2022.02.25</time>
+            
+                <span class="category"><a class="category-link" href="/categories/JS/">JS</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p><img src="https://img-blog.csdnimg.cn/fbc17875fc394dc78498adbed3dacd5a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>1.手机号码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^<span class="number">1</span>([<span class="number">358</span>][<span class="number">0</span>-<span class="number">9</span>]|<span class="number">4</span>[<span class="number">579</span>]|<span class="number">66</span>|<span class="number">7</span>[<span class="number">0135678</span>]|<span class="number">9</span>[<span class="number">89</span>])[<span class="number">0</span>-<span class="number">9</span>]&#123;<span class="number">8</span>&#125;$</span><br></pre></td></tr></table></figure>
+
+<p>2.身份证号码：<br>（1）18位</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">地区： ([<span class="number">1</span>-<span class="number">6</span>][<span class="number">1</span>-<span class="number">9</span>]|<span class="number">50</span>)\d&#123;<span class="number">4</span>&#125;  <span class="comment">// 补充重庆地区50</span></span><br><span class="line">年的前两位： (<span class="number">18</span>|<span class="number">19</span>|<span class="number">20</span>)            <span class="number">1800</span>-<span class="number">2399</span></span><br><span class="line">年的后两位： \d&#123;<span class="number">2</span>&#125;</span><br><span class="line">月份：((<span class="number">0</span>[<span class="number">1</span>-<span class="number">9</span>])|<span class="number">10</span>|<span class="number">11</span>|<span class="number">12</span>)</span><br><span class="line">天数： (([<span class="number">0</span>-<span class="number">2</span>][<span class="number">1</span>-<span class="number">9</span>])|<span class="number">10</span>|<span class="number">20</span>|<span class="number">30</span>|<span class="number">31</span>)      闰年不能禁止<span class="number">29</span>+</span><br><span class="line">三位顺序码： \d&#123;<span class="number">3</span>&#125;</span><br><span class="line">校验码： [<span class="number">0</span>-9Xx]</span><br><span class="line"><span class="comment">// 校验18位的身份证</span></span><br><span class="line"><span class="keyword">let</span> _IDRe18 =  <span class="regexp">/^([1-6][1-9]|50)\d&#123;4&#125;(18|19|20)\d&#123;2&#125;((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d&#123;3&#125;[0-9Xx]$/</span></span><br></pre></td></tr></table></figure>
+<p>（2）15位</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">地区：[<span class="number">1</span>-<span class="number">6</span>][<span class="number">1</span>-<span class="number">9</span>]\d&#123;<span class="number">4</span>&#125;</span><br><span class="line">年份只有后两位：\d&#123;<span class="number">2</span>&#125;</span><br><span class="line">月份：((<span class="number">0</span>[<span class="number">1</span>-<span class="number">9</span>])|<span class="number">10</span>|<span class="number">11</span>|<span class="number">12</span>)</span><br><span class="line">天数：(([<span class="number">0</span>-<span class="number">2</span>][<span class="number">1</span>-<span class="number">9</span>])|<span class="number">10</span>|<span class="number">20</span>|<span class="number">30</span>|<span class="number">31</span>)      闰年不能禁止<span class="number">29</span>+</span><br><span class="line">三位顺序码： \d&#123;<span class="number">3</span>&#125;</span><br><span class="line"><span class="comment">// 校验15位的身份证</span></span><br><span class="line"><span class="keyword">let</span> _IDRe15 =  <span class="regexp">/^([1-6][1-9]|50)\d&#123;4&#125;\d&#123;2&#125;((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d&#123;3&#125;$/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _IDRe18 = <span class="regexp">/^([1-6][1-9]|50)\d&#123;4&#125;(18|19|20)\d&#123;2&#125;((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d&#123;3&#125;[0-9Xx]$/</span></span><br><span class="line"><span class="keyword">let</span> _IDre15 =  <span class="regexp">/^([1-6][1-9]|50)\d&#123;4&#125;\d&#123;2&#125;((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d&#123;3&#125;$/</span></span><br></pre></td></tr></table></figure>
+
+<p>3.密码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 密码至少包含 数字和英文，长度6-20 */</span></span><br><span class="line"><span class="built_in">String</span> reg = <span class="string">&quot;^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">/* 密码包含 数字,英文,字符中的两种以上，长度6-20 */</span></span><br><span class="line"><span class="built_in">String</span> reg = <span class="string">&quot;^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).&#123;6,20&#125;$&quot;</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">/* 至少包含数字跟字母，可以有字符 */</span></span><br><span class="line"><span class="built_in">String</span> reg = <span class="string">&quot;(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&amp;*()]&#123;6,20&#125;$&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>4.邮箱：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[\w-.]+@[a-z\d-]+(\.[a-z\d-]+)*\.[a-z\d]&#123;<span class="number">2</span>,<span class="number">6</span>&#125;$/i</span><br></pre></td></tr></table></figure>
+
+<p>5.姓名:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 1.可以是中文</span></span><br><span class="line"><span class="comment"> * 2.可以是英文，允许输入点（英文名字中的那种点）， 允许输入空格</span></span><br><span class="line"><span class="comment"> * 3.中文和英文不能同时出现</span></span><br><span class="line"><span class="comment"> * 4.长度在20个字符以内</span></span><br><span class="line"><span class="comment"> * @param name</span></span><br><span class="line"><span class="comment"> * @return</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">public <span class="keyword">static</span> <span class="built_in">Boolean</span> <span class="function"><span class="title">validateName</span>(<span class="params"><span class="built_in">String</span> name</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> name.matches(<span class="string">&quot;^([\\u4e00-\\u9fa5]&#123;1,20&#125;|[a-zA-Z\\.\\s]&#123;1,20&#125;)$&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br/>
+<br/>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gxzhaha/article/details/108115777?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164578896816780255213890%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164578896816780255213890&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-108115777.first_rank_v2_pc_rank_v29&utm_term=%E6%AD%A3%E5%88%99+%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81&spm=1018.2226.3001.4187">电话号码正则博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/fly_wugui/article/details/88902156?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164578901316780261939270%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164578901316780261939270&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-88902156.first_rank_v2_pc_rank_v29&utm_term=%E6%AD%A3%E5%88%99+%E8%BA%AB%E4%BB%BD%E8%AF%81%E5%8F%B7%E7%A0%81&spm=1018.2226.3001.4187">身份证号码正则博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/maike_even/article/details/90387782?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164578915416780271950756%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164578915416780271950756&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-90387782.first_rank_v2_pc_rank_v29&utm_term=%E6%AD%A3%E5%88%99+%E5%AF%86%E7%A0%81&spm=1018.2226.3001.4187">密码正则博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42905245/article/details/103641805?ops_request_misc=&request_id=&biz_id=102&utm_term=%E6%AD%A3%E5%88%99%20%E9%82%AE%E7%AE%B1&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-6-103641805.first_rank_v2_pc_rank_v29&spm=1018.2226.3001.4187">邮箱正则博客</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/kekekeqi/article/details/80881718?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164578932316780255263301%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164578932316780255263301&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-80881718.first_rank_v2_pc_rank_v29&utm_term=%E6%AD%A3%E5%88%99+%E5%A7%93%E5%90%8D&spm=1018.2226.3001.4187">姓名正则博客</a></p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/01/31/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84Destructuring%E8%B5%8B%E5%80%BC/">变量的解构Destructuring赋值</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/JS/" rel="tag">JS</a><a class="-none-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/02/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84Destructuring%E8%B5%8B%E5%80%BC/">变量的解构Destructuring赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4/">let和const命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/H5%E5%92%8CCSS3%E6%8F%90%E9%AB%98/">H5和CSS3提高</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/vue(8)%20Router%E8%B7%AF%E7%94%B1/">vue(8) Router路由</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/vue(7)%20Vuex%E3%80%81ElementUI/">vue(7) Vuex、ElementUI</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12.5px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JS/" style="font-size: 15px;">JS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
