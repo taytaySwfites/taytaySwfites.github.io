@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>webpack(1) 安装 打包 插件 资源模块 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="webpack(1) 安装 打包 插件 资源模块"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/219d8d225ac9427cad62190d16b340e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>webpack(1) 安装 打包 插件 资源模块</h2>
+            <div class="post-meta">
+                <time class="date">2022.02.26</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Webpack/">Webpack</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack webpack-cli --<span class="built_in">global</span> <span class="comment">// 全局安装</span></span><br><span class="line">npm i webpack webpack-cli --save-dev <span class="comment">// 本地安装</span></span><br><span class="line"></span><br><span class="line">npm init -y</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-打包"><a href="#2-打包" class="headerlink" title="2.打包"></a>2.打包</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">webpack</span><br><span class="line">webpack --stats detailed <span class="comment">// 详细打包</span></span><br><span class="line">npm uninstall webpack webpack-cli --gloabal <span class="comment">// 卸载全局的webpack</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用npx，npx依托于npm</strong><br><strong>作用：当前目录有没有指定的命令，没有就会找上一层</strong></p>
+<h5 id="自定义Webpack配置："><a href="#自定义Webpack配置：" class="headerlink" title="自定义Webpack配置："></a>自定义Webpack配置：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack --help <span class="comment">// 查看全部指令</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="–entry：设置入口文件"><a href="#–entry：设置入口文件" class="headerlink" title="–entry：设置入口文件"></a>–entry：设置入口文件</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack --entry ./src/index.js --mode production</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="使用webpack-config-js"><a href="#使用webpack-config-js" class="headerlink" title="使用webpack.config.js:"></a><code>使用webpack.config.js</code>:</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 因为在nodeJs里面运行，使用nodeJs的CommonJS模块</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">// 入口</span></span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    <span class="comment">// 出口</span></span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">        <span class="comment">// 文件输出路径，应该使用绝对路径(物理路径)</span></span><br><span class="line">        <span class="comment">// __dirname：当前webpack所在的路径</span></span><br><span class="line">        <span class="comment">// &#x27;./dist&#x27;: __dirname下的dist目录</span></span><br><span class="line">        <span class="attr">path</span>: path.resolve(__dirname, <span class="string">&#x27;./dist&#x27;</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;none&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-插件"><a href="#3-插件" class="headerlink" title="3.插件"></a>3.插件</h2><p><img src="https://img-blog.csdnimg.cn/f1196cb857f14da094b55d17795b9dff.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="（1）htmlWebpackPlugin"><a href="#（1）htmlWebpackPlugin" class="headerlink" title="（1）htmlWebpackPlugin"></a>（1）htmlWebpackPlugin</h4><p>安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install html-webpack-plugin -D</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常量以大写开头可能是类或者构造函数</span></span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugins = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment">// 因为在nodeJs里面运行，使用nodeJs的CommonJS模块</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="comment">// 插件使用需要实例化</span></span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugins(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./index.html&#x27;</span>,</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;app.html&#x27;</span>,</span><br><span class="line">            <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>, <span class="comment">// 在body生成新的标签</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="清除上一次打包没用的内容："><a href="#清除上一次打包没用的内容：" class="headerlink" title="清除上一次打包没用的内容："></a>清除上一次打包没用的内容：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">    <span class="comment">// 清除上一次打包没用的内容</span></span><br><span class="line">    <span class="attr">clean</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="修改模式："><a href="#修改模式：" class="headerlink" title="修改模式："></a>修改模式：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mode: <span class="string">&#x27;development&#x27;</span>, <span class="comment">// 开发模式</span></span><br></pre></td></tr></table></figure>
+
+
+<h5 id="精准锁定出错代码的位置："><a href="#精准锁定出错代码的位置：" class="headerlink" title="精准锁定出错代码的位置："></a>精准锁定出错代码的位置：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devtool: <span class="string">&#x27;inline-source-map&#x27;</span>,</span><br></pre></td></tr></table></figure>
+
+
+<p>使用watch mode编译时的自动监测文件变化时的功能，但需要手动刷新浏览器</p>
+<h4 id="（2）webpack-dev-server：不但能监测文件的变化，从而重新编译，还能自动的实现浏览器的刷新"><a href="#（2）webpack-dev-server：不但能监测文件的变化，从而重新编译，还能自动的实现浏览器的刷新" class="headerlink" title="（2）webpack-dev-server：不但能监测文件的变化，从而重新编译，还能自动的实现浏览器的刷新"></a>（2）webpack-dev-server：不但能监测文件的变化，从而重新编译，还能自动的实现浏览器的刷新</h4><p>没有输出任何的物理的文件，而是把打包了之后的文放到了内存里</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack-dev-server -D</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npx webpack-dev-server</span><br><span class="line">npx webpack-dev-server --open <span class="comment">//自动打开浏览器</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-资源模块-asset-module"><a href="#4-资源模块-asset-module" class="headerlink" title="4.资源模块 asset module"></a>4.资源模块 asset module</h2><p>asset module type资源模块类型：<br>（1）asset/resource：发送单独的文件并导出url<br>（2）asset/inline：导出资源的Data URL<br>（3）asset/source：导出资源的源代码<br>（4）通用资源类型asset：在导出资源的Data URL和发送一个单独文件中自动选择</p>
+<h4 id="（1）Resource资源："><a href="#（1）Resource资源：" class="headerlink" title="（1）Resource资源："></a>（1）Resource资源：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="comment">// 资源文件的模块名</span></span><br><span class="line">        <span class="attr">assetModuleFilename</span>: <span class="string">&#x27;images/test[contenthash][ext]&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [&#123;</span><br><span class="line">            <span class="comment">// 以png作为扩展名的文件</span></span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.png$/</span>,</span><br><span class="line">            type: <span class="string">&#x27;asset/resource&#x27;</span>,</span><br><span class="line">            <span class="comment">// generator的优先级高于assetModuleFilename</span></span><br><span class="line">            <span class="attr">generator</span>: &#123;</span><br><span class="line">                <span class="attr">filename</span>: <span class="string">&#x27;images/test[contenthash][ext]&#x27;</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="（2）inline资源："><a href="#（2）inline资源：" class="headerlink" title="（2）inline资源："></a>（2）inline资源：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [&#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.svg$/</span>,</span><br><span class="line">            type: <span class="string">&#x27;asset/inline&#x27;</span></span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="（3）source资源："><a href="#（3）source资源：" class="headerlink" title="（3）source资源："></a>（3）source资源：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [&#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.txt$/</span>,</span><br><span class="line">            type: <span class="string">&#x27;asset/source&#x27;</span></span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="（4）inline资源："><a href="#（4）inline资源：" class="headerlink" title="（4）inline资源："></a>（4）inline资源：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="comment">// 资源文件的模块名</span></span><br><span class="line">        <span class="attr">assetModuleFilename</span>: <span class="string">&#x27;images/test[contenthash][ext]&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: [</span><br><span class="line">        <span class="comment">// 继承使用了assetModuleFilename</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.jpg$/</span>,</span><br><span class="line">            type: <span class="string">&#x27;asset&#x27;</span>,</span><br><span class="line">            <span class="attr">parser</span>: &#123;</span><br><span class="line">                <span class="attr">dataUrlCondition</span>: &#123;</span><br><span class="line">                    <span class="comment">// 当图片资源文件大于4MB时，生成资源文件，不然生成base64</span></span><br><span class="line">                    <span class="attr">maxSize</span>: <span class="number">4</span> * <span class="number">1024</span> * <span class="number">1024</span>,</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/02/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/Webpack/" rel="tag">Webpack</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img0.baidu.com/it/u=1373006895,102752536&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=500" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一个菜虫罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/02/26/webpack(1)%20%E5%AE%89%E8%A3%85%20%E6%89%93%E5%8C%85%20%E6%8F%92%E4%BB%B6%20%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97/">webpack(1) 安装 打包 插件 资源模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84Destructuring%E8%B5%8B%E5%80%BC/">变量的解构Destructuring赋值</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/let%E5%92%8Cconst%E5%91%BD%E4%BB%A4/">let和const命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/H5%E5%92%8CCSS3%E6%8F%90%E9%AB%98/">H5和CSS3提高</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/24/vue(8)%20Router%E8%B7%AF%E7%94%B1/">vue(8) Router路由</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12.5px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JS/" style="font-size: 15px;">JS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
