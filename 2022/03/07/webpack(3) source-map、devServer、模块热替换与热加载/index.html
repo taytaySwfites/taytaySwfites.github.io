@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>webpack(3) source-map、devServer、模块热替换与热加载 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="webpack(3) source-map、devServer、模块热替换与热加载"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>webpack(3) source-map、devServer、模块热替换与热加载</h2>
+            <div class="post-meta">
+                <time class="date">2022.03.07</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Webpack/">Webpack</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-source-map"><a href="#1-source-map" class="headerlink" title="1.source-map"></a>1.source-map</h2><p>一般不会开启sourcemap功能，因为：<br>（1）通过bundle和sourcemap文件，可以反编译出源码（线上产物有soucemap文件的话，就意味着有暴漏源码的风险）<br>（2）sourcemap文件的体积相对比较巨大，生产环境的追求不同（生产环境追求更小更轻量的bundle）<br><img src="https://img-blog.csdnimg.cn/205fd14f521948278194136f30bd2f3d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<ul>
+<li>在开发模式下，默认使用eval</li>
+<li>使用cheap-module-source-map，需要先有使用babel：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-loader @babel/core @babel/preset-env -D</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>注意，生产环境我们一般不会开启sourcmap功能,主要有两点原因：<br>（1）通过bundle和sourcemap文件，可以反编译出源码—-也就是说，<code>线上产物有soucemap文件的话，就意味着有暴漏源码的风险</code><br>（2）我们可以观察到，sourcemap文件的体积相对比较巨大,这跟我们生产环境的追求不同（<code>生产环境追求更小更轻量的bundle</code>）</p>
+<br/>
+
+<h2 id="2-devServer"><a href="#2-devServer" class="headerlink" title="2.devServer"></a>2.devServer</h2><p>  在开发模式下，我们往往需要启动一个web服务，方便我们模拟用户从浏览器中访问我们的web服务，读打包的产物，以观测我们的代码在客户端的表现<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack-dev-server -D</span><br></pre></td></tr></table></figure></p>
+<p>（1）基本使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;);</span><br><span class="line">const HtmpWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    mode: &#x27;development&#x27;,</span><br><span class="line">    entry: &#x27;./app.js&#x27;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        publicPath: &#x27;/&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        // 默认把/dist目录当做web服务的根目录</span><br><span class="line">        static: path.resolve(__dirname, &#x27;./dist&#x27;),</span><br><span class="line">        </span><br><span class="line">        // 是不是在服务器端进行代码压缩，在传输时可以减少数据大小</span><br><span class="line">        // 可选择开启gzips压缩功能，对应静态资源请求的响应头里的 Content-Encoding: gzip</span><br><span class="line">        compress: true,</span><br><span class="line">        </span><br><span class="line">        // 端口号</span><br><span class="line">        port: 3000,</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new HtmpWebpackPlugin(),</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）添加响应头<br>  我们需要为所有响应添加headers，来对资源的请求和响应打入标志，一遍做一些安全防范，或者方便发生异常后做请求的链路追踪</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">        &#x27;X-Access-Token&#x27;: &#x27;tay&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>（3）开启代理<br>  打包出的js bundle里有时会含有一些对特定接口的网络请求（ajax/fetch）要注意，需要使用跨域</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    proxy: &#123;</span><br><span class="line">        &#x27;/api&#x27;: &#123;</span><br><span class="line">            target: &#x27;http://localhost:9000&#x27;,</span><br><span class="line">            pathRewrite: &#123; &#x27;^/api&#x27;: &#x27;&#x27;&#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>  默认情况下，将不接受HTTPS上运行且证书无效的后端服务器，如果需要，则需要修改配置：<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    proxy: &#123;</span><br><span class="line">        &#x27;/api&#x27;: &#123;</span><br><span class="line">            target: &#x27;https://other-server.example.com&#x27;,</span><br><span class="line">            secure: false,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>（4）https<br>  https由于配置使用的是自签名证书，所以浏览器会告诉我们是不安全的，但依然可以继续访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    // </span><br><span class="line">    // https: true,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>（5）http2<br>  也可以通过http2，它是自带https证书的,但会有不安全的警告，因为本地使用的是默认的证书</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    http2: true,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+<p>(6)historyApiFallback<br>  如果应用是一个SPA单页面应用，如果使用了路由的history模式，发现可能会报错，需要配置一下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    historyApiFallback: true,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  此时重启服务刷新后发现请求变成了index.html。当然，在多数业务场景下，我们需要根据不同的访问路径定制替代的页面，这种情况下，我们可以使用rewrites配置项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123; </span><br><span class="line">    //... </span><br><span class="line">    devServer: &#123; </span><br><span class="line">        historyApiFallback: &#123; </span><br><span class="line">            rewrites: [</span><br><span class="line">                &#123; from: /^\/$/, to: &#x27;/views/landing.html&#x27; &#125;, </span><br><span class="line">                &#123; from: /^\/subpage/, to: &#x27;/views/subpage.html&#x27; &#125;, </span><br><span class="line">                &#123; from: /./, to: &#x27;/views/404.html&#x27; &#125;,</span><br><span class="line">            ], </span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;, </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>（7）开启服务器主机，同一局域网可以通过ip来访问服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    host: &#x27;0.0.0.0&#x27;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="3-模块热替换与热加载"><a href="#3-模块热替换与热加载" class="headerlink" title="3.模块热替换与热加载"></a>3.模块热替换与热加载</h2><p>（1）模块热替换</p>
+<ul>
+<li><p>(HMR - hot module replacement)功能会在应用程序运行过程中，替换、添加或删除模块，而无需重新加载整个页面</p>
+</li>
+<li><p>HMR在家样式，如果配置了style-loader，那么现在同样支持样式文件的热替换功能</p>
+</li>
+<li><p>因为style-loader使用了module.hot.accept，在CSS依赖模块更新之后，会对style标签打补丁</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;)</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    mode: &#x27;development&#x27;,</span><br><span class="line">    entry: &#x27;./app.js&#x27;,</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [&#123;</span><br><span class="line">            test: /\.css$/,</span><br><span class="line">            use: [&#x27;style-loader&#x27;, &#x27;css-loader&#x27;]</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: &#x27;./index.html&#x27;,</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        // 模块化热替换</span><br><span class="line">        hot: true,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>（2）热加载</p>
+<ul>
+<li>（文件更新时，自动刷新我们的服务和页面）新版的webpack-dev-server默认已经开启了热加载的功能</li>
+<li>它对应的参数是devServer.liveReload，默认为true</li>
+<li>注意，如果想要关掉它，要将liveReload设置为false的同时，也要关掉hot<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        // 模块化热替换</span><br><span class="line">        hot: true,</span><br><span class="line">        // 热加载</span><br><span class="line">        liveReload: true,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<br/>
+
+<h2 id="4-eslint"><a href="#4-eslint" class="headerlink" title="4.eslint"></a>4.eslint</h2><p>  eslint是用来扫描我们所写的代码是否符合规范的工具。如果期望统一的代码规范，这时候可以让eslint来对我们进行约束。<br>  严格意义上来说，eslint配置跟webpack无关，但在工程化开发环境中，它往往是不可或缺的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i eslint -D</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --init</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/41a8fa6246af411384665bc8a2f4ce52.png#pic_center" alt="在这里插入图片描述"></p>
+<p>在eslint使用时，用哪种方式呢？<br>（1）仅仅检查语法错误<br>（2）检查语法和发现问题<br>（3）检查语法和发现问题，还可以规范代码的格式<br><img src="https://img-blog.csdnimg.cn/840654af0050463493034772c2894dbc.png#pic_center" alt="在这里插入图片描述"></p>
+<p>在项目使用了哪种模块化编写方式？<br>（1）js的模块化<br>（2）commonjs的模块化<br>（3）什么都不用</p>
+<p>生成一个配置文件.eslintrc.json，该配置文件里的配置项的含义：<br>（1）env指定脚本的运行环境：每种环境都有一组特定的预定义全局变量</p>
+<ul>
+<li>browser预定义了浏览器环境中的全局变量，es6启用除了modules以外的所有ECMAScript 6特性（该选项会自动设置 ecmaVersion 解析器选项为 6）</li>
+</ul>
+<p>（2）globals 脚本在执行期间访问的额外的全局变量，也就是env中未预定义，但我们又需要使用的全局变量 </p>
+<p>（3）extends检测中使用的预定义的规则集合</p>
+<p>（4）rules启用的规则及其各自的错误级别，会合并extends中的同名规则，定义冲突时优先级更高</p>
+<p>（5）parserOptions ESLint允许你指定你想要支持的JavaScript语言选项  </p>
+<ul>
+<li>ecmaFeatures是个对象，表示你想使用的额外的语言特性，ecmaVersion 用来指定支持的 ECMAScript 版本</li>
+<li>默认为5，即仅支持es5，你可以使用 6、7、8、9或10来指定想要使用的ECMAScript版本</li>
+<li>也可以用使用年份命名的版本号指定为 2015（同 6），2016（同 7），或 2017（同 8）或2018（同 9）或2019 (same as 10)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;env&quot;: &#123;</span><br><span class="line">        &quot;browser&quot;: true,</span><br><span class="line">        &quot;es2021&quot;: true</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;extends&quot;: [</span><br><span class="line">        &quot;airbnb-base&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;parserOptions&quot;: &#123;</span><br><span class="line">        &quot;ecmaVersion&quot;: &quot;latest&quot;,</span><br><span class="line">        &quot;sourceType&quot;: &quot;module&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;rules&quot;: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;globals&quot;: &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>配置规则：关闭一下两个警告（0为关闭）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;rules&quot;: &#123;</span><br><span class="line">    &quot;no-console&quot;: 0,</span><br><span class="line">    &quot;eol-last&quot;: 0</span><br><span class="line">&#125;,        </span><br></pre></td></tr></table></figure>
+
+<p>结合webpack：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i babel-loader eslint-loader @babel/core -D</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    mode: &#x27;development&#x27;,</span><br><span class="line">    entry: &#x27;./src/app.js&#x27;,</span><br><span class="line">    </span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [&#123;</span><br><span class="line">            test: /\.js$/,</span><br><span class="line">            use: [&#x27;babel-loader&#x27;, &#x27;eslint-loader&#x27;],</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(),</span><br><span class="line">    ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>不显示浏览器覆盖层错误提示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    client: &#123;</span><br><span class="line">        overlay: false</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="5-git-hooks与husky"><a href="#5-git-hooks与husky" class="headerlink" title="5.git-hooks与husky"></a>5.git-hooks与husky</h2><p>  为了保证提交的代码符合规范，我们可以在开发者上传代码时进行校，常用 husky来协助进行代码提交时的eslint 校验，而husky是基于git-hooks</p>
+<p>（1）git-hooks：<br>利用.git/hooks下的pre-master，分三步：<br>1.新增任意名称文件夹以及文件pre-commit（这个文件名字比如跟要使用的githook名字一致）<br>2.执行以下命令来移交git-hook的配置权限 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config core.hooksPath .mygithooks</span><br></pre></td></tr></table></figure>
+
+<p>3.给这个文件添加可执行权限：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chomd +x .mygithooks/pre-commit</span><br></pre></td></tr></table></figure>
+<p>可以在pre-commit里写入任意脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eslint src</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当eslint扫描代码，出现error时，会在结束扫描时将退出码设为大于0的数字；也就是会报错，这时候commit就无法往下执行啦，我们成功的拦截了此次错误操作</li>
+</ul>
+<p>（2）husky：<br>官网使用：<a target="_blank" rel="noopener" href="https://typicode.github.io/husky/#/?id=manual">Husky - Git hooks (typicode.github.io)</a><br>视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YU4y1g745?p=62&spm_id_from=pageDriver">前端webpack5</a></p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/03/06/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/">HTTP状态码</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/Webpack/" rel="tag">Webpack</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/44fe1ae59cf64276875a181335fa1058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一颗菜菜西兰花罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/07/webpack(3)%20source-map%E3%80%81devServer%E3%80%81%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2%E4%B8%8E%E7%83%AD%E5%8A%A0%E8%BD%BD/">webpack(3) source-map、devServer、模块热替换与热加载</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/06/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/">HTTP状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/26/webpack(2)%20loader%20babel-loader%20%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB/">webpack(2) loader babel-loader 代码分离 缓存 拆分开发环境和生产环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/26/webpack(1)%20%E5%AE%89%E8%A3%85%20%E6%89%93%E5%8C%85%20%E6%8F%92%E4%BB%B6%20%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97/">webpack(1) 安装 打包 插件 资源模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/31/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84Destructuring%E8%B5%8B%E5%80%BC/">变量的解构Destructuring赋值</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 18px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 12px;">HTML</a> <a href="/tags/JS/" style="font-size: 16px;">JS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 14px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
