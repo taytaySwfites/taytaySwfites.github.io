@@ -125,7 +125,7 @@
 <p><img src="https://img-blog.csdnimg.cn/41a8fa6246af411384665bc8a2f4ce52.png#pic_center" alt="在这里插入图片描述"><br>在eslint使用时，用哪种方式呢？<br>（1）仅仅检查语法错误<br>（2）检查语法和发现问题<br>（3）检查语法和发现问题，还可以规范代码的格式</p>
 <br/>
 
-<p><img src="https://img-blog.csdnimg.cn/840654af0050463493034772c2894dbc.png#pic_center" alt="在这里插入图片描述"><br>在项目使用了哪种模块化编写方式？<br>（1）js的模块化<br>（2）commonjs的模块化<br>（3）什么都不用<br><br/><br/></p>
+<p><img src="https://img-blog.csdnimg.cn/840654af0050463493034772c2894dbc.png#pic_center" alt="在这里插入图片描述"><br>在项目使用了哪种模块化编写方式？<br>（1）js的模块化<br>（2）commonjs的模块化<br>（3）什么都不用<br><br/></p>
 <p>生成一个配置文件.eslintrc.json，该配置文件里的配置项的含义：<br>（1）env指定脚本的运行环境：每种环境都有一组特定的预定义全局变量</p>
 <ul>
 <li>browser预定义了浏览器环境中的全局变量，es6启用除了modules以外的所有ECMAScript 6特性（该选项会自动设置 ecmaVersion 解析器选项为 6）</li>
@@ -139,12 +139,15 @@
 <li>默认为5，即仅支持es5，你可以使用 6、7、8、9或10来指定想要使用的ECMAScript版本</li>
 <li>也可以用使用年份命名的版本号指定为 2015（同 6），2016（同 7），或 2017（同 8）或2018（同 9）或2019 (same as 10)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;env&quot;: &#123;</span><br><span class="line">        &quot;browser&quot;: true,</span><br><span class="line">        &quot;es2021&quot;: true</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;extends&quot;: [</span><br><span class="line">        &quot;airbnb-base&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;parserOptions&quot;: &#123;</span><br><span class="line">        &quot;ecmaVersion&quot;: &quot;latest&quot;,</span><br><span class="line">        &quot;sourceType&quot;: &quot;module&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;rules&quot;: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;globals&quot;: &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p><br/><br/><br><code>配置规则</code>：关闭一下两个警告（0为关闭）</p>
+<br/>
+`配置规则`：关闭一下两个警告（0为关闭）
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;rules&quot;: &#123;</span><br><span class="line">    &quot;no-console&quot;: 0,</span><br><span class="line">    &quot;eol-last&quot;: 0</span><br><span class="line">&#125;,        </span><br></pre></td></tr></table></figure>
-<p><br/><br/><br><code>结合webpack</code>：</p>
+<br/>
+`结合webpack`：
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i babel-loader eslint-loader @babel/core -D</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    mode: &#x27;development&#x27;,</span><br><span class="line">    entry: &#x27;./src/app.js&#x27;,</span><br><span class="line">    </span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [&#123;</span><br><span class="line">            test: /\.js$/,</span><br><span class="line">            use: [&#x27;babel-loader&#x27;, &#x27;eslint-loader&#x27;],</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(),</span><br><span class="line">    ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><br/><br/><br><code>不显示浏览器覆盖层错误提示</code>：</p>
+<br/>
+`不显示浏览器覆盖层错误提示`：
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    client: &#123;</span><br><span class="line">        overlay: false</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
 <br/>
