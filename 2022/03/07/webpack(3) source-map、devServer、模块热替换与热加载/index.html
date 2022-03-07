@@ -119,10 +119,10 @@
 <h2 id="4-eslint"><a href="#4-eslint" class="headerlink" title="4.eslint"></a>4.eslint</h2><p>  eslint是用来扫描我们所写的代码是否符合规范的工具。如果期望统一的代码规范，这时候可以让eslint来对我们进行约束。<br>  严格意义上来说，eslint配置跟webpack无关，但在工程化开发环境中，它往往是不可或缺的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i eslint -D</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --init</span><br></pre></td></tr></table></figure>
-<br/>
-<br/>
-![在这里插入图片描述](https://img-blog.csdnimg.cn/41a8fa6246af411384665bc8a2f4ce52.png#pic_center)
 
+<br/>
+
+<p><img src="https://img-blog.csdnimg.cn/41a8fa6246af411384665bc8a2f4ce52.png#pic_center" alt="在这里插入图片描述"></p>
 <p>在eslint使用时，用哪种方式呢？<br>（1）仅仅检查语法错误<br>（2）检查语法和发现问题<br>（3）检查语法和发现问题，还可以规范代码的格式<br><br/><br><img src="https://img-blog.csdnimg.cn/840654af0050463493034772c2894dbc.png#pic_center" alt="在这里插入图片描述"><br><br/><br>在项目使用了哪种模块化编写方式？<br>（1）js的模块化<br>（2）commonjs的模块化<br>（3）什么都不用<br><br/><br/><br>生成一个配置文件.eslintrc.json，该配置文件里的配置项的含义：<br>（1）env指定脚本的运行环境：每种环境都有一组特定的预定义全局变量</p>
 <ul>
 <li>browser预定义了浏览器环境中的全局变量，es6启用除了modules以外的所有ECMAScript 6特性（该选项会自动设置 ecmaVersion 解析器选项为 6）</li>
