@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>webpack(4) 模块与依赖、模块解析、PostCSS与CSS模块、TypeScript - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="webpack(4) 模块与依赖、模块解析、PostCSS与CSS模块、TypeScript"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>webpack(4) 模块与依赖、模块解析、PostCSS与CSS模块、TypeScript</h2>
+            <div class="post-meta">
+                <time class="date">2022.03.18</time>
+            
+                <span class="category"><a class="category-link" href="/categories/Webpack/">Webpack</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-Webpack模块与解析原理"><a href="#1-Webpack模块与解析原理" class="headerlink" title="1.Webpack模块与解析原理"></a>1.Webpack模块与解析原理</h2><p>webpack模块：<br><img src="https://img-blog.csdnimg.cn/cf9a79d846eb4625b1cb2e96130c3553.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_12,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br><br/><br><img src="https://img-blog.csdnimg.cn/25147f7456684948be5d289ce9b582f1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="2-模块解析（resolve）"><a href="#2-模块解析（resolve）" class="headerlink" title="2.模块解析（resolve）"></a>2.模块解析（resolve）</h2><ul>
+<li>webpack通过Resolvers实现了模块之间的依赖和引用</li>
+<li> 所引用的模块可以是来自应用程序的代码，也可以是第三方库。resolver帮助webpack从每个require/import语句中，找到需要引入到bundle中的模块代码</li>
+<li>当打包模块时，webpack使用enhanced-resolve来解析文件路径</li>
+</ul>
+<p>（1）webpack中模块路径解析规则</p>
+<ul>
+<li>绝对路径</li>
+<li>相对路径</li>
+<li>模块路径（在resolve.modules中指定的所有目录检索模块node_modules里的模块已经被默认配置了）</li>
+</ul>
+<p>（2）resolve</p>
+<ul>
+<li><p>alias：将绝对路径配置为一个模块路径<br>const path = require(‘path’)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="comment">// 别名</span></span><br><span class="line">        <span class="attr">alias</span>: &#123;</span><br><span class="line">            <span class="string">&quot;@&quot;</span>: path.resolve(__dirname, <span class="string">&#x27;./src&#x27;</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>extensions：webpack会按照数组顺序去解析这些后缀名，对于同名的文件，webpack总是会先解析列在数组首位的后缀名的文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="attr">extensions</span>: [<span class="string">&#x27;.json&#x27;</span>, <span class="string">&#x27;.js&#x27;</span>, <span class="string">&#x27;.vue&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>（3）externals<br>    为了减小bundle的体积，从而把一些不变的第三方库用cdn的形式引入进来</p>
+<ul>
+<li>第一种写法：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  webpack.config,js</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            <span class="attr">template</span>: <span class="string">&#x27;./index.html&#x27;</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    <span class="attr">externals</span>: &#123; </span><br><span class="line">        <span class="attr">jquery</span>: <span class="string">&#x27;jQuery&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>  app.js中使用：<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> $ <span class="keyword">from</span> <span class="string">&#x27;jquery&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log($)</span><br></pre></td></tr></table></figure><br>  webpack.config.js同目录下创建index.html，引入cdn：<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>第二种写法：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin()</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    <span class="attr">externalsType</span>: <span class="string">&#x27;script&#x27;</span>,</span><br><span class="line">    <span class="attr">externals</span>: &#123; </span><br><span class="line">        <span class="attr">jquery</span>: [</span><br><span class="line">            <span class="string">&#x27;https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;$&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>（4）依赖图<br>  安装：<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack-bundle-analyzer -D</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; BundleAnalyzerPlugin &#125; = <span class="built_in">require</span>(<span class="string">&#x27;webpack-bundle-analyzer&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: &#123;</span><br><span class="line">        <span class="attr">app</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">        <span class="attr">app2</span>: <span class="string">&#x27;./src/app2.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(),</span><br><span class="line">        <span class="keyword">new</span> BundleAnalyzerPlugin(),</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-PostCSS与CSS模块"><a href="#3-PostCSS与CSS模块" class="headerlink" title="3.PostCSS与CSS模块"></a>3.PostCSS与CSS模块</h2><ul>
+<li>PostCSS是一个用JavaScript工具和插件转换CSS代码的工具。比如可以使用Autoprefixer插件自动获取浏览器的流行度和能够支持的属性，并根据这些数据帮我们自动的为CSS规则添加前缀，将最新的CSS语法转换成大多数浏览器都能理解的语法</li>
+<li>CSS模块能让你永远不用担心命名太大众化而造成冲突，只要用最有意义的名字就行了</li>
+</ul>
+<p>（1）PostCSS</p>
+<ul>
+<li><p>使用插件autoprefixer提供自动给样式加前缀去兼容看浏览器，安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i postcss-loader -D</span><br><span class="line">npm i autoprefixer -D</span><br></pre></td></tr></table></figure>
+<p>项目下创建postcss.config.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>)</span><br><span class="line">    ]</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>在package.json下配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全球浏览器的使用率要大于1%，每个浏览器最新的两个版本</span></span><br><span class="line"><span class="string">&quot;browserslist&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;&gt; 1%&quot;</span>,</span><br><span class="line">    <span class="string">&quot;last 2 versions&quot;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li><p>插件postcss-nested提供编写嵌套的样式语法，安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i postcss-nested -D</span><br></pre></td></tr></table></figure>
+<p>项目下创建postcss.config.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>),</span><br><span class="line">        <span class="built_in">require</span>(<span class="string">&#x27;postcss-nested&#x27;</span>)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>（2）css模块</p>
+<ul>
+<li>存在命名冲突的问题时，可以开启CSS模块解决<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">            use: [</span><br><span class="line">                <span class="string">&#x27;style-loader&#x27;</span>,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">loader</span>: <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">                    <span class="attr">options</span>: &#123;</span><br><span class="line">                        <span class="attr">modules</span>: <span class="literal">true</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="string">&#x27;postcss-loader&#x27;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+那么在使用css时，应该：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> style <span class="keyword">from</span> <span class="string">&#x27;./app.css&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> div = <span class="built_in">document</span>.createElement(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line">div.textContent = <span class="string">&#x27;taytay&#x27;</span>;</span><br><span class="line">div.classList.add(style.box);</span><br><span class="line"><span class="built_in">document</span>.body. appendChild(div)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>也可以部分开启CSS模块模式，比如全局样式可以冠以.global前缀：<br>I.<em>.global.css 普通模式<br>II.</em>.css css module模式<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// css module </span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">`^(?!.*\\.global).*\\.css`</span>), </span><br><span class="line">    <span class="attr">use</span>: [ </span><br><span class="line">        &#123; </span><br><span class="line">            <span class="attr">loader</span>: <span class="string">&#x27;style-loader&#x27;</span> </span><br><span class="line">        &#125;, </span><br><span class="line">        &#123; </span><br><span class="line">            <span class="attr">loader</span>: <span class="string">&#x27;css-loader&#x27;</span>, </span><br><span class="line">            <span class="attr">options</span>: &#123; </span><br><span class="line">                <span class="attr">modules</span>: <span class="literal">true</span>, </span><br><span class="line">                <span class="attr">localIdentName</span>: <span class="string">&#x27;[hash:base64:6]&#x27;</span> </span><br><span class="line">            &#125; </span><br><span class="line">        &#125;, </span><br><span class="line">        &#123; </span><br><span class="line">            <span class="attr">loader</span>: <span class="string">&#x27;postcss-loader&#x27;</span> </span><br><span class="line">        &#125; </span><br><span class="line">    ], </span><br><span class="line">    <span class="attr">exclude</span>:[path.resolve(__dirname, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;node_modules&#x27;</span>)] </span><br><span class="line">&#125; </span><br><span class="line">    </span><br><span class="line"><span class="comment">// 普通模式 </span></span><br><span class="line">&#123; </span><br><span class="line">    <span class="attr">test</span>: <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">`^(.*\\.global).*\\.css`</span>), </span><br><span class="line">    <span class="attr">use</span>: [ </span><br><span class="line">        &#123; </span><br><span class="line">            <span class="attr">loader</span>: <span class="string">&#x27;style-loader&#x27;</span> </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">loader</span>: <span class="string">&#x27;css-loader&#x27;</span>, </span><br><span class="line">        &#125;, &#123; </span><br><span class="line">            <span class="attr">loader</span>: <span class="string">&#x27;postcss-loader&#x27;</span> </span><br><span class="line">        &#125; </span><br><span class="line">    ], </span><br><span class="line">    <span class="attr">exclude</span>:[path.resolve(__dirname, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;node_modules&#x27;</span>)] </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-Web-Works"><a href="#4-Web-Works" class="headerlink" title="4.Web Works"></a>4.Web Works</h2><h2 id="5-TypeScript"><a href="#5-TypeScript" class="headerlink" title="5.TypeScript"></a>5.TypeScript</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  安装：</span><br><span class="line">npm i typescript ts-loader -D</span><br></pre></td></tr></table></figure>
+<p>  创建ts配置文件tsconfig.json：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx tsc --init</span><br></pre></td></tr></table></figure>
+<p>  打开配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;rootDir&quot;</span>: <span class="string">&quot;./src&quot;</span>,                                 </span><br><span class="line"><span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;./dist&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>如果ts中引入，如lodash：<br>需要同时安装这个库的类型声明文件(typing definition）<br>可以在官网查询：<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/dt/search?search=">TypeScript: Search for typed packages (typescriptlang.org)</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @types/lodash --save-dev</span><br></pre></td></tr></table></figure></li>
+<li><p>注意：如果使用eslint，使用初始化命令式，需要选择typescript；如果配置了eslint，但没有配置ts相关的配置，需要先安装对应plugin</p>
+</li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/03/07/webpack(3)%20source-map%E3%80%81devServer%E3%80%81%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2%E4%B8%8E%E7%83%AD%E5%8A%A0%E8%BD%BD/">webpack(3) source-map、devServer、模块热替换与热加载</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/Webpack/" rel="tag">Webpack</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/44fe1ae59cf64276875a181335fa1058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一颗菜菜西兰花罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/18/webpack(4)%20%E6%A8%A1%E5%9D%97%E4%B8%8E%E4%BE%9D%E8%B5%96%E3%80%81%E6%A8%A1%E5%9D%97%E8%A7%A3%E6%9E%90%E3%80%81PostCSS%E4%B8%8ECSS%E6%A8%A1%E5%9D%97%E3%80%81TypeScript/">webpack(4) 模块与依赖、模块解析、PostCSS与CSS模块、TypeScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/07/webpack(3)%20source-map%E3%80%81devServer%E3%80%81%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2%E4%B8%8E%E7%83%AD%E5%8A%A0%E8%BD%BD/">webpack(3) source-map、devServer、模块热替换与热加载</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/06/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/">HTTP状态码</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/26/webpack(2)%20loader%20babel-loader%20%E4%BB%A3%E7%A0%81%E5%88%86%E7%A6%BB/">webpack(2) loader babel-loader 代码分离 缓存 拆分开发环境和生产环境配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/26/webpack(1)%20%E5%AE%89%E8%A3%85%20%E6%89%93%E5%8C%85%20%E6%8F%92%E4%BB%B6%20%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97/">webpack(1) 安装 打包 插件 资源模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 17.5px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12.5px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 12.5px;">HTML</a> <a href="/tags/JS/" style="font-size: 15px;">JS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 15px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
