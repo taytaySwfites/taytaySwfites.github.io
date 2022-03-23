@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>TS(2) typeof类型守卫、(真值、等值、in、instanceo、分配缩小)、控制流分析、类型谓词、受歧视的unions、never类型与穷尽性检查 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="TS(2) typeof类型守卫、(真值、等值、in、instanceo、分配缩小)、控制流分析、类型谓词、受歧视的unions、never类型与穷尽性检查"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>TS(2) typeof类型守卫、(真值、等值、in、instanceo、分配缩小)、控制流分析、类型谓词、受歧视的unions、never类型与穷尽性检查</h2>
+            <div class="post-meta">
+                <time class="date">2022.03.23</time>
+            
+                <span class="category"><a class="category-link" href="/categories/TS/">TS</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-typeof类型守卫："><a href="#1-typeof类型守卫：" class="headerlink" title="1.typeof类型守卫："></a>1.typeof类型守卫：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">padLeft</span>(<span class="params">padding: <span class="built_in">number</span> | <span class="built_in">string</span>, input: <span class="built_in">string</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> padding === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Array</span>(padding + <span class="number">1</span>).join(<span class="string">&quot; &quot;</span>) + input;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> padding + input;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-真值缩小："><a href="#2-真值缩小：" class="headerlink" title="2.真值缩小："></a>2.真值缩小：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 真值缩小</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserOnlineMessage</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (num) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`现在共有 <span class="subst">$&#123;num&#125;</span> 人在线.`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;现在没有人在线.&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">!<span class="string">&#x27;world&#x27;</span>; <span class="comment">// 转成文字布尔类型</span></span><br><span class="line">!!<span class="string">&#x27;world&#x27;</span>; <span class="comment">// 转成真正的true/false</span></span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mutiplyAll</span>(<span class="params">values: <span class="built_in">number</span>[] | <span class="literal">undefined</span>, factor: <span class="built_in">number</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!values) &#123;</span><br><span class="line">        <span class="keyword">return</span> values;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> values.map(<span class="function">(<span class="params">x</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> x * factor;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(mutiplyAll([<span class="number">3</span>, <span class="number">4</span>], <span class="number">2</span>));</span><br><span class="line"><span class="built_in">console</span>.log(mutiplyAll(<span class="literal">undefined</span>, <span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-等值缩小："><a href="#3-等值缩小：" class="headerlink" title="3.等值缩小："></a>3.等值缩小：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">example</span>(<span class="params">x: <span class="built_in">string</span> | <span class="built_in">number</span>, y : <span class="built_in">string</span> | <span class="built_in">boolean</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x === y) &#123;</span><br><span class="line">        x.toUpperCase();</span><br><span class="line">        y.toUpperCase();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(x);</span><br><span class="line">        <span class="built_in">console</span>.log(y);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="4-in操作符缩小："><a href="#4-in操作符缩小：" class="headerlink" title="4.in操作符缩小："></a>4.in操作符缩小：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> FlyFish = &#123;</span><br><span class="line">    <span class="attr">fly</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">type</span> Fish = &#123;</span><br><span class="line">    <span class="attr">swim</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">type</span> Human = &#123;</span><br><span class="line">    swim?: <span class="function">() =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">    fly?:<span class="function">() =&gt;</span> <span class="built_in">void</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">animal: FlyFish | Fish | Human</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="string">&#x27;swim&#x27;</span> <span class="keyword">in</span> animal) &#123;</span><br><span class="line">        <span class="keyword">return</span> (animal <span class="keyword">as</span> Fish).swim();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        (animal <span class="keyword">as</span> FlyFish).fly();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="5-instanceo操作符缩小："><a href="#5-instanceo操作符缩小：" class="headerlink" title="5.instanceo操作符缩小："></a>5.instanceo操作符缩小：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logValue</span>(<span class="params">x: <span class="built_in">Date</span> | <span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x <span class="keyword">instanceof</span> <span class="built_in">Date</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(x.toUTCString());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(x.toUpperCase());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">logValue(<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">logValue(<span class="string">&#x27;hello&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="6-分配缩小："><a href="#6-分配缩小：" class="headerlink" title="6.分配缩小："></a>6.分配缩小：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分配缩小</span></span><br><span class="line"><span class="keyword">let</span> x1 = <span class="built_in">Math</span>.random() &lt; <span class="number">0.5</span> ? <span class="number">10</span> : <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line">x1 = <span class="number">1</span>;</span><br><span class="line">x1 = <span class="string">&#x27;goodbai&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="7-控制流分析："><a href="#7-控制流分析：" class="headerlink" title="7.控制流分析："></a>7.控制流分析：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 控制流分析</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">example1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> x2: <span class="built_in">number</span> | <span class="built_in">string</span> | <span class="built_in">boolean</span>;</span><br><span class="line">    x2 = <span class="built_in">Math</span>.random() &lt; <span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.5</span>) &#123;</span><br><span class="line">        x2 = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        x2 = <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> x2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> x2 = example1();</span><br><span class="line">x2 = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line">x2 = <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="8-类型谓词："><a href="#8-类型谓词：" class="headerlink" title="8.类型谓词："></a>8.类型谓词：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类型谓词</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFish</span>(<span class="params">pet: Fish | FlyFish</span>): <span class="title">pet</span> <span class="title">is</span> <span class="title">Fish</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (pet <span class="keyword">as</span> Fish).swim() !== <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSamllPet</span>(<span class="params"></span>): <span class="title">Fish</span> | <span class="title">FlyFish</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fish: Fish = &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;fish&#x27;</span>,</span><br><span class="line">        <span class="attr">swim</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> fly: FlyFish = &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;flyfish&#x27;</span>,</span><br><span class="line">        <span class="attr">fly</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span> ? fly : fish;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> pet = getSamllPet();</span><br><span class="line"><span class="keyword">if</span>(isFish(pet)) &#123;</span><br><span class="line">    pet.swim();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    pet.fly();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> zoo: (Fish | FlyFish)[] = [getSamllPet(), getSamllPet(), getSamllPet()];</span><br><span class="line"><span class="keyword">const</span> underWater: Fish[] = zoo.filter(isFish);</span><br><span class="line"><span class="keyword">const</span> underWater2: Fish[] = zoo.filter(isFish) <span class="keyword">as</span> Fish[];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> underWater3: Fish[] = zoo.filter((pet): pet is Fish =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(pet.name == <span class="string">&#x27;flog&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isFish(pet);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="9-受歧视的unions："><a href="#9-受歧视的unions：" class="headerlink" title="9.受歧视的unions："></a>9.受歧视的unions：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 受歧视的unions</span></span><br><span class="line"><span class="keyword">interface</span> Shape &#123;</span><br><span class="line">    <span class="attr">kind</span>: <span class="string">&#x27;circle&#x27;</span> | <span class="string">&#x27;square&#x27;</span>;</span><br><span class="line">    radius?: <span class="built_in">number</span>;</span><br><span class="line">    sideLength?: <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape: Shape</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.PI * shape.radius! ** <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改进</span></span><br><span class="line"><span class="keyword">interface</span> Circle &#123;</span><br><span class="line">    <span class="attr">kind</span>: <span class="string">&#x27;circle&#x27;</span>;</span><br><span class="line">    radius: <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Square &#123;</span><br><span class="line">    <span class="attr">kind</span>: <span class="string">&#x27;square&#x27;</span>;</span><br><span class="line">    sideLength: <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">type</span> Shape2 = Circle | Square;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea2</span>(<span class="params">shape: Shape2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(shape.kind) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;circle&#x27;</span>: </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Math</span>.PI * shape.radius ** <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;square&#x27;</span>: </span><br><span class="line">            <span class="keyword">return</span> shape.sideLength ** <span class="number">2</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="10-never类型与穷尽性检查："><a href="#10-never类型与穷尽性检查：" class="headerlink" title="10.never类型与穷尽性检查："></a>10.never类型与穷尽性检查：</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// never类型与穷尽性检查</span></span><br><span class="line"><span class="keyword">interface</span> Triangle &#123;</span><br><span class="line">    <span class="attr">kind</span>: <span class="string">&#x27;triangle&#x27;</span>;</span><br><span class="line">    sideLength: <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">type</span> Shape3 = Circle | Square | Triangle;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea3</span>(<span class="params">shape: Shape3</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(shape.kind) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;circle&#x27;</span>: </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Math</span>.PI * shape.radius ** <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;square&#x27;</span>: </span><br><span class="line">            <span class="keyword">return</span> shape.sideLength ** <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">default</span>: </span><br><span class="line">            <span class="keyword">const</span> _exhastiveCheck: <span class="built_in">never</span> = shape;</span><br><span class="line">            <span class="keyword">return</span> _exhastiveCheck;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/03/22/TS(1)%E7%B1%BB%E5%9E%8B%E3%80%81%E7%B1%BB%E5%9E%8B%E6%B3%A8%E9%87%8A%E3%80%81%E5%87%BD%E6%95%B0%E3%80%81%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E3%80%81%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E3%80%81%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%96%87%E5%AD%97%E7%B1%BB%E5%9E%8B%E3%80%81null%E5%92%8Cundefined%E3%80%81bigint%E5%92%8Csymbol.../">TS(1)类型、类型注释、函数、对象类型、联合类型、类型别名、接口、文字类型、null和undefined、bigint和symbol...</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/TS/" rel="tag">TS</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/44fe1ae59cf64276875a181335fa1058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一颗菜菜西兰花罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/23/TS(2)%20typeof%E7%B1%BB%E5%9E%8B%E5%AE%88%E5%8D%AB%E3%80%81(%E7%9C%9F%E5%80%BC%E3%80%81%E7%AD%89%E5%80%BC%E3%80%81in%E3%80%81instanceo%E3%80%81%E5%88%86%E9%85%8D%E7%BC%A9%E5%B0%8F)%E3%80%81%E6%8E%A7%E5%88%B6%E6%B5%81%E5%88%86%E6%9E%90%E3%80%81%E7%B1%BB%E5%9E%8B%E8%B0%93%E8%AF%8D%E3%80%81%E5%8F%97%E6%AD%A7%E8%A7%86%E7%9A%84unions%E3%80%81never%E7%B1%BB%E5%9E%8B%E4%B8%8E%E7%A9%B7%E5%B0%BD%E6%80%A7%E6%A3%80%E6%9F%A5/">TS(2) typeof类型守卫、(真值、等值、in、instanceo、分配缩小)、控制流分析、类型谓词、受歧视的unions、never类型与穷尽性检查</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/22/TS(1)%E7%B1%BB%E5%9E%8B%E3%80%81%E7%B1%BB%E5%9E%8B%E6%B3%A8%E9%87%8A%E3%80%81%E5%87%BD%E6%95%B0%E3%80%81%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E3%80%81%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B%E3%80%81%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%96%87%E5%AD%97%E7%B1%BB%E5%9E%8B%E3%80%81null%E5%92%8Cundefined%E3%80%81bigint%E5%92%8Csymbol.../">TS(1)类型、类型注释、函数、对象类型、联合类型、类型别名、接口、文字类型、null和undefined、bigint和symbol...</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/20/%E3%80%8Ajs%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B-%E7%AC%94%E8%AE%B01/">《js高级程序设计》-笔记1</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/19/hgroup%E6%A0%87%E7%AD%BE/">hgroup标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/19/ruby%E6%A0%87%E7%AD%BE/">ruby标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/18/webpack(5)%20entry%E9%85%8D%E7%BD%AE%E3%80%81%E6%A8%A1%E6%9D%BF%E3%80%81%E5%A4%9A%E9%A1%B5%E9%9D%A2%E5%BA%94%E7%94%A8%E3%80%81Tree%20Shaking%E3%80%81sideEffects/">webpack(5) entry配置、模板、多页面应用、Tree Shaking、sideEffects</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 18px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 14px;">HTML</a> <a href="/tags/JS/" style="font-size: 16px;">JS</a> <a href="/tags/TS/" style="font-size: 12px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 16px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
