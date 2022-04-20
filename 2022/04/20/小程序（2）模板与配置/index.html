@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>小程序（2）模板与配置 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="小程序（2）模板与配置"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>小程序（2）模板与配置</h2>
+            <div class="post-meta">
+                <time class="date">2022.04.20</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-数据绑定："><a href="#1-数据绑定：" class="headerlink" title="1.数据绑定："></a>1.数据绑定：</h2><h3 id="①-在data中定义数据"><a href="#①-在data中定义数据" class="headerlink" title="① 在data中定义数据"></a>① 在data中定义数据</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 页面的初始数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">info</span>: <span class="string">&#x27;taytay&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="②-使用mustache语法"><a href="#②-使用mustache语法" class="headerlink" title="② 使用mustache语法"></a>② 使用mustache语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 页面的初始数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">imgSrcList</span>: [</span><br><span class="line">            <span class="string">&#x27;../images/img01.jpg&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;../images/img02.jpg&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>使用场景：绑定内容、绑定属性、运算</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;swiper <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;swiper-container&quot;</span> </span><br><span class="line">    indicator-dots=<span class="string">&quot;true&quot;</span> indicator-color=<span class="string">&quot;#ccc&quot;</span> indicator-active-color=<span class="string">&quot;white&quot;</span></span><br><span class="line">    autoplay=<span class="string">&quot;true&quot;</span> interval=<span class="string">&quot;3000&quot;</span> circular=<span class="string">&quot;true&quot;</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">swiper-item</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>  <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;2&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;imgSrcList[index]&#125;&#125;&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;heightFix&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></span></span><br><span class="line">&lt;/swiper&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-事件绑定："><a href="#2-事件绑定：" class="headerlink" title="2.事件绑定："></a>2.事件绑定：</h2><ul>
+<li>事件是渲染层到逻辑层的通讯方式</li>
+</ul>
+<h3 id="（1）常用事件："><a href="#（1）常用事件：" class="headerlink" title="（1）常用事件："></a>（1）常用事件：</h3><p><img src="https://img-blog.csdnimg.cn/8cff4ca72cdf4644b9f18ea62b1b4c1a.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="（2）事件对象的属性列表："><a href="#（2）事件对象的属性列表：" class="headerlink" title="（2）事件对象的属性列表："></a>（2）事件对象的属性列表：</h3><ul>
+<li>当事件回调触发时，会收到一个事件对象<br><img src="https://img-blog.csdnimg.cn/e559f257d93641ae9640e04f83862aa7.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></li>
+</ul>
+<h3 id="（3）事件以冒泡的方式向外扩散："><a href="#（3）事件以冒泡的方式向外扩散：" class="headerlink" title="（3）事件以冒泡的方式向外扩散："></a>（3）事件以冒泡的方式向外扩散：</h3><p>target：是触发该事件的源头组件<br>currentTarget：是当前事件所绑定的组件<br><img src="https://img-blog.csdnimg.cn/9f91d6a3d1b649d68d3688bbd2598d12.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="（4）bindtap的语法格式："><a href="#（4）bindtap的语法格式：" class="headerlink" title="（4）bindtap的语法格式："></a>（4）bindtap的语法格式：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;list.length&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;bottomNacButton&quot;</span>&gt;</span>&#123;&#123;list[index]&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    <span class="comment">// 定义按钮时间的处理函数</span></span><br><span class="line">    <span class="function"><span class="title">bottomNacButton</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="（5）在事件处理函数中使用data中的值："><a href="#（5）在事件处理函数中使用data中的值：" class="headerlink" title="（5）在事件处理函数中使用data中的值："></a>（5）在事件处理函数中使用data中的值：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;list.length&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;bottomNacButton&quot;</span> <span class="attr">data-info</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span>&gt;</span> // 传递的值是数字</span><br><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;list.length&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;bottomNacButton&quot;</span> <span class="attr">data-info</span>=<span class="string">&quot;index&quot;</span>&gt;</span> // 传递的值是字符串</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义按钮时间的处理函数</span></span><br><span class="line"><span class="function"><span class="title">bottomNacButton</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">    <span class="built_in">console</span>.log(e.target.dataset.info);</span><br><span class="line">    <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">        <span class="attr">infoData</span>: <span class="built_in">this</span>.data.infoData + <span class="number">1</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="（6）input："><a href="#（6）input：" class="headerlink" title="（6）input："></a>（6）input：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">&quot;&#123;&#123;msg&#125;&#125;&quot;</span> <span class="attr">bindinput</span>=<span class="string">&quot;inputHandler&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    <span class="function"><span class="title">inputHandler</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">            <span class="attr">msg</span>: e.detail.value</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-条件渲染："><a href="#3-条件渲染：" class="headerlink" title="3.条件渲染："></a>3.条件渲染：</h2><h3 id="（1）wx-if："><a href="#（1）wx-if：" class="headerlink" title="（1）wx:if："></a>（1）wx:if：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">您的性别：<span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;sex === &#x27;male&#x27;&#125;&#125;&quot;</span>&gt;</span>男<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:elif</span>=<span class="string">&quot;&#123;&#123;sex === &#x27;female&#x27;&#125;&#125;&quot;</span>&gt;</span>女<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span> <span class="attr">wx:else</span>&gt;</span>保密<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）block："><a href="#（2）block：" class="headerlink" title="（2）block："></a>（2）block：</h3><ul>
+<li>一次性控制多个组件的展示与隐藏：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:if</span>=<span class="string">&quot;&#123;&#123;false&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span>&gt;</span>A<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span>&gt;</span>B<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="（3）hidden："><a href="#（3）hidden：" class="headerlink" title="（3）hidden："></a>（3）hidden：</h2><ul>
+<li>隐藏和控制元素：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;delete&quot;</span> <span class="attr">hidden</span>=<span class="string">&quot;&#123;&#123; condition &#125;&#125;&quot;</span>&gt;</span>我需要被隐藏？<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="（4）区别："><a href="#（4）区别：" class="headerlink" title="（4）区别："></a>（4）区别：</h3><p>① <code>运行方式不同</code>：<br>  wx:if以动态创建和移除元素的方式，控制元素的展示与隐藏<br>  hidden 以切换样式的方式（display: none/block），控制元素的显示与隐藏<br>② ·<code>使用建议</code>：<br>  频繁切换时，建议使用hidden<br>  控制条件复杂时，建议使用wx: if 搭配 wx:elif、wx:else进行展示与隐藏的切换</p>
+<h2 id="4-列表渲染："><a href="#4-列表渲染：" class="headerlink" title="4.列表渲染："></a>4.列表渲染：</h2><h3 id="（1）使用："><a href="#（1）使用：" class="headerlink" title="（1）使用："></a>（1）使用：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;list&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span>  <span class="attr">bindtap</span>=<span class="string">&quot;bottomNacButton&quot;</span> <span class="attr">data-info</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123;item&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）改变变量名："><a href="#（2）改变变量名：" class="headerlink" title="（2）改变变量名："></a>（2）改变变量名：</h3><p>wx:for-index：指定当前循环项的索引<br>ws:for-item：指定当前项的变量名</p>
+<h3 id="（3）wx-key的使用："><a href="#（3）wx-key的使用：" class="headerlink" title="（3）wx:key的使用："></a>（3）wx:key的使用：</h3><ul>
+<li>提供渲染的效率<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;list&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span>  <span class="attr">bindtap</span>=<span class="string">&quot;bottomNacButton&quot;</span> <span class="attr">data-info</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123;item&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>*使用list中的id**： <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;list&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;id&quot;</span>  <span class="attr">bindtap</span>=<span class="string">&quot;bottomNacButton&quot;</span> <span class="attr">data-info</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123;item&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5-wxss和css的关系："><a href="#5-wxss和css的关系：" class="headerlink" title="5.wxss和css的关系："></a>5.wxss和css的关系：</h2><p><img src="https://img-blog.csdnimg.cn/7a05239c44c74c3785f97239faa735b4.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_10,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="6-rpx"><a href="#6-rpx" class="headerlink" title="6.rpx:"></a>6.rpx:</h2><p><code>rpx的实现原理</code>：鉴于不同设备屏幕的大小不同，为了实现屏幕的自动适配，rpx把所有设备的屏幕，在宽度上等分为750份（即:当前屏幕的总宽度为750rpx）</p>
+<ul>
+<li>在较小的设备上,1rpx所代表的宽度较小</li>
+<li>在较大的设备上，1rpx所代表的宽度较大</li>
+</ul>
+<p>小程序在不同设备上运行的时候，会自动把 rpx的样式单位换算成对应的像素单位来渲染，从而实现屏幕适配<br><img src="https://img-blog.csdnimg.cn/80662021f86c4f49817302c9079eb1e6.png#pic_center" alt="在这里插入图片描述"></p>
+<p><code>建议使用ipone6进行开发</code></p>
+<h2 id="7-样式导入："><a href="#7-样式导入：" class="headerlink" title="7.样式导入："></a>7.样式导入：</h2><p>@import导入外联样式表的相对路径，用;表示语句结束</p>
+<h2 id="8-全局样式和局部样式："><a href="#8-全局样式和局部样式：" class="headerlink" title="8.全局样式和局部样式："></a>8.全局样式和局部样式：</h2><p>全局样式：app.wxss中<br>局部样式：页面.wxss中定义的样式为局部样式，只作用于当前页面</p>
+<p>注意：<br>① 当局部样式和全局样式冲突，采用就近原则，局部样式会覆盖全局样式<br>② 当局部样式的权重大于或等于全局样式的权重时，才会覆盖全局的样式</p>
+<h2 id="9-全局配置-window："><a href="#9-全局配置-window：" class="headerlink" title="9.全局配置-window："></a>9.全局配置-window：</h2><p><img src="https://img-blog.csdnimg.cn/bde64653bcd240af9271f20f152536a2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_12,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>window节点常用的配置项：<br><img src="https://img-blog.csdnimg.cn/203fa208bfc444b695563cb27b847955.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;window&quot;</span>:&#123;</span><br><span class="line">    <span class="string">&quot;backgroundTextStyle&quot;</span>:<span class="string">&quot;light&quot;</span>, <span class="comment">// 只有light和dark，loding样式</span></span><br><span class="line">    <span class="string">&quot;navigationBarBackgroundColor&quot;</span>: <span class="string">&quot;#fff&quot;</span>, <span class="comment">// 只支持十六进制的颜色值</span></span><br><span class="line">    <span class="string">&quot;navigationBarTitleText&quot;</span>: <span class="string">&quot;taytay&quot;</span>,</span><br><span class="line">    <span class="string">&quot;navigationBarTextStyle&quot;</span>:<span class="string">&quot;black&quot;</span>, <span class="comment">// 只有black和white</span></span><br><span class="line">    <span class="string">&quot;enablePullDownRefresh&quot;</span>: <span class="literal">true</span>, <span class="comment">// 下拉刷新</span></span><br><span class="line">    <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#F9DBE3&quot;</span>, <span class="comment">// 背景色</span></span><br><span class="line">    <span class="string">&quot;onReachBottomDistance&quot;</span>: <span class="number">50</span> <span class="comment">// 上拉触底的距离，默认为50px，使用去加载更多数据</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="10-全局配置-tabBar："><a href="#10-全局配置-tabBar：" class="headerlink" title="10.全局配置-tabBar："></a>10.全局配置-tabBar：</h2><p><img src="https://img-blog.csdnimg.cn/c2acf4d0a99e4c42afa0042b089dc10a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_13,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/8a9605e84e324c6ea24e8e8f3ac1b086.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_11,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>tabBar节点的配置项：<br><img src="https://img-blog.csdnimg.cn/27ab85ed453843b8919fb530f7b0d837.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;pages&quot;</span>:[</span><br><span class="line">    <span class="string">&quot;pages/list/list&quot;</span>,</span><br><span class="line">    <span class="string">&quot;pages/index/index&quot;</span>,</span><br><span class="line">    <span class="string">&quot;pages/logs/logs&quot;</span>,</span><br><span class="line">    <span class="string">&quot;pages/my/my&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;tabBar&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;position&quot;</span>: <span class="string">&quot;bottom&quot;</span>,</span><br><span class="line">    <span class="string">&quot;color&quot;</span>: <span class="string">&quot;#E6E6E6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;selectedColor&quot;</span>: <span class="string">&quot;#F9DBE3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;list&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;pages/list/list&quot;</span>,</span><br><span class="line">        <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: <span class="string">&quot;list&quot;</span>,</span><br><span class="line">        <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;images/list.png&quot;</span>,</span><br><span class="line">        <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;images/list-active.png&quot;</span></span><br><span class="line">      &#125;,&#123;</span><br><span class="line">        <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;pages/index/index&quot;</span>,</span><br><span class="line">        <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: <span class="string">&quot;首页&quot;</span>,</span><br><span class="line">        <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;images/index.png&quot;</span>,</span><br><span class="line">        <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;images/index-active.png&quot;</span></span><br><span class="line">      &#125;,&#123;</span><br><span class="line">        <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;pages/my/my&quot;</span>,</span><br><span class="line">        <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: <span class="string">&quot;个人中心&quot;</span>,</span><br><span class="line">        <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;images/my.png&quot;</span>,</span><br><span class="line">        <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;images/my-active.png&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="11-网络请求："><a href="#11-网络请求：" class="headerlink" title="11.网络请求："></a>11.网络请求：</h2><p>处于安全性方面考虑，小程序官方对数据接口的请求做出两个限制：<br>① 只能请求HTTPS类型的接口<br>② 必须将接口的域名添加到信任列表中（开发 -&gt; 开发设置 -&gt; 服务器域名 -&gt; 修改request合法域名）</p>
+<p>注意：<br>① 只支持https协议<br>② 不能使用ip地址或者localhost<br>③ 域名必须经过ICP备案<br>④ 服务器域名一个月内最多申请5次修改</p>
+<h3 id="（1）get请求："><a href="#（1）get请求：" class="headerlink" title="（1）get请求："></a>（1）get请求：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;https://www.escook.cn/api/get&#x27;</span>, <span class="comment">// 请求的接口地址，必须基于https协议</span></span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>, <span class="comment">//请求的方式</span></span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;tay&#x27;</span>,</span><br><span class="line">        <span class="attr">age</span>: <span class="number">13</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123; <span class="comment">// 请求成功之后的回调函数</span></span><br><span class="line">        <span class="built_in">console</span>.log(res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="（2）post请求："><a href="#（2）post请求：" class="headerlink" title="（2）post请求："></a>（2）post请求：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;https://www.escook.cn/api/post&#x27;</span>, <span class="comment">// 请求的接口地址，必须基于https协议</span></span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="comment">//请求的方式</span></span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&#x27;tay&#x27;</span>,</span><br><span class="line">        <span class="attr">gender</span>: <span class="string">&#x27;女&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123; <span class="comment">// 请求成功之后的回调函数</span></span><br><span class="line">        <span class="built_in">console</span>.log(res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="12-在页面刚加载时请求数据："><a href="#12-在页面刚加载时请求数据：" class="headerlink" title="12.在页面刚加载时请求数据："></a>12.在页面刚加载时请求数据：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生命周期函数--监听页面加载</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">onLoad</span>: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="13-跳过request合法域名校验："><a href="#13-跳过request合法域名校验：" class="headerlink" title="13.跳过request合法域名校验："></a>13.跳过request合法域名校验：</h2><p><img src="https://img-blog.csdnimg.cn/b7515b5604f34477aac3feffdec25ea2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_10,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="14-关于跨域和Ajax说明："><a href="#14-关于跨域和Ajax说明：" class="headerlink" title="14.关于跨域和Ajax说明："></a>14.关于跨域和Ajax说明：</h2><p>① 小程序的宿主环境不是浏览器，而是微信哭护短，所以小程序中不存在跨域问题<br>② Ajax技术的核心是依赖于浏览器中的XMLHttpRequest，由于小程序的宿主环境是微信客户端，所以小程序不能叫做“发起Ajax请求”，而是“发起网络数据请求”</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%881%EF%BC%89%E7%AE%80%E4%BB%8B/">小程序（1）简介</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/44fe1ae59cf64276875a181335fa1058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一颗菜菜西兰花罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%882%EF%BC%89%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%85%8D%E7%BD%AE/">小程序（2）模板与配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%881%EF%BC%89%E7%AE%80%E4%BB%8B/">小程序（1）简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/02/ES6%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95find()%E3%80%81findIndex()/">ES6数组方法find()、findIndex()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/01/@click.native%E4%B8%AD%20.native%20%E7%9A%84%E5%90%AB%E4%B9%89%E4%B8%8E%E4%BD%BF%E7%94%A8/">click.native 的含义与使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/30/TS(6)%20%E7%B1%BB%E3%80%81%E6%A8%A1%E5%9D%97/">TS(6) 类、模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/30/TS(5)%20%E4%BB%8E%E7%B1%BB%E5%9E%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%B1%BB%E5%9E%8B%EF%BC%9A%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B%E3%80%81keyof%E3%80%81typeof%E3%80%81%E7%B4%A2%E5%BC%95%E8%AE%BF%E9%97%AE%E3%80%81%E6%9D%A1%E4%BB%B6%E3%80%81%E6%98%A0%E5%B0%84%E3%80%81%E6%A8%A1%E5%9D%97%E5%AD%97%E9%9D%A2%E9%87%8F/">TS(5) 从类型中创建类型：泛型类型、keyof、typeof、索引访问、条件、映射、模块字面量</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 18.57px;">CSS</a> <a href="/tags/ES6/" style="font-size: 12.86px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 14.29px;">HTML</a> <a href="/tags/JS/" style="font-size: 17.14px;">JS</a> <a href="/tags/TS/" style="font-size: 17.14px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 15.71px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 11.43px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
