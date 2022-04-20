@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>小程序（1）简介 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="小程序（1）简介"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>小程序（1）简介</h2>
+            <div class="post-meta">
+                <time class="date">2022.04.29</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-不同："><a href="#1-不同：" class="headerlink" title="1.不同："></a>1.不同：</h2><p>小程序和普通网页开发的区别：</p>
+<h3 id="（1）运行环境不同："><a href="#（1）运行环境不同：" class="headerlink" title="（1）运行环境不同："></a>（1）运行环境不同：</h3><pre><code>网页在浏览器，小程序在微信环境中
+</code></pre>
+<h3 id="（2）API不同："><a href="#（2）API不同：" class="headerlink" title="（2）API不同："></a>（2）API不同：</h3><pre><code>无法调用DOM和BOM的API，小程序可以调用微信提供的，例如：地理位置、扫码、支付等
+</code></pre>
+<h3 id="（3）开发模式不同："><a href="#（3）开发模式不同：" class="headerlink" title="（3）开发模式不同："></a>（3）开发模式不同：</h3><pre><code>网页开发：浏览器 + 代码编辑器
+小程序：申请小程序开发账号 -&gt; 安装小程序开发者工具 -&gt; 创建和配置小程序项目
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/b0f971c2af994d5bb5958497b35dd5cc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_10,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="2-第一个程序："><a href="#2-第一个程序：" class="headerlink" title="2.第一个程序："></a>2.第一个程序：</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/">网址 </a></li>
+<li>appID：开发 -&gt; 开发管理 -&gt; 开发设置</li>
+<li>安装开发者工具：</li>
+</ul>
+<h2 id="3-项目的基本组成结构"><a href="#3-项目的基本组成结构" class="headerlink" title="3.项目的基本组成结构;"></a>3.项目的基本组成结构;</h2><p><img src="https://img-blog.csdnimg.cn/7e4d46ffb9a54490b6b6be7358ce1712.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="（1）pages："><a href="#（1）pages：" class="headerlink" title="（1）pages："></a>（1）pages：</h3><ul>
+<li>用来存放所有小程序的页面，每个页面已单独的文件夹存在<br><img src="https://img-blog.csdnimg.cn/227c38b51e5c4c668f851f57e16cc199.png#pic_center" alt="在这里插入图片描述"></li>
+</ul>
+<p>其中，每个页面由4个基本文件组成，它们分别是:<br>①.js 文件：</p>
+<ul>
+<li>页面的脚本文件，存放页面的数据、事件处理函数等</li>
+</ul>
+<p>② .json文件：</p>
+<ul>
+<li>当前页面的配置文件，配置窗口的外观、表现等</li>
+</ul>
+<p>③ .wxml 文件：</p>
+<ul>
+<li>页面的模板结构文件</li>
+</ul>
+<p>④ .wxss文件：</p>
+<ul>
+<li>当前页面的样式表文件</li>
+</ul>
+<h3 id="（2）utils："><a href="#（2）utils：" class="headerlink" title="（2）utils："></a>（2）utils：</h3><ul>
+<li>用来存放工具性质的模块（例如∶格式化时间的自定义模块)<h3 id="（3）app-js："><a href="#（3）app-js：" class="headerlink" title="（3）app.js："></a>（3）app.js：</h3></li>
+<li>小程序项目的入口文件<h3 id="（4）app-json："><a href="#（4）app-json：" class="headerlink" title="（4）app.json："></a>（4）app.json：</h3></li>
+<li>小程序项目的全局配置文件<h3 id="（5）app-wxss："><a href="#（5）app-wxss：" class="headerlink" title="（5）app.wxss："></a>（5）app.wxss：</h3></li>
+<li>小程序项目的全局样式文件<h3 id="（6）project-config-json："><a href="#（6）project-config-json：" class="headerlink" title="（6）project.config.json："></a>（6）project.config.json：</h3></li>
+<li>项目的配置文件<h3 id="（7）sitemap-json："><a href="#（7）sitemap-json：" class="headerlink" title="（7）sitemap.json："></a>（7）sitemap.json：</h3></li>
+<li>用来配置小程序及其页面是否允许被微信索引</li>
+</ul>
+<h2 id="4-JSON配置文件的作用："><a href="#4-JSON配置文件的作用：" class="headerlink" title="4.JSON配置文件的作用："></a>4.JSON配置文件的作用：</h2><p>JSON是一种数据格式，在实际开发中，JSON总是以配置文件的形式出现，小程序项目中有4种json配置文件，分别是:</p>
+<h3 id="（1）app-json："><a href="#（1）app-json：" class="headerlink" title="（1）app.json："></a>（1）app.json：</h3><ul>
+<li>根目录下</li>
+<li><em>是当前小程序的全局配置，包括了小程序的所有页面路径、窗口外观、界面表现、底部tab等</em>*</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  &#123;</span><br><span class="line">  <span class="comment">// 用来记录当前小程序所有页面的路径</span></span><br><span class="line">  <span class="string">&quot;pages&quot;</span>:[</span><br><span class="line">    <span class="string">&quot;pages/index/index&quot;</span>,</span><br><span class="line">    <span class="string">&quot;pages/logs/logs&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// 全局定义小程序所有页面的背景色、文字颜色</span></span><br><span class="line">  <span class="string">&quot;window&quot;</span>:&#123;</span><br><span class="line">    <span class="string">&quot;backgroundTextStyle&quot;</span>:<span class="string">&quot;light&quot;</span>,</span><br><span class="line">    <span class="string">&quot;navigationBarBackgroundColor&quot;</span>: <span class="string">&quot;#fff&quot;</span>,</span><br><span class="line">    <span class="string">&quot;navigationBarTitleText&quot;</span>: <span class="string">&quot;taytay&quot;</span>,</span><br><span class="line">    <span class="string">&quot;navigationBarTextStyle&quot;</span>:<span class="string">&quot;black&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 全局定义小程序组件所使用的样式版本</span></span><br><span class="line">  <span class="string">&quot;style&quot;</span>: <span class="string">&quot;v2&quot;</span>,</span><br><span class="line">  <span class="comment">// 用户指明sitemap.json的位置</span></span><br><span class="line">  <span class="string">&quot;sitemapLocation&quot;</span>: <span class="string">&quot;sitemap.json&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）project-config-json："><a href="#（2）project-config-json：" class="headerlink" title="（2）project.config.json："></a>（2）project.config.json：</h3><ul>
+<li>根目录下</li>
+<li>对小程序开发工具所做的个性化配置<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;description&quot;</span>: <span class="string">&quot;项目配置文件&quot;</span>,</span><br><span class="line">    <span class="comment">// 编译相关的配置</span></span><br><span class="line">    <span class="string">&quot;setting&quot;</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;appid&quot;</span>: <span class="string">&quot;wx0f0ae9e4296b6188&quot;</span>,</span><br><span class="line">    <span class="comment">// 项目名称</span></span><br><span class="line">    <span class="string">&quot;projectname&quot;</span>: <span class="string">&quot;test1&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="（3）sitemap-json："><a href="#（3）sitemap-json：" class="headerlink" title="（3）sitemap.json："></a>（3）sitemap.json：</h3><ul>
+<li>根目录下</li>
+<li>微信现已开放小程序内搜索，效果类似于PC网页的SEO，sitemap.json文件用来配置小程序页面是否允许微信索引</li>
+<li>当开发者允许微信索引时，微信会通过爬虫的形式，为小程序的页面内容建立索引。当用户的搜索关键字和页面的索引匹配成功的时候，小程序的页面将可能展示在搜索结果中<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;desc&quot;</span>: <span class="string">&quot;关于本文件的更多信息，请参考文档 https://developers.weixin.qq.com/miniprogram/dev/framework/sitemap.html&quot;</span>,</span><br><span class="line">  <span class="string">&quot;rules&quot;</span>: [&#123;</span><br><span class="line">  <span class="string">&quot;action&quot;</span>: <span class="string">&quot;allow&quot;</span>, <span class="comment">// &quot;disallow&quot;</span></span><br><span class="line">  <span class="string">&quot;page&quot;</span>: <span class="string">&quot;*&quot;</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><code>注意</code>: sitemap的索引提示是默认开启的，如需要关闭sitemap的索引提示，可在小程序项目配置文project.config.json 的setting中配置字段checkSiteMap为false：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;setting&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;checkSiteMap&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>（4）每个页面文件夹中的.json：</p>
+<ul>
+<li>小程序中的每一个页面，可以使用.json文件来对本页面的窗口外观进行配置，页面中的配置项会覆盖app.json 的 window中相同的配置项<br>{<br>“usingComponents”: {},<br>“navigationBarBackgroundColor”: “#C5E2FF”<br>}</li>
+</ul>
+<h2 id="5-新建小程序页面："><a href="#5-新建小程序页面：" class="headerlink" title="5.新建小程序页面："></a>5.新建小程序页面：</h2><ul>
+<li>在根目录下app.json下的pages中新增页面存放路径，小程序开发者工具会帮我们自动创建对应的页面文件</li>
+</ul>
+<p><code>修改首页</code>：</p>
+<ul>
+<li>在根目录下app.json下的pages数组中调整页面路径的前后顺序，即可修改项目的首页（小程序会把排在第一位的页面，当作项目首页进行渲染</li>
+</ul>
+<h2 id="6-wxml、wsss模板："><a href="#6-wxml、wsss模板：" class="headerlink" title="6.wxml、wsss模板："></a>6.wxml、wsss模板：</h2><h3 id="（1）wxml："><a href="#（1）wxml：" class="headerlink" title="（1）wxml："></a>（1）wxml：</h3><ul>
+<li>小程序框架设计的一套标签语言，用来构建小程序页面的结构，其作用类似于网页开发中的HTML</li>
+<li>*和HTML的区别**：<br>① 标签名称不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTML ( div, span, img, a)</span><br><span class="line">wXML ( view, text, image, navigator)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>② 属性节点不同</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;#&quot;</span>&gt;超链接&lt;/a&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">navigator</span> <span class="attr">url</span>=<span class="string">&quot; / pages/home/home&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">navigator</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>③ 提供了类似于Vue中的模板语法：数据绑定、列表渲染、条件渲染</p>
+<h3 id="（2）wxss："><a href="#（2）wxss：" class="headerlink" title="（2）wxss："></a>（2）wxss：</h3><ul>
+<li>小程序框架设计的一套样式语言，用来描述WXML的组件样式，其作用类似于网页开发中的CSS</li>
+</ul>
+<p>① <strong>新增了rpx尺寸单位</strong>:<br>CSS中需要手动进行像素单位换算，例如rem<br>wxss在底层支持新的尺寸单位rpx，在不同大小的屏幕上小程序会自动进行换算</p>
+<p>② <strong>提供了全局的样式和局部样式</strong>:<br>项目根目录中的app.wxss会作用于所有小程序页面<br>局部页面的.wxss样式仅对当前页面生效</p>
+<p>③ <strong>wxss仅支持部分CSS选择器</strong>:<br>.class和#id<br>element<br>并集选择器、后代选择器<br>::after和::before 等伪类选择器</p>
+<h2 id="7-小程序中的JS文件分为三大类，分别是："><a href="#7-小程序中的JS文件分为三大类，分别是：" class="headerlink" title="7.小程序中的JS文件分为三大类，分别是："></a>7.小程序中的JS文件分为三大类，分别是：</h2><h3 id="（1）app-js："><a href="#（1）app-js：" class="headerlink" title="（1）app.js："></a>（1）app.js：</h3><ul>
+<li>是整个小程序项目的入口文件，通过调用App()函数来启动整个小程序<h3 id="（2）页面的-js-文件："><a href="#（2）页面的-js-文件：" class="headerlink" title="（2）页面的.js 文件："></a>（2）页面的.js 文件：</h3></li>
+<li>是页面的入口文件，通过调用Page()函数来创建并运行页面<h3 id="（3）普通的-js-文件："><a href="#（3）普通的-js-文件：" class="headerlink" title="（3）普通的.js 文件："></a>（3）普通的.js 文件：</h3></li>
+<li>是普通的功能模块文件，用来封装公共的函数或属性供页面使用</li>
+</ul>
+<h2 id="8-宿主环境："><a href="#8-宿主环境：" class="headerlink" title="8.宿主环境："></a>8.宿主环境：</h2><p>宿主环境：程序运行所必须的依赖环境<br><img src="https://img-blog.csdnimg.cn/1d2e218e58ba4ae78c6e25c7e82d2704.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_19,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>小程序借助宿主环境提供的能力，可以完成许多普通网页无法完成的功能</p>
+<p>小程序宿主环境包含的内容：</p>
+<h3 id="①-通信模型："><a href="#①-通信模型：" class="headerlink" title="① 通信模型："></a>① 通信模型：</h3><p><strong>通信主体：渲染层和逻辑层</strong><br>（1）wxml模板和wxss样式工作在渲染层<br>（2）js脚本工作在逻辑层<br><img src="https://img-blog.csdnimg.cn/4ede7e4a46ce4ef7b6ca96294075898f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_10,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>通信模型</strong>：<br>（1）渲染层和逻辑层之间的通信：由微信客户端进行转发<br>（2）逻辑层和第三方服务器之间的通信：由微信客户端转发<br><img src="https://img-blog.csdnimg.cn/3fc5a18d7600467598cf05c6408ad0cc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_11,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="②-运行机制："><a href="#②-运行机制：" class="headerlink" title="② 运行机制："></a>② 运行机制：</h3><h3 id="③-组件："><a href="#③-组件：" class="headerlink" title="③ 组件："></a>③ 组件：</h3><p>组件有宿主环境提供<br>有九大类：（1）视图容器 （2）基础内容 （3）表单组件 （4）导航组件（5）媒体组件 （6）map地图组件 （7）canvas画布组件 （8）开放能力<br>（9）无障碍访问</p>
+<p>（1）<code>视图容器</code>：<br>view：普通视图区域，类似div，是一个块级元素<br>scroll-view：可滚动的视图<br>swiper和swiper-item：轮播图的容器、轮播图的item组件<br><img src="https://img-blog.csdnimg.cn/f034d36444694ae4aacea3eb2dc268bf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;swiper <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;swiper-container&quot;</span> </span><br><span class="line">    indicator-dots=<span class="string">&quot;true&quot;</span> indicator-color=<span class="string">&quot;white&quot;</span> indicator-active-color=<span class="string">&quot;#ccc&quot;</span></span><br><span class="line">    autoplay=<span class="string">&quot;true&quot;</span> interval=<span class="string">&quot;3000&quot;</span> circular=<span class="string">&quot;true&quot;</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">swiper-item</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>  <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;5&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">        轮播图&#123;&#123;index+1&#125;&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></span></span><br><span class="line">&lt;/swiper&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>（2）<code>基础内容</code>：<br>text：文本组建，类似span，是行内元素<br>rich-text：富文本自己看，支持把HTML字符串渲染为WXML结构</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;view <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;bottomLeft&quot;</span>&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">rich-text</span> <span class="attr">nodes</span>=<span class="string">&quot;&lt;h1 style=&#x27;color: red&#x27;&gt;我是标题&lt;/h1&gt;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">rich-text</span>&gt;</span></span></span><br><span class="line">    复制文字:<span class="xml"><span class="tag">&lt;<span class="name">text</span> <span class="attr">user-select</span>=<span class="string">&quot;true&quot;</span>&gt;</span>Taylor Swift<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span></span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（3）其他常用组件：<br>button：使用open-type属性可以调用微信提供的各种功能（客服、转发、获取用户授权、获取用户信息等）<br>image：图片组件，image组建默认值：宽300px、高240px<br><img src="https://img-blog.csdnimg.cn/90814ce10c5a41ee989bbb6cb871d3b6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br>navigator：导航组建，类似<a></p>
+<h3 id="④-API："><a href="#④-API：" class="headerlink" title="④ API："></a>④ API：</h3><p>（1）事件监听API：以on开头，监听某些事件的触发</p>
+<p>（2）同步API：以Sync结尾，通过函数返回值直接获取，如果执行出错会抛出异常</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx.setStorageSync(<span class="string">&#x27;key&#x27;</span>, <span class="string">&#x27;value&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>（3）异步API：通过success、fail、complete接收调用的结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx.request() <span class="comment">// 发送网络请求</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="9-协同工作与发布："><a href="#9-协同工作与发布：" class="headerlink" title="9.协同工作与发布："></a>9.协同工作与发布：</h2><h3 id="（1）需求：权限进行划分"><a href="#（1）需求：权限进行划分" class="headerlink" title="（1）需求：权限进行划分"></a>（1）需求：权限进行划分</h3><h3 id="（2）不同权限："><a href="#（2）不同权限：" class="headerlink" title="（2）不同权限："></a>（2）不同权限：</h3><p><img src="https://img-blog.csdnimg.cn/5c03d66f19f74baca2c4fdc3d7e6609a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/1e8d4cbaebeb4107b5c81a7017a9323c.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="（3）不同版本："><a href="#（3）不同版本：" class="headerlink" title="（3）不同版本："></a>（3）不同版本：</h3><p><img src="https://img-blog.csdnimg.cn/0e217745465b41bc9096fc31fb0d3ef3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="（4）发布过程："><a href="#（4）发布过程：" class="headerlink" title="（4）发布过程："></a>（4）发布过程：</h3><p>上传代码 -&gt; 提交审核 -&gt; 发布</p>
+<h3 id="（5）获取小程序码："><a href="#（5）获取小程序码：" class="headerlink" title="（5）获取小程序码："></a>（5）获取小程序码：</h3><p>管理后台 -&gt; 设置 -&gt; 基本设置 -&gt; 基本信息 -&gt; 小程序码及线下物料下载</p>
+<h3 id="（6）运营数据："><a href="#（6）运营数据：" class="headerlink" title="（6）运营数据："></a>（6）运营数据：</h3><p>① 在“小程序后台”查看：统计中查看<br>② 使用“小程序数据助手”查看</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/04/02/ES6%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95find()%E3%80%81findIndex()/">ES6数组方法find()、findIndex()</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/44fe1ae59cf64276875a181335fa1058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一颗菜菜西兰花罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/29/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%881%EF%BC%89%E7%AE%80%E4%BB%8B/">小程序（1）简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/02/ES6%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95find()%E3%80%81findIndex()/">ES6数组方法find()、findIndex()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/01/@click.native%E4%B8%AD%20.native%20%E7%9A%84%E5%90%AB%E4%B9%89%E4%B8%8E%E4%BD%BF%E7%94%A8/">click.native 的含义与使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/30/TS(6)%20%E7%B1%BB%E3%80%81%E6%A8%A1%E5%9D%97/">TS(6) 类、模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/30/TS(5)%20%E4%BB%8E%E7%B1%BB%E5%9E%8B%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%B1%BB%E5%9E%8B%EF%BC%9A%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B%E3%80%81keyof%E3%80%81typeof%E3%80%81%E7%B4%A2%E5%BC%95%E8%AE%BF%E9%97%AE%E3%80%81%E6%9D%A1%E4%BB%B6%E3%80%81%E6%98%A0%E5%B0%84%E3%80%81%E6%A8%A1%E5%9D%97%E5%AD%97%E9%9D%A2%E9%87%8F/">TS(5) 从类型中创建类型：泛型类型、keyof、typeof、索引访问、条件、映射、模块字面量</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/27/less%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">less的基本使用</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 18.33px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.67px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 16.67px;">JS</a> <a href="/tags/TS/" style="font-size: 16.67px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 15px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
