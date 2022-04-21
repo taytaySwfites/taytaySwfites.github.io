@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>click.native 的含义与使用 - taytay</title>
+    <title>splice() - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content="click.native 的含义与使用"/>
+    <meta property="og:title" content="splice()"/>
     
     <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
     
@@ -53,41 +53,67 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>click.native 的含义与使用</h2>
+            <h2>splice()</h2>
             <div class="post-meta">
-                <time class="date">2022.04.01</time>
+                <time class="date">2022.04.21</time>
             
-                <span class="category"><a class="category-link" href="/categories/Vue/">Vue</a></span>
+                <span class="category"><a class="category-link" href="/categories/JS/">JS</a></span>
             
             </div>
         </section>
         <article class="post-content">
         
-            <p><strong>.native–侦听组件根元素上的原生事件</strong><br>作用： <code>给组件绑定原生事件</code></p>
-<p>@实际上是 v-on 的简写，而 v-on 则是对 vue 的事件体系封装之后的 API接口;<br>也就是说，在处理DOM原生事件的场合中需要添加额外的标识符</p>
-<ul>
-<li><p>比如：如果使用router-link标签，加上@click事件，绑定的事件会无效，因为router-link的作用是单纯的路由跳转，会阻止click事件，如果不加 .native, 事件是不会触发的，因此需要加上 .native 才会触发事件</p>
-</li>
-<li><p><code>当给一个vue组件绑定事件的时候，要加上native，如果是普通的html元素，就不需要</code></p>
-</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span> @<span class="attr">click.native</span> = <span class="string">&#x27;goToNext&#x27;</span>&gt;</span>点击跳转<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> Button <span class="keyword">from</span> <span class="string">&#x27;../components/Button&#x27;</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="attr">components</span>:&#123; Button &#125;,</span></span><br><span class="line"><span class="javascript">    <span class="attr">methods</span>:&#123;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="title">goToNext</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            alert(<span class="string">&#x27;hello--world&#x27;</span>)</span></span><br><span class="line"><span class="javascript">        &#125;</span></span><br><span class="line"><span class="javascript">    &#125;    </span></span><br><span class="line"><span class="javascript">&#125;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <p><code>splice()</code>：<strong>向/从数组中添加/删除/替换项目，然后返回被删除的项目</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayObject.splice(index, howmany, item1, ....., itemX)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>index</td>
+<td>必需，整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置</td>
+</tr>
+<tr>
+<td>howmany</td>
+<td>必需，要删除的项目数量。如果设置为 0，则不会删除项目</td>
+</tr>
+<tr>
+<td>item1, …, itemX</td>
+<td>可选，向数组添加的新项目</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>删除：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">2</span>, <span class="number">1</span>)); <span class="comment">// [&quot;c&quot;]</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&quot;a&quot;, &quot;b&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p>插入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">1</span>, <span class="number">0</span>, <span class="string">&#x27;insert&#x27;</span>)); <span class="comment">// []</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&#x27;a&#x27;, &#x27;insert&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>替换：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">1</span>, <span class="number">1</span>, <span class="string">&#x27;insert&#x27;</span>)); <span class="comment">// []</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&#x27;a&#x27;, &#x27;insert&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
 
 
         </article>
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2022/04/02/ES6%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95find()%E3%80%81findIndex()/">ES6数组方法find()、findIndex()</a></li>
+                    <li>上一篇: 看完啦 (つд⊂)</li>
                 
                 
-                    <li>下一篇: <a href="/2022/03/30/TS(6)%20%E7%B1%BB%E3%80%81%E6%A8%A1%E5%9D%97/">TS(6) 类、模块</a></li>
+                    <li>下一篇: <a href="/2022/04/21/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%884%EF%BC%89%E7%BB%84%E4%BB%B6/">小程序（4）组件</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/Vue/" rel="tag">Vue</a>
+            <a class="-none-link" href="/tags/JS/" rel="tag">JS</a>
             </section>
         
     

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>小程序（4）组件 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="小程序（4）组件"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>小程序（4）组件</h2>
+            <div class="post-meta">
+                <time class="date">2022.04.21</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-创建组件："><a href="#1-创建组件：" class="headerlink" title="1.创建组件："></a>1.创建组件：</h2><p>在根路径下创建components文件夹，新建组件的文件夹，在组件的文件夹下右击选中创建 Component</p>
+<h2 id="2-局部引用："><a href="#2-局部引用：" class="headerlink" title="2.局部引用："></a>2.局部引用：</h2><p>在页面的.json配置文件下，引用组件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;usingComponents&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;my-test&quot;</span>: <span class="string">&quot;/components/test/test&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;navigationBarBackgroundColor&quot;</span>: <span class="string">&quot;#C5E2FF&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-全局引用："><a href="#3-全局引用：" class="headerlink" title="3.全局引用："></a>3.全局引用：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;pages&quot;</span>:[],</span><br><span class="line">  <span class="string">&quot;usingComponents&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;my-test&quot;</span>: <span class="string">&quot;/components/test/test&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;window&quot;</span>:&#123;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-组件和普通界面的关系："><a href="#4-组件和普通界面的关系：" class="headerlink" title="4.组件和普通界面的关系："></a>4.组件和普通界面的关系：</h2><p>① 同样都是由.wxml、.wxss、.js和.json组成的</p>
+<p>② 组件的<code>.json文件中需要声明</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;component&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;usingComponents&quot;</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>③ 组件的.js文件中调用<code>Component()函数</code></p>
+<p>④ 组件的事件处理函数需要定义到<code>methods</code>节点中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 组件的属性列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">properties</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 组件的初始数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 组件的方法列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">methods</span>: &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="5-组件样式隔离："><a href="#5-组件样式隔离：" class="headerlink" title="5.组件样式隔离："></a>5.组件样式隔离：</h2><p>默认情况下，<strong>自定义组件的样式只对当前组件生效</strong>，不会影响到组件之外的UI结构</p>
+<p><code>好处</code>：<br>  ① 防止外界的样式影响组件内部的样式<br>  ② 防止组件的样式破坏外界的组件</p>
+<p><code>注意</code>：<br>  ① app.wxss中的全局样式对组件无效<br>  ② 只有class选择器会有样式隔离效果，id选择器、属性选择器、标签选择器不受样式隔离的影响</p>
+<p><code>建议</code>：<br>  在组件和引用组件的页面中建议使用class选择器，不要使用id、属性、标签选择器</p>
+<p>修改组件的样式隔离选项：<br><img src="https://img-blog.csdnimg.cn/6003c063d7eb46e097d611ac33041568.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p><code>在.js文件中配置</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="attr">styleIsolation</span>: <span class="string">&#x27;isolated&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>或在.json文件中配置</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;styleIsolation&quot;</span>: <span class="string">&quot;isolated&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="6-组件的data、methods、properties："><a href="#6-组件的data、methods、properties：" class="headerlink" title="6.组件的data、methods、properties："></a>6.组件的data、methods、properties：</h2><p>在组件的data中定义数据<br>在组件的methods中定义方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 组件的初始数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 组件的方法列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">methods</span>: &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>properties：接收外界传递到组件中的数据</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 组件的属性列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="attr">properties</span>: &#123;</span><br><span class="line">        <span class="attr">max</span>: &#123; <span class="comment">// 完整定义属性的方式，可以指定属性的默认值</span></span><br><span class="line">            <span class="attr">type</span>: <span class="built_in">Number</span>,</span><br><span class="line">            <span class="attr">value</span>: <span class="number">10</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">min</span>: <span class="built_in">Number</span>, <span class="comment">// 简化定义属性的方式</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>data和properties的关系：<br>① properties属性和data数据的用法相同，都是可读可写<br>② <strong>data更倾向于存储组件的私有数据</strong><br>③ <strong>properties更倾向于存储外界传递到组件中的数据</strong></p>
+<h2 id="7-数据监听器："><a href="#7-数据监听器：" class="headerlink" title="7.数据监听器："></a>7.数据监听器：</h2><p>类似于vue中的watch侦听器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">observers</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;字段A, 字段B&#x27;</span>: <span class="function"><span class="keyword">function</span>(<span class="params">字段A的新值， 字段B的新值</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// do something</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">n1</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">n2</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">sum</span>: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">methods</span>: &#123;</span><br><span class="line">        <span class="function"><span class="title">addN1</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">                <span class="attr">n1</span>: <span class="built_in">this</span>.data.n1 + <span class="number">1</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="function"><span class="title">addN2</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">                <span class="attr">n2</span>: <span class="built_in">this</span>.data.n2 + <span class="number">1</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attr">observers</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;n1, n2&#x27;</span>: <span class="function"><span class="keyword">function</span>(<span class="params">n1， n2</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">                <span class="attr">sum</span>: n1 + n2</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<p>监听对象属性的变化：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">observers</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;对象.属性A, 对象.属性B&#x27;</span>: <span class="function"><span class="keyword">function</span>(<span class="params">字段A的新值， 字段B的新值</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// do something</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<p><code>监听对象中所有属性的变化</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">observers</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;对象.**&#x27;</span>: <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// do something</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="8-纯数据字段："><a href="#8-纯数据字段：" class="headerlink" title="8.纯数据字段："></a>8.纯数据字段：</h2><p>纯数据字段：<strong>不用于界面渲染的data字段</strong></p>
+<p>某些data中的字段既不会展示着在界面上，也不会传递给其他组件</p>
+<p><code>好处</code>：纯数据字段有助于提升页面更新的性能</p>
+<p><code>使用</code>：在Component构造器的options节点中，指定pureDataPattern为一个正则表达式，字段名符合这个正则表达式的字段将成为纯数据字段</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="attr">pureDataPattern</span>: <span class="regexp">/^_/</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">a</span>: <span class="literal">true</span>, <span class="comment">// 普通数据字段</span></span><br><span class="line">        <span class="attr">_a</span>: <span class="literal">true</span>, <span class="comment">// 纯数据字段 </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="9-组件的生命周期："><a href="#9-组件的生命周期：" class="headerlink" title="9.组件的生命周期："></a>9.组件的生命周期：</h2><p><img src="https://img-blog.csdnimg.cn/06d7e53c70ca4fc6bf493de7fc39cb85.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>① created生命周期函数（刚被创建好）：<br>  （1）不能调用setData<br>  （2）只能给组件的this添加一些自定义的属性字段</p>
+<p>② attached生命周期函数（完全初始化完毕、进入页面节点树后）：<br>  （1）this.data已被初始化完毕<br>  （2）绝大多数初始化的工作在这个时机进行（例如发请求获取初始数据）</p>
+<p>③ detached生命周期函数（离开页面节点树后）：<br>  （1）退出一个页面是，会触发页面内每个自定义组件的detached生命周期函数<br>  （2）适合做一些请理性的工作</p>
+<p>④ lifetimes节点：在lifetimes内声明的优先级最高</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">lifetimes</span>: &#123;</span><br><span class="line">        <span class="function"><span class="title">attached</span>(<span class="params"></span>)</span> &#123;&#125;,</span><br><span class="line">        <span class="function"><span class="title">detached</span>(<span class="params"></span>)</span> &#123;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="10-组件所在页面的生命周期："><a href="#10-组件所在页面的生命周期：" class="headerlink" title="10.组件所在页面的生命周期："></a>10.组件所在页面的生命周期：</h2><p>自定义组件的行为依赖于页面状态的变化，需要用到组件所在页面的生命周期<br><img src="https://img-blog.csdnimg.cn/82e0d4c0ac284554bfb1a9a91eec6490.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>pageLifetimes节点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">pageLifetimes</span>: &#123;</span><br><span class="line">        <span class="function"><span class="title">show</span>(<span class="params"></span>)</span> &#123;&#125;,</span><br><span class="line">        <span class="function"><span class="title">hide</span>(<span class="params"></span>)</span> &#123;&#125;,</span><br><span class="line">        <span class="function"><span class="title">resize</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="11-插槽："><a href="#11-插槽：" class="headerlink" title="11.插槽："></a>11.插槽：</h2><p>用于承载组件使用者提供的wxml结构<br><img src="https://img-blog.csdnimg.cn/4e9126980b3f425e89d60122ef24a206.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_13,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>① 单个插槽：默认自定义组件中只允许使用一个<slot></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;view&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">view</span>&gt;</span>我是组件内部节点<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span></span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-test&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">view</span>&gt;</span>这里是插入到组件slot中的内容<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span></span><br><span class="line">&lt;/my-test&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>② 启用多个插槽：在组件的.js文件中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="attr">multipletSlots</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;view&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;before&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">view</span>&gt;</span>我是组件内部节点<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span></span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;after&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-test&gt;</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">view</span> <span class="attr">slot</span>=<span class="string">&quot;before&quot;</span>&gt;</span>这里是插入到组件slot中的内容before<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span></span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">view</span> <span class="attr">slot</span>=<span class="string">&quot;after&quot;</span>&gt;</span>这里是插入到组件slot中的内容after<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span></span><br><span class="line">&lt;/my-test&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="12-父子组件之间的通信："><a href="#12-父子组件之间的通信：" class="headerlink" title="12.父子组件之间的通信："></a>12.父子组件之间的通信：</h2><p>① <code>属性绑定</code>：用于<strong>父组件向子组件</strong>的指定属性设置数据，仅能设置JSON兼容的数据（只能数据，不能方法）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件中</span></span><br><span class="line"><span class="attr">properties</span>: &#123;</span><br><span class="line">    <span class="attr">count</span>: <span class="built_in">Number</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;text count=<span class="string">&quot;&#123;&#123;count&#125;&#125;&quot;</span>&gt;&lt;/text&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>② <code>事件绑定</code>：用于<strong>子组件向父组件</strong>传递数据，可以传递任意数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;my-text count=<span class="string">&quot;&#123;&#123;count&#125;&#125;&quot;</span> bind:sync=<span class="string">&quot;syncCount&quot;</span>&gt;&lt;/my-text&gt;</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">my-text</span> <span class="attr">count</span>=<span class="string">&quot;&#123;&#123;count&#125;&#125;&quot;</span> <span class="attr">bindsync</span>=<span class="string">&quot;syncCount&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">my-text</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件js中</span></span><br><span class="line">Page(&#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">syncCount</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">            <span class="attr">count</span>: e.details.value</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件中</span></span><br><span class="line"><span class="built_in">this</span>.triggerEvent(<span class="string">&#x27;syncCount&#x27;</span>, &#123; </span><br><span class="line">    <span class="comment">/* 参数对象 */</span></span><br><span class="line">    &#123; <span class="attr">value</span>: <span class="built_in">this</span>.properties.count &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>③ <code>获取组件实例</code>：父组件通过<code>this.selectComponent(&#39;id或class选择器&#39;)</code>获取子组件实例对象，可以访问到子组件的任意数据和方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;my-text count=<span class="string">&quot;&#123;&#123;count&#125;&#125;&quot;</span> bind:sync=<span class="string">&quot;syncCount&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;customA&quot;</span>&gt;&lt;/my-text&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">bindtap</span>=<span class="string">&quot;getChild&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件js中</span></span><br><span class="line">Page(&#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">getChild</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> child = <span class="built_in">this</span>.selectComponent(<span class="string">&#x27;.customA&#x27;</span>);</span><br><span class="line">        child.setData(&#123; <span class="attr">count</span>: child.properties.count + <span class="number">1</span> &#125;)</span><br><span class="line">        child.addCount(); <span class="comment">// 使用子组件的方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="13-behaviors："><a href="#13-behaviors：" class="headerlink" title="13.behaviors："></a>13.behaviors：</h2><ul>
+<li>用于组件间代码共享的特性，每个behavior可以包含一组属性、数据、生命周期函数和方法</li>
+<li>它的属性、数据和方法会被合并到组件中<br><img src="https://img-blog.csdnimg.cn/27a407e343e24fe4b39123b32954cc44.png#pic_center" alt="在这里插入图片描述"></li>
+</ul>
+<p>① 创建behaviror：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用 Behavior()方法，创建实例对象</span></span><br><span class="line"><span class="comment">// 并使用module.exports将behavior实例对象共享出去</span></span><br><span class="line"><span class="built_in">module</span>.exports = Behavior(&#123;</span><br><span class="line">    <span class="comment">// 属性节点</span></span><br><span class="line">    <span class="attr">properties</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="comment">// 私有数据节点</span></span><br><span class="line">    <span class="attr">data</span>: &#123; </span><br><span class="line">        <span class="attr">username</span>: <span class="string">&#x27;tay&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//事件处理函数和自定义方法节点</span></span><br><span class="line">    <span class="attr">methods</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 其它节点...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>② 导入并使用behaviors：使用require方法导入，挂载后即可访问behavior中的数据或方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myBehavior = <span class="built_in">require</span>(<span class="string">&quot;../../behaviors/my-behavior.js&quot;</span>);</span><br><span class="line"></span><br><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">behaviors</span>: [ myBehavior ],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>③ behavior中所有可用的节点：<br><img src="https://img-blog.csdnimg.cn/b031e37915b94251bbb8b7b05d764ab3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>④ 同名字段的覆盖和组合规则：<br>（1）<code>同名的数据字段（data）</code>：</p>
+<ul>
+<li>对象会合并，<strong>组件 &gt; behavior &gt; 子behavior，靠后的behavior &gt; 靠前的behavior</strong></li>
+</ul>
+<p>（2）<code>同名的属性（properties）或方法（methods）</code>：</p>
+<ul>
+<li>1.若组件本身<strong>有这个属性或方法</strong>，则组件的属性或方法<strong>会覆盖 behavior 中的同名属性或方法</strong></li>
+<li>2.若组件本身<strong>无这个属性或方法</strong>，则在组件的 <strong>behaviors 字段中定义靠后的 behavior 的属性或方法会覆盖靠前的同名属性或方法</strong></li>
+<li>3.在2的基础上，若存在嵌套引用 behavior 的情况，则规则为：引用者 behavior 覆盖 被引用的 behavior中的同名属性或方法</li>
+</ul>
+<p>（3）<code>同名的生命周期函数</code>：<strong>生命周期函数不会相互覆盖，而是在对应触发时机被逐个调用</strong></p>
+<ul>
+<li>对于<strong>不同的生命周期函数</strong>之间，<strong>遵循组件生命周期函数的执行顺序</strong>；</li>
+<li>对于<strong>同种生命周期函数</strong>，遵循如下规则：<br><strong>behavior 优先于组件执行</strong>；<br><strong>被引用的 behavior 优先于 引用者 behavior执行</strong>；<br><strong>靠前的 behavior 优先于 靠后的 behavior 执行</strong>；<br><strong>如果同一个 behavior 被一个组件多次引用，它定义的生命周期函数只会被执行一次</strong></li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2022/04/21/splice()/">splice()</a></li>
+                
+                
+                    <li>下一篇: <a href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%883%EF%BC%89%E8%A7%86%E5%9B%BE%E4%B8%8E%E9%80%BB%E8%BE%91/">小程序（3）视图与逻辑</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/44fe1ae59cf64276875a181335fa1058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一颗菜菜西兰花罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/21/splice()/">splice()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/21/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%884%EF%BC%89%E7%BB%84%E4%BB%B6/">小程序（4）组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%883%EF%BC%89%E8%A7%86%E5%9B%BE%E4%B8%8E%E9%80%BB%E8%BE%91/">小程序（3）视图与逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%882%EF%BC%89%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%85%8D%E7%BD%AE/">小程序（2）模板与配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%881%EF%BC%89%E7%AE%80%E4%BB%8B/">小程序（1）简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/02/ES6%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95find()%E3%80%81findIndex()/">ES6数组方法find()、findIndex()</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 18.57px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.43px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 12.86px;">HTML</a> <a href="/tags/JS/" style="font-size: 17.14px;">JS</a> <a href="/tags/TS/" style="font-size: 15.71px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 14.29px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 12.86px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
