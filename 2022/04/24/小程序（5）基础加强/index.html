@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>小程序（5）基础加强 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="小程序（5）基础加强"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>小程序（5）基础加强</h2>
+            <div class="post-meta">
+                <time class="date">2022.04.24</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-使用npm包："><a href="#1-使用npm包：" class="headerlink" title="1.使用npm包："></a>1.使用npm包：</h2><p>小程序中使用npm包的限制：<br>（1）不支持依赖于Node.js内置库的包<br>（2）不支持依赖于浏览器内置对象的包<br>（3）不支持依赖于C++插件的包</p>
+<h2 id="2-vant-weapp："><a href="#2-vant-weapp：" class="headerlink" title="2.vant weapp："></a>2.vant weapp：</h2><p>使用的是MIT开源许可协议，比较友好</p>
+<p>安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 通过 npm 安装</span><br><span class="line">npm i @vant/weapp -S --production</span><br></pre></td></tr></table></figure>
+
+
+<p>去除app.json中的：小程序的新版基础组件强行加上了许多样式，难以覆盖，不关闭将造成部分组件样式混乱</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;style&quot;</span>: <span class="string">&quot;v2&quot;</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<p>在project.config.json添加：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;setting&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;packNpmManually&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">&quot;packNpmRelationList&quot;</span>: [&#123;</span><br><span class="line">            <span class="string">&quot;packageJsonPath&quot;</span>: <span class="string">&quot;./package.json&quot;</span>,</span><br><span class="line">            <span class="string">&quot;miniprogramNpmDistDir&quot;</span>: <span class="string">&quot;./&quot;</span></span><br><span class="line">        &#125;],</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>构建npm包：<br><img src="https://img-blog.csdnimg.cn/c4fab28e4fbc46d78213d9594b66f9aa.png#pic_center" alt="在这里插入图片描述"></p>
+<p><code>定义全局主体样式</code>：<br>声明一个自定义属性，属性名需要以两个减号（–）开始，属性值则可以是任何有效的CSS值。和其他属性一样，自定义属性也是写在规则集之内的，如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element &#123;</span><br><span class="line">  --<span class="selector-tag">main</span>-bg-<span class="attribute">color</span>: brown;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>注意</code>：<br>  <strong>自定义属性名是大小写敏感的，–my-color和–My-color会被认为是两个不同的自定义属性</strong><br>使用：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--main-bg-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>定制全局主题样式：<br>在app.wxss中，写入CSS变量，即可对全局生效：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**app.wxss**/</span></span><br><span class="line">page &#123;</span><br><span class="line">  --<span class="selector-tag">button</span>-default-<span class="attribute">color</span>: white;</span><br><span class="line">  --<span class="selector-tag">button</span>-default-<span class="attribute">background-color</span>: <span class="number">#C5E2FF</span>;</span><br><span class="line">  --<span class="selector-tag">button</span>-default-<span class="attribute">border-color</span>: <span class="number">#C5E2FF</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="3-基于回调函数的异步API："><a href="#3-基于回调函数的异步API：" class="headerlink" title="3.基于回调函数的异步API："></a>3.基于回调函数的异步API：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">we.request(&#123;</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">success</span>: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">    <span class="attr">fail</span>: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">    <span class="attr">compire</span>: <span class="function">() =&gt;</span> &#123;&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>API Promise化，指的是通过额外的配置，将官方提供的、基于回调函数的异步API，升级改造为基于Promise的异步API，从而提高代码的可读性、维护性、避免回调地狱的问题</p>
+</li>
+<li><p>实现API Promise化主要依赖于miniprogram-api-promise这个第三方npm包</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save miniprogram-api-promise@<span class="number">1.0</span><span class="number">.4</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>每次安装好一个包，需要重新构建一下，防止出现不必要的错误，最好每一次都先删除miniprogram-npm这个目录</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="comment">// 实现异步API的Promise化</span></span><br><span class="line"><span class="keyword">import</span> &#123; promisifyAll &#125; <span class="keyword">from</span> <span class="string">&#x27;miniprogram-api-promise&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> wxp = wx.p = &#123;&#125;</span><br><span class="line"><span class="comment">// promisift ll wx&#x27;s api</span></span><br><span class="line">promisifyAll(wx, wxp);</span><br><span class="line"></span><br><span class="line">App(&#123;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = getApp()</span><br><span class="line"></span><br><span class="line">Page(&#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">async</span> <span class="function"><span class="title">getPromise</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">        <span class="keyword">const</span> &#123; <span class="attr">data</span>: res &#125; = <span class="keyword">await</span> wx.p.request(&#123;</span><br><span class="line">            <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;https://www.escook.cn/api/get&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: &#123;</span><br><span class="line">                <span class="attr">name</span>: <span class="string">&#x27;tay&#x27;</span>,</span><br><span class="line">                <span class="attr">age</span>: <span class="number">20</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="built_in">console</span>.log(res);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-全局数据共享："><a href="#4-全局数据共享：" class="headerlink" title="4.全局数据共享："></a>4.全局数据共享：</h2><p>状态管理，解决组件之间的数据共享</p>
+<ul>
+<li>在小程序中，可使用mobx-miniprogram配合mobx-miniprogram-bindings实现全局数据共享，其中:<br>（1） mobx-miniprogram 用来创建Store实例对象<br>（2）mobx-miniprogram-bindings用来把 Store 中的共享数据或方法，绑定到组件或页面中使用<br><img src="https://img-blog.csdnimg.cn/2ba3f82af972464f98b4d07309c835f3.png#pic_center" alt="在这里插入图片描述"></li>
+</ul>
+<p>安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save mobx-miniprogram mobx-miniprogram-bindings</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; observable, action&#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-miniprogram&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> store = observable(&#123;</span><br><span class="line">    <span class="comment">// 数据字段</span></span><br><span class="line">    <span class="attr">numA</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">numB</span>: <span class="number">2</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算属性</span></span><br><span class="line">    <span class="keyword">get</span> <span class="title">sum</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.numA + <span class="built_in">this</span>.numB;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// actions方法，用来修改sotre中的数据</span></span><br><span class="line">    <span class="attr">updataNum1</span>: action(<span class="function"><span class="keyword">function</span>(<span class="params">step</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.numA += step;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="attr">updataNum2</span>: action(<span class="function"><span class="keyword">function</span>(<span class="params">step</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.numB += step;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>将store中的成员绑定到页面中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createStoreBindings &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-miniprogram-bindings&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; store &#125; <span class="keyword">from</span> <span class="string">&#x27;../../store/store&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = getApp()</span><br><span class="line">Page(&#123;</span><br><span class="line">    <span class="function"><span class="title">btnHandler1</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.updataNum1(e.target.dataset.step);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/* 生命周期函数--监听页面加载 */</span></span><br><span class="line">    </span><br><span class="line">    <span class="attr">onLoad</span>: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.storeBindings = createStoreBindings(<span class="built_in">this</span>, &#123;</span><br><span class="line">            store,</span><br><span class="line">            <span class="attr">fields</span>: [<span class="string">&#x27;numA&#x27;</span>, <span class="string">&#x27;numB&#x27;</span>, <span class="string">&#x27;sum&#x27;</span>],</span><br><span class="line">            <span class="attr">actions</span>: [ <span class="string">&#x27;updataNum1&#x27;</span> ]</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/* 生命周期函数--监听页面卸载 */</span></span><br><span class="line">    <span class="attr">onUnload</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.storeBindings.destroyStoreBindings();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>  在页面中使用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;gotoColorList&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span>&gt;</span> &#123;&#123;numA&#125;&#125; + &#123;&#123;numB&#125;&#125; = &#123;&#123;sum&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">van-button</span> <span class="attr">type</span>=<span class="string">&quot;default&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;btnHandler1&quot;</span> <span class="attr">data-step</span>=<span class="string">&quot;&#123;&#123;1&#125;&#125;&quot;</span>&gt;</span>numA + 1<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">van-button</span> <span class="attr">type</span>=<span class="string">&quot;default&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;btnHandler1&quot;</span> <span class="attr">data-step</span>=<span class="string">&quot;&#123;&#123;-1&#125;&#125;&quot;</span>&gt;</span>numA - 1<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>将store中的成员绑定到组件中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; storeBindingsBehavior &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-miniprogram-bindings&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; store &#125; <span class="keyword">from</span> <span class="string">&#x27;../../store/store&#x27;</span></span><br><span class="line"></span><br><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">behaviors</span>: [ storeBindingsBehavior ], <span class="comment">// 通过storeBindingsBehavior来实现自动绑定</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">storeBindings</span>: &#123;</span><br><span class="line">        store,</span><br><span class="line">        <span class="attr">fields</span>: &#123;</span><br><span class="line">            <span class="attr">numA</span>: <span class="function">() =&gt;</span> store.numA,</span><br><span class="line">            <span class="attr">numB</span>: <span class="function">(<span class="params">store</span>) =&gt;</span> store.numB,</span><br><span class="line">            <span class="attr">sum</span>: <span class="string">&#x27;sum&#x27;</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">actions</span>: &#123;</span><br><span class="line">            <span class="attr">updataNum2</span>: <span class="string">&#x27;updataNum2&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">methods</span>: &#123;</span><br><span class="line">        <span class="function"><span class="title">btnHandler2</span>(<span class="params">e</span>)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.updataNum2(e.target.dataset.step);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在组件中使用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span>&#123;&#123;numA&#125;&#125; + &#123;&#123;numB&#125;&#125; = &#123;&#123;sum&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">van-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;btnHandler2&quot;</span> <span class="attr">data-step</span>=<span class="string">&quot;&#123;&#123;1&#125;&#125;&quot;</span>&gt;</span>numB + 1<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">van-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">bindtap</span>=<span class="string">&quot;btnHandler2&quot;</span> <span class="attr">data-step</span>=<span class="string">&quot;&#123;&#123;-1&#125;&#125;&quot;</span>&gt;</span>numB - 1<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="5-分包："><a href="#5-分包：" class="headerlink" title="5.分包："></a>5.分包：</h2><p><code>分包的好处</code>：<br>可以优化小程序首次启动的下载时间<br>在多人团队共同开发时可以更好的解耦协作</p>
+<p><code>分包后</code>：小程序项目由一个主包 + 多个分包组成：<br>主包：一般只包含项目的启动页面或TabBar页面，以及所有分包都需要用到的一些公共资源<br>分包：只包含和当前分包有关的页面和私有资源<br><img src="https://img-blog.csdnimg.cn/8c7b9b6a07714ad682526c311d245eef.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p><code>分包加载规则</code>：<br>（1）小程序启动时，默认会下载主包并启动主包内页面（tabBar页面需要放在主包）<br>（2）当用户进入分包内某个页面时，客户端会把对应分包下载下来，下载完成后进行展示（非tabBar页面可以按照功能的不同，划分为不同的分包，进行按需下载）</p>
+<p><code>分包的体积限制</code>：<br>（1）整个小程序所有分包大小不超过16M<br>（2）单个分包不能超过2M</p>
+<p><code>配置分包</code>：<br><img src="https://img-blog.csdnimg.cn/e4e22fb8f8a34d8eb9a0fb37f606256b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_15,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/402cbbed4755486f8a717fbe1dcd433e.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_15,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<ul>
+<li>使用name为分包取别名</li>
+<li>在右侧的基本信息中查看每个分包的大小</li>
+</ul>
+<p><code>打包原则</code>：<br>（1）小程序按subpackages配置进行分包<br>（2）主包也有自己的pages<br>（3）tabBar页面必须在主包中<br>（4）分包之间不能互相嵌套</p>
+<p><code>引用原则</code>：<br>（1）主包无法引用分包内的私有资源<br>（2）分包之间不能相互引用私有资源<br>（3）分包可以引用主包内的资源</p>
+<h2 id="6-独立分包："><a href="#6-独立分包：" class="headerlink" title="6.独立分包："></a>6.独立分包：</h2><p>独立分包也是分包，但是可以独立于主包和其他分包单独运行<br><img src="https://img-blog.csdnimg.cn/14d554d50dea4d1496328f07a2d471ac.png#pic_center" alt="在这里插入图片描述"></p>
+<p>独立分包和分包的区别：<br>（1）普通分包必须依赖于主包才能运行<br>（2）独立分包可以在不下载主包的情况下，独立运行</p>
+<p>配置方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;independent&quot;</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>独立分包和普通分包以及主包之间，是相互隔绝的，不能相互引用彼此的资源</li>
+</ul>
+<h2 id="7-分包预下载："><a href="#7-分包预下载：" class="headerlink" title="7. 分包预下载："></a>7. 分包预下载：</h2><p>在app.json中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;preloadRule&quot;</span>: &#123; <span class="comment">// 分包预下载</span></span><br><span class="line">    <span class="string">&quot;pages/contact/contact&quot;</span>: &#123; <span class="comment">//触发分包下载的页面路径</span></span><br><span class="line">        <span class="string">&quot;packages&quot;</span>: [<span class="string">&quot;p1&quot;</span>],  <span class="comment">// &quot;wifi&quot;</span></span><br><span class="line">        <span class="string">&quot;network&quot;</span>: <span class="string">&quot;all&quot;</span> <span class="comment">// 下载哪些分包，可以是root或者name</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同一个分包中的页面享有共同的预下载大小限额2M</p>
+<h2 id="8-自定义tabBar："><a href="#8-自定义tabBar：" class="headerlink" title="8.自定义tabBar："></a>8.自定义tabBar：</h2><p>app.json:引入vant的tabBar，在taBar定义custom属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;usingComponents&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;van-button&quot;</span>: <span class="string">&quot;@vant/weapp/button/index&quot;</span>,</span><br><span class="line">    <span class="string">&quot;van-tabbar&quot;</span>: <span class="string">&quot;@vant/weapp/tabbar/index&quot;</span>,</span><br><span class="line">    <span class="string">&quot;van-tabbar-item&quot;</span>: <span class="string">&quot;@vant/weapp/tabbar-item/index&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;tabBar&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;custom&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;position&quot;</span>: <span class="string">&quot;bottom&quot;</span>,</span><br><span class="line">    <span class="string">&quot;color&quot;</span>: <span class="string">&quot;#E6E6E6&quot;</span>,</span><br><span class="line">    <span class="string">&quot;selectedColor&quot;</span>: <span class="string">&quot;#F9DBE3&quot;</span>,</span><br><span class="line">    <span class="string">&quot;list&quot;</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;pages/index/index&quot;</span>,</span><br><span class="line">        <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: <span class="string">&quot;首页&quot;</span>,</span><br><span class="line">        <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;images/index.png&quot;</span>,</span><br><span class="line">        <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;images/index-active.png&quot;</span></span><br><span class="line">      &#125;,&#123;</span><br><span class="line">        <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;pages/list/list&quot;</span>,</span><br><span class="line">        <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: <span class="string">&quot;list&quot;</span>,</span><br><span class="line">        <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;images/list.png&quot;</span>,</span><br><span class="line">        <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;images/list-active.png&quot;</span></span><br><span class="line">      &#125;,&#123;</span><br><span class="line">        <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;pages/my/my&quot;</span>,</span><br><span class="line">        <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: <span class="string">&quot;个人中心&quot;</span>,</span><br><span class="line">        <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;images/my.png&quot;</span>,</span><br><span class="line">        <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;images/my-active.png&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>在根目录下，新建custom-tab-bar文件夹：<br><img src="https://img-blog.csdnimg.cn/945a59757fd54ce7b575933cd5565bfc.png#pic_center" alt="在这里插入图片描述"></p>
+<p>index.wxml：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">van-tabbar</span> <span class="attr">active</span>=<span class="string">&quot;&#123;&#123;active&#125;&#125;&quot;</span> <span class="attr">bind:change</span>=<span class="string">&quot;onChange&quot;</span> <span class="attr">active-color</span>=<span class="string">&quot;#F9DBE3&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">van-tabbar-item</span>  <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;list&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;index&quot;</span> <span class="attr">info</span>=<span class="string">&quot;&#123;&#123;item.info ? item.info : &#x27;&#x27;&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">image</span> <span class="attr">slot</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;item.iconPath&#125;&#125;&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;aspectFit&quot;</span>  /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">image</span> <span class="attr">slot</span>=<span class="string">&quot;icon-active&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;item.selectedIconPath&#125;&#125;&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;aspectFit&quot;</span>/&gt;</span></span><br><span class="line">    &#123;&#123;item.text&#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">van-tabbar-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">van-tabbar</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>index.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; storeBindingsBehavior &#125; <span class="keyword">from</span> <span class="string">&#x27;mobx-miniprogram-bindings&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; store &#125; <span class="keyword">from</span> <span class="string">&#x27;../store/store&#x27;</span></span><br><span class="line"></span><br><span class="line">Component(&#123;</span><br><span class="line">    <span class="attr">behaviors</span>: [ storeBindingsBehavior ],</span><br><span class="line">    <span class="attr">storeBindings</span>: &#123;</span><br><span class="line">        store,</span><br><span class="line">        <span class="attr">fields</span>: &#123;</span><br><span class="line">            <span class="attr">sum</span>: <span class="string">&#x27;sum&#x27;</span>,</span><br><span class="line">            <span class="attr">active</span>: <span class="string">&#x27;activeTabBarIndex&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">actions</span>: &#123;</span><br><span class="line">            <span class="attr">updateActiveTabBarIndex</span>: <span class="string">&#x27;updateActiveTabBarIndex&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="attr">styleIsolation</span>: <span class="string">&#x27;shared&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">properties</span>: &#123;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">list</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;/pages/index/index&quot;</span>,</span><br><span class="line">              <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">              <span class="string">&quot;text&quot;</span>: <span class="string">&quot;首页&quot;</span>,</span><br><span class="line">              <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;../images/index.png&quot;</span>,</span><br><span class="line">              <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;../images/index-active.png&quot;</span></span><br><span class="line">            &#125;,&#123;</span><br><span class="line">              <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;/pages/list/list&quot;</span>,</span><br><span class="line">              <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">              <span class="string">&quot;text&quot;</span>: <span class="string">&quot;list&quot;</span>,</span><br><span class="line">              <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;../images/list.png&quot;</span>,</span><br><span class="line">              <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;../images/list-active.png&quot;</span>,</span><br><span class="line">              <span class="attr">info</span>: <span class="number">3</span></span><br><span class="line">            &#125;,&#123;</span><br><span class="line">              <span class="string">&quot;pagePath&quot;</span>: <span class="string">&quot;/pages/my/my&quot;</span>,</span><br><span class="line">              <span class="string">&quot;backgroundColor&quot;</span>: <span class="string">&quot;#ffffff&quot;</span>,</span><br><span class="line">              <span class="string">&quot;text&quot;</span>: <span class="string">&quot;个人中心&quot;</span>,</span><br><span class="line">              <span class="string">&quot;iconPath&quot;</span>: <span class="string">&quot;../images/my.png&quot;</span>,</span><br><span class="line">              <span class="string">&quot;selectedIconPath&quot;</span>: <span class="string">&quot;../images/my-active.png&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">observers</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;sum&#x27;</span>: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">this</span>.setData(&#123;</span><br><span class="line">                <span class="string">&#x27;list[[1].info&#x27;</span>: val</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">methods</span>: &#123;</span><br><span class="line">        <span class="function"><span class="title">onChange</span>(<span class="params">event</span>)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.updateActiveTabBarIndex(event.detail);</span><br><span class="line">            wx.switchTab(&#123;</span><br><span class="line">              <span class="attr">url</span>: <span class="built_in">this</span>.data.list[event.detail].pagePath,</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意，覆盖vant的样式：<br>在index.js定义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">options: &#123;</span><br><span class="line">    <span class="attr">styleIsolation</span>: <span class="string">&#x27;shared&#x27;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>index.wxss：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">van-tabbar-item &#123;</span><br><span class="line">    --tabbar-item-<span class="attribute">margin-bottom</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/04/21/splice()/">splice()</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/44fe1ae59cf64276875a181335fa1058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一颗菜菜西兰花罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/24/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%885%EF%BC%89%E5%9F%BA%E7%A1%80%E5%8A%A0%E5%BC%BA/">小程序（5）基础加强</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/21/splice()/">splice()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/21/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%884%EF%BC%89%E7%BB%84%E4%BB%B6/">小程序（4）组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%883%EF%BC%89%E8%A7%86%E5%9B%BE%E4%B8%8E%E9%80%BB%E8%BE%91/">小程序（3）视图与逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%882%EF%BC%89%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%85%8D%E7%BD%AE/">小程序（2）模板与配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%881%EF%BC%89%E7%AE%80%E4%BB%8B/">小程序（1）简介</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 18.57px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.43px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 12.86px;">HTML</a> <a href="/tags/JS/" style="font-size: 17.14px;">JS</a> <a href="/tags/TS/" style="font-size: 15.71px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 14.29px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 14.29px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
