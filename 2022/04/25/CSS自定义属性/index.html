@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>CSS自定义属性 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="CSS自定义属性"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://img-blog.csdnimg.cn/716307520e154461a5fe4b719ad47e0f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>CSS自定义属性</h2>
+            <div class="post-meta">
+                <time class="date">2022.04.25</time>
+            
+                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Using_CSS_custom_properties">使用CSS自定义属性（变量） - CSS（层叠样式表） | MDN (mozilla.org)</a></p>
+<p><em><strong>自定义属性</strong></em>：CSS变量、级联变量，可以重复使用的</p>
+<p><em><strong>基本用法</strong></em>：属性名以<code>--</code>开始，属性值可以是任何有效的CSS值</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element &#123;</span><br><span class="line">  --<span class="selector-tag">main</span>-bg-<span class="attribute">color</span>: brown;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>注意</strong></em>：规则集指定的选择器定义的自定义属性的可见作用域<br>最佳是在根伪类<code>:root</code>下，这样在任何地方都能访问到了</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  --<span class="selector-tag">main</span>-bg-<span class="attribute">color</span>: brown;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><em><strong>注意</strong></em>：自定义属性名是大小写敏感的，–my-color 和 –My-color 会被认为是两个不同的自定义属性</p>
+<p><em><strong>使用</strong></em>：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--main-bg-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><em><strong>备用值</strong></em>：当给定值未定义是会用备用纸替换</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.two</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">var</span>(--my-var, red); <span class="comment">/* Red if --my-var is not defined */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.three</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--my-var, <span class="built_in">var</span>(--my-background, pink)); <span class="comment">/* pink if --my-var and --my-background are not defined */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.three</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">var</span>(--my-var, --my-background, pink); <span class="comment">/* Invalid: &quot;--my-background, pink&quot; */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><em><strong>有效性和值</strong></em>：通过var()函数调用时，在特定上下文环境下也可能不会奏效。属性和自定义变量会导致无效的CSS语句</p>
+<p><em><strong>无效变量会导致什么？</strong></em><br>当浏览器遇到无效的 var() 时，会使用继承值或初始值代替</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123; --text-<span class="attribute">color</span>: <span class="number">16px</span>; &#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123; <span class="attribute">color</span>: blue; &#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123; <span class="attribute">color</span>: <span class="built_in">var</span>(--text-color); &#125;</span><br><span class="line">// <span class="attribute">color</span>最后为黑色 </span><br><span class="line">// 段落颜色并不是蓝色，因为无效代换导致了它被替换成了默认初始值的黑色</span><br><span class="line">// 如果你直接写<span class="attribute">color</span>: <span class="number">16px</span> 的话，则会导致语法错误，而前面的定义则会生效（段落显示为蓝色）</span><br></pre></td></tr></table></figure>
+
+
+<p><em><strong>javascript中的值</strong></em>：在javascript中获取或者修改CSS变量和操作普通CSS属性是一样的</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 获取一个 Dom 节点上的 CSS 变量</span><br><span class="line">element<span class="selector-class">.style</span><span class="selector-class">.getPropertyValue</span>(&quot;--my-<span class="selector-tag">var</span>&quot;);</span><br><span class="line"></span><br><span class="line">// 获取任意 Dom 节点上的 CSS 变量</span><br><span class="line">getComputedStyle(element)<span class="selector-class">.getPropertyValue</span>(&quot;--my-<span class="selector-tag">var</span>&quot;);</span><br><span class="line"></span><br><span class="line">// 修改一个 Dom 节点上的 CSS 变量</span><br><span class="line">element<span class="selector-class">.style</span><span class="selector-class">.setProperty</span>(&quot;--my-<span class="selector-tag">var</span>&quot;, jsVar + <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>在小程序中使用vant，并定制全局主题样式</strong></em>：<br>在app.wxss中，写入CSS变量，即可对全局生效</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**app.wxss**/</span></span><br><span class="line">page &#123;</span><br><span class="line">  --<span class="selector-tag">button</span>-default-<span class="attribute">color</span>: white;</span><br><span class="line">  --<span class="selector-tag">button</span>-default-<span class="attribute">background-color</span>: <span class="number">#C5E2FF</span>;</span><br><span class="line">  --<span class="selector-tag">button</span>-default-<span class="attribute">border-color</span>: <span class="number">#C5E2FF</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/04/24/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%885%EF%BC%89%E5%9F%BA%E7%A1%80%E5%8A%A0%E5%BC%BA/">小程序（5）基础加强</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/44fe1ae59cf64276875a181335fa1058.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>一颗菜菜西兰花罢了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/04/25/CSS%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7/">CSS自定义属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/24/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%885%EF%BC%89%E5%9F%BA%E7%A1%80%E5%8A%A0%E5%BC%BA/">小程序（5）基础加强</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/21/splice()/">splice()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/21/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%884%EF%BC%89%E7%BB%84%E4%BB%B6/">小程序（4）组件</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%883%EF%BC%89%E8%A7%86%E5%9B%BE%E4%B8%8E%E9%80%BB%E8%BE%91/">小程序（3）视图与逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/04/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%882%EF%BC%89%E6%A8%A1%E6%9D%BF%E4%B8%8E%E9%85%8D%E7%BD%AE/">小程序（2）模板与配置</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.67px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 18.33px;">JS</a> <a href="/tags/TS/" style="font-size: 16.67px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 20px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 15px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 15px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
