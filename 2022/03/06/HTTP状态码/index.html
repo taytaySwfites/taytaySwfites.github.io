@@ -118,6 +118,7 @@
 <li><strong>307会遵照浏览器标准，不会从POST变成GET</strong></li>
 <li>但是，对于处理响应时的行为，每种浏览器有可能出现不同的情况</li>
 </ul>
+<p>（6）<code>308 Permanent Redirect</code><br>该状态码与301 Moved Permanently有着相同的含义</p>
 <h3 id="3-4XX-客户端错误"><a href="#3-4XX-客户端错误" class="headerlink" title="3.4XX 客户端错误"></a>3.4XX 客户端错误</h3><p>  表明客户端是发生错误的原因所在<br>（1）<code>400 Bad Request</code></p>
 <ul>
 <li>表示请求报文中存在语法错误，需要修改请求的内容再次发送请求</li>
@@ -142,6 +143,31 @@
 <ul>
 <li>请求行中指定的<strong>请求方法不能被用于请求相应的资源</strong>。 例如Apache、IIS、Nginx等绝大多数web服务器，都不允许静态文件响应POST请求</li>
 </ul>
+<p>(6) <code>406 Not Acceptable</code></p>
+<ul>
+<li><strong>无法找到请求的资源</strong></li>
+</ul>
+<p>(7) `408 Request Timeout</p>
+<ul>
+<li>请求超时，服务器等待了过长的时间</li>
+</ul>
+<p>(8) <code>409 Conflict</code></p>
+<ul>
+<li>多个请求发生了冲突，可以理解为多线程并发时的竞态</li>
+</ul>
+<p>(9) <code>413 Request Entity Too Large</code></p>
+<ul>
+<li>请求报文里的body 太大</li>
+</ul>
+<p>(10) <code>414 Request-URl Too Long</code></p>
+<ul>
+<li>请求行里的URI太大</li>
+</ul>
+<p>(11) <code>Too Many Requests</code><br>*客户端发送了太多的请求，通常是由于服务器的限连策略</p>
+<p>(12) <code>Request Header Fields Too Large</code></p>
+<ul>
+<li>请求头某个字段或总体太大</li>
+</ul>
 <h3 id="4-5XX-服务器错误"><a href="#4-5XX-服务器错误" class="headerlink" title="4.5XX 服务器错误"></a>4.5XX 服务器错误</h3><pre><code>5XX的响应结果表明服务器本身发生错误
 </code></pre>
 <p>（1）<code>500 lnternal Server Error</code></p>
@@ -149,7 +175,15 @@
 <li>该状态码表明<strong>服务器端在执行请求时发生了错误</strong></li>
 <li>也有可能是web应用存在的bug或某些临时的故障</li>
 </ul>
-<p>（2）<code>503 Service Unavailable</code></p>
+<p>（2）<code>501 Not lmplemented</code></p>
+<ul>
+<li>表示客户端请求的功能还不支持，这个错误码比500要“温和”一些</li>
+</ul>
+<p>（3）<code>502 Bad Gateway</code></p>
+<ul>
+<li>通常是服务器作为网关或者代理时返回的错误码，表示服务器自身工作正常，访问后端服务器时发生了错误，但具体的错误原因也是不知道的</li>
+</ul>
+<p>（4）<code>503 Service Unavailable</code></p>
 <ul>
 <li>该状态码表明服务器<strong>暂时处于超负载或正在进行停机维护，现在无法处理请求</strong></li>
 <li>如果事先得知解除以上状况需要的时间，最好写入Retry-After首部字段再返回给客户端</li>
