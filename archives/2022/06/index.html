@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>splice() - taytay</title>
+    <title>2022 年 6 月 - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content="splice()"/>
+    <meta property="og:title" content=""/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -52,83 +52,35 @@
 
     <main>
     <div class="wrap min">
-        <section class="post-title">
-            <h2>splice()</h2>
-            <div class="post-meta">
-                <time class="date">2022.04.21</time>
+        <section class="home-title">
             
-                <span class="category"><a class="category-link" href="/categories/JS/">JS</a></span>
+            <h1>“2022 年 6 月”</h1>
+        </section>
+        <section class="home-posts">
+    
+    <div class="post-item">
+        <h2>
+            <a href="/2022/06/30/Chrome%E6%9E%B6%E6%9E%84%EF%BC%9A%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">Chrome架构：进程和线程</a>
+        </h2>
+    
+        <p>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;问题：在Chrome打开一个页面需要多少进程？&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;右上角“选项” –&amp;gt; “更多工具” –&amp;gt;...</p>
+    
+        <div class="post-meta">
+            <time class="date">2022.06.30</time>
             
-            </div>
-        </section>
-        <article class="post-content">
-        
-            <p><code>splice()</code>：<strong>向/从数组中添加/删除/替换项目，然后返回被删除的项目</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayObject.splice(index, howmany, item1, ....., itemX)</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>index</td>
-<td>必需，整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置</td>
-</tr>
-<tr>
-<td>howmany</td>
-<td>必需，要删除的项目数量。如果设置为 0，则不会删除项目</td>
-</tr>
-<tr>
-<td>item1, …, itemX</td>
-<td>可选，向数组添加的新项目</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>删除：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">2</span>, <span class="number">1</span>)); <span class="comment">// [&quot;c&quot;]</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&quot;a&quot;, &quot;b&quot;]</span></span><br></pre></td></tr></table></figure>
-
-<p>插入：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">1</span>, <span class="number">0</span>, <span class="string">&#x27;insert&#x27;</span>)); <span class="comment">// []</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&#x27;a&#x27;, &#x27;insert&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<p>替换：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">1</span>, <span class="number">1</span>, <span class="string">&#x27;insert&#x27;</span>)); <span class="comment">// []</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&#x27;a&#x27;, &#x27;insert&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-
-        </article>
-        <section class="post-near">
-            <ul>
-                
-                    <li>上一篇: <a href="/2022/04/24/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%885%EF%BC%89%E5%9F%BA%E7%A1%80%E5%8A%A0%E5%BC%BA/">小程序（5）基础加强</a></li>
-                
-                
-                    <li>下一篇: <a href="/2022/04/21/%E5%B0%8F%E7%A8%8B%E5%BA%8F%EF%BC%884%EF%BC%89%E7%BB%84%E4%BB%B6/">小程序（4）组件</a></li>
-                
-            </ul>
-        </section>
-        
-            <section class="post-tags">
-            <a class="-none-link" href="/tags/JS/" rel="tag">JS</a>
-            </section>
-        
+                <span class="category"><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span>
+            
+            
+                <span class="tags"><a class="-none-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></span>
+            
+        </div>
+    </div>
     
-        <section class="post-author">
-        
-            <figure class="author-avatar">
-                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
-            </figure>
-        
-            <div class="author-info">
-                <h4>taytay</h4>
-                <p>老笨蛋了...</p>
-            </div>
+</section>
+
+        <section class="page-navigator">
+            <span class="page-number current">1</span>
         </section>
-    
     </div>
 </main>
 
