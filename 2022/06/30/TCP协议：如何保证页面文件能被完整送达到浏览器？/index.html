@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>2022 年 - taytay</title>
+    <title>TCP协议：如何保证页面文件能被完整送达到浏览器？ - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content=""/>
+    <meta property="og:title" content="TCP协议：如何保证页面文件能被完整送达到浏览器？"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -52,147 +52,54 @@
 
     <main>
     <div class="wrap min">
-        <section class="home-title">
+        <section class="post-title">
+            <h2>TCP协议：如何保证页面文件能被完整送达到浏览器？</h2>
+            <div class="post-meta">
+                <time class="date">2022.06.30</time>
             
-            <h1>“2022 年”</h1>
+                <span class="category"><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span>
+            
+            </div>
         </section>
-        <section class="home-posts">
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/11/SCSS%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">SCSS的基本使用</a>
-        </h2>
-    
-        <p>什么是SASS？Sass 是采用 Ruby 语言编写的一款 CSS 预处理语言，它诞生于2007年，是最大的成熟的 CSS 预处理语言。最初它是为了配合HAML（一种缩进式 HTML 预编译器）...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.11</time>
-            
-                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/11/==%20%E5%92%8C%20===%20%E7%9A%84%E5%8C%BA%E5%88%AB%20%EF%BC%9F%EF%BC%9F%EF%BC%9F/">== 和 === 的区别</a>
-        </h2>
-    
-        <p>== 和 === 的区别相等运算符 ==    会进行类型的转换16 == &amp;quot;6&amp;quot; // true
+        <article class="post-content">
+        
+            <p>衡量Web页面性能的重要指标“FP(First Paint)”，从页面加载到首次开始绘制的时长<br>什么影响FP指标？  网络加载速度</p>
+<h2 id="一个数据包的“旅程”"><a href="#一个数据包的“旅程”" class="headerlink" title="一个数据包的“旅程”"></a>一个数据包的“旅程”</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;互联网，实际上是一套理念和协议组成的体系结构<br/><br>1.Ip：把数据包送达目的主机<br>&nbsp;&nbsp;&nbsp;&nbsp;网际协议(Internet Protocol,IP)：计算机的地址就称为IP地址，访问任何网站实际上只是你的计算机向另外一台计算机请求信息<br><img src="https://img-blog.csdnimg.cn/40ed94adb9094a2e996f23e1be5b1a0f.png#pic_center" alt="在这里插入图片描述"></p>
+<p>2.UDP：把数据包送达应用程序<br>&nbsp;&nbsp;&nbsp;&nbsp;用户数据协议(User Datagram Protocol，UDP)：IP通过IP地址信息把数据包发送给指定的主机，而UDP通过端口号把数据包分发给正确的程序<br><img src="https://img-blog.csdnimg.cn/a526dde1569b4d52b2860f413a8fe139.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<code>UDP不能保证数据可靠性，但是传输速度却非常快</code></p>
+<p>3.TCP：把数据完整地送达应用程序<br>&nbsp;&nbsp;&nbsp;&nbsp;传输控制协议(Transmission Control Protocol, TCP)，是一种面向连接的、可靠的、基于字节流的传输层通信协议<br/><br>相对于UDP，TCP有两个特点：<br>① 对于数据包丢失的情况，TCP提供重传机制<br>② TCP引入了数据包排序机制，用来保证把乱序的数据包组合成一个完整的文件<br><img src="https://img-blog.csdnimg.cn/3b8925bbeca648db99b94fd75480ce81.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="完整的TCP连接"><a href="#完整的TCP连接" class="headerlink" title="完整的TCP连接"></a>完整的TCP连接</h2><p><img src="https://img-blog.csdnimg.cn/bed744c58afb4f89ac36f05d3b777360.png#pic_center" alt="在这里插入图片描述"></p>
+<p>1.三次握手：<br>&nbsp;&nbsp;&nbsp;&nbsp;面向连接是指在数据通信开始之前先做好两端之间的准备工作，通过客户端和服务器发送三个数据包以确认连接的建立<br>2.传输数据：<br>&nbsp;&nbsp;&nbsp;&nbsp;接收端需要对每个数据包进行确认操作（在接收到数据包后，需要发送确认数据包给发送端，所以当发送端在规定时间内没有接收到接收端的反馈信息，则认为数据包丢失，并触发重传机制；一个大的文件的传输过程中会被拆分成很多小包，这些数据包到达接收端后，接收端按照TCP头中序号排序，从而保证完整性）<br>3.四次挥手<br/><br>&nbsp;&nbsp;&nbsp;&nbsp;TCP为了保证数据传输可靠性，牺牲了数据包的传输速度，但是“三次握手”和“数据包校验机制”等把传输过程中的数据包的数据提高了一倍</p>
 
-全等运算符 ===   不会进行类型的转换16 === &amp;quot;6&amp;...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.11</time>
-            
-                <span class="category"><a class="category-link" href="/categories/JS/">JS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/JS/" rel="tag">JS</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/10/CSS3%20%E6%B8%90%E5%8F%98/">CSS3 渐变</a>
-        </h2>
-    
-        <p>一、线性渐变linear-gradient为了创建一个线性渐变，必须至少定义两种颜色。这个颜色就是你想呈现的平稳过渡的颜色，同时也可以设置一个起点和一个方向（或一个角度）
-1background...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.10</time>
-            
-                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/09/box%20shadow%20AND%20text%20show/">盒子阴影 和 文本阴影</a>
-        </h2>
-    
-        <p>盒子阴影 和 文本阴影给div或者文字添加阴影（盒子阴影、文本阴影）CSS3定义了两种阴影：盒子阴影和文本阴影其中盒子阴影需要IE9及其更新版本，而文本阴影需要IE10及其更新版本
-1.盒子阴影...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.09</time>
-            
-                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/09/what%20is%20cdn%EF%BC%9F/">到底什么是cdn？</a>
-        </h2>
-    
-        <p>到底什么是cdn？一般上线一个网站：一定要有一台服务器，存放网站文件，再买一个域名，通过DNS域名解析设置，把域名指向服务器的IP地址，配置好服务器我们就能用浏览器通过网络访问域名打开网站
-但随...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.09</time>
-            
-                <span class="category"><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CDN/" rel="tag">CDN</a>，<a class="-none-link" href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" rel="tag">前端优化</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/07/Flex/">Flex布局</a>
-        </h2>
-    
-        <p>Flex布局Flexible Box，弹性布局，用来为盒状模型提供最大的灵活性，且任何容器都能使用FLex布局：
-1display: flex;  
-行内也可以：
-1display: inlin...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.07</time>
-            
-                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a>，<a class="-none-link" href="/tags/Flex%E5%B8%83%E5%B1%80/" rel="tag">Flex布局</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/05/hello-world/">Hello World</a>
-        </h2>
-    
-        <p>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any ...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.05</time>
-            
-            
-        </div>
-    </div>
-    
-</section>
-
-        <section class="page-navigator">
-            <a class="extend prev" rel="prev" href="/archives/2022/page/4/">«</a><a class="page-number" href="/archives/2022/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/page/3/">3</a><a class="page-number" href="/archives/2022/page/4/">4</a><span class="page-number current">5</span>
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/06/30/Chrome%E6%9E%B6%E6%9E%84%EF%BC%9A%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">Chrome架构：进程和线程</a></li>
+                
+            </ul>
         </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>老笨蛋了...</p>
+            </div>
+        </section>
+    
     </div>
 </main>
 
