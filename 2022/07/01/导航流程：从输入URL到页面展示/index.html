@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>ruby标签 - taytay</title>
+    <title>导航流程：从输入URL到页面展示 - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content="ruby标签"/>
+    <meta property="og:title" content="导航流程：从输入URL到页面展示"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -53,45 +53,40 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>ruby标签</h2>
+            <h2>导航流程：从输入URL到页面展示</h2>
             <div class="post-meta">
-                <time class="date">2022.03.19</time>
+                <time class="date">2022.07.01</time>
             
-                <span class="category"><a class="category-link" href="/categories/HTML/">HTML</a></span>
+                <span class="category"><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span>
             
             </div>
         </section>
         <article class="post-content">
         
-            <h2 id="1-定义即使用说明"><a href="#1-定义即使用说明" class="headerlink" title="1.定义即使用说明"></a>1.定义即使用说明</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ruby</span>&gt;</span> 标签定义 ruby 注释（中文注音或字符）一般与<span class="tag">&lt;<span class="name">rp</span>&gt;</span><span class="tag">&lt;<span class="name">rt</span>&gt;</span>标签一起使用</span><br><span class="line"><span class="tag">&lt;<span class="name">rt</span>&gt;</span> 标记定义对ruby注释的内容文本</span><br><span class="line"><span class="tag">&lt;<span class="name">rp</span>&gt;</span> 当浏览器不支持<span class="tag">&lt;<span class="name">ruby</span>&gt;</span>标签的时候就会用<span class="tag">&lt;<span class="name">rp</span>&gt;</span>显示内容</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>支持<rt>标签的浏览器显示：<br><img src="https://img-blog.csdnimg.cn/b029480944994de4987b797d2d97fefd.png#pic_center" alt="在这里插入图片描述"></li>
-</ul>
-<ul>
-<li>不支持<ruby>标签，浏览器显示用<rp>标签<br><br/><br/></li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;test&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./images/yusei.jpg&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ruby</span>&gt;</span></span><br><span class="line">                西兰花</span><br><span class="line">                <span class="tag">&lt;<span class="name">rt</span>&gt;</span>Yusei Yagi<span class="tag">&lt;/<span class="name">rt</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">rp</span>&gt;</span>一棵菜菜西兰花<span class="tag">&lt;/<span class="name">rp</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ruby</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./images/yusei.jpg&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ruby</span>&gt;</span></span><br><span class="line">                西兰花</span><br><span class="line">                <span class="tag">&lt;<span class="name">rt</span>&gt;</span>Yusei Yagi<span class="tag">&lt;/<span class="name">rt</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">rp</span>&gt;</span>一棵菜菜西兰花<span class="tag">&lt;/<span class="name">rp</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ruby</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-兼容情况："><a href="#2-兼容情况：" class="headerlink" title="2.兼容情况："></a>2.兼容情况：</h2><ul>
-<li>IE 9+、Firefox、Opera、Chrome 和 Safari 支持 标签</li>
-<li>IE 8 或更早版本的 IE浏览器 不支持 标签</li>
-</ul>
-
+            <p><img src="https://img-blog.csdnimg.cn/5c40ef4a43e74ee5aaecc3f9104e2af5.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;<code>整个过程需要各个进程之间的配合</code><br>&nbsp;&nbsp;&nbsp;&nbsp;① <strong>浏览器进程</strong>：用户狡猾、子进程管理和文件存储<br>&nbsp;&nbsp;&nbsp;&nbsp;② <strong>网络进程</strong>：面向渲染进程和浏览器进程等提供网络下载功能<br>&nbsp;&nbsp;&nbsp;&nbsp;③ <strong>渲染进程</strong>：把从网络下载的HTML、JS、CSS、图片等资源解析为可以显示和交互的页面</p>
+<h2 id="导航过程"><a href="#导航过程" class="headerlink" title="导航过程"></a>导航过程</h2><p>① 用户在浏览器中<strong>输入请求信息</strong><br>② 网络进程<strong>发起URL请求</strong><br>③ 服务器响应URL后，浏览器进程<strong>准备渲染进程</strong><br>④ 渲染进程准备好后，向渲染进程提交页面的数据（<strong>提交文档</strong>）<br>⑤ 渲染进程接收文档信息后，便开始<strong>解析页面和加载子资源</strong>，完成页面的渲染</p>
+<h2 id="从输入URL到页面展示"><a href="#从输入URL到页面展示" class="headerlink" title="从输入URL到页面展示"></a>从输入URL到页面展示</h2><h3 id="1-用户输入："><a href="#1-用户输入：" class="headerlink" title="1.用户输入："></a>1.用户输入：</h3><p>地址栏会判断是搜索内容，还是请求的URL（当浏览器刚开始加载一个地址后，标签页上的图片进入加载状态，但页面内容还没替换，因为要等待提交文档阶段，页面内容才会被替换）</p>
+<h3 id="2-URL请求过程："><a href="#2-URL请求过程：" class="headerlink" title="2.URL请求过程："></a>2.URL请求过程：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;① 浏览器通过进程间通信（IPC）把URL请求发送给网络进程<br>&nbsp;&nbsp;&nbsp;&nbsp;② 在网络进程中查找是否缓存了该资源<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 如果有，那么直接返回给浏览器进程；如果没有，那么直接进入网络请求流程<br>&nbsp;&nbsp;&nbsp;&nbsp;④ DNS解析，以获取请求域名的服务器IP地址<br>&nbsp;&nbsp;&nbsp;&nbsp;⑤ 如果请求协议是HTTPS，那么还需要建立TLS连接<br>&nbsp;&nbsp;&nbsp;&nbsp;⑥ 利用IP地址和服务器建立TCP连接，连接后，浏览器会构建请求行、请求头等信息，并把和该域名相关的Cookie数据等数据附加到请求头中，然后像服务器发送构建的请求信息<br>&nbsp;&nbsp;&nbsp;&nbsp;⑦ 服务器收到请求信息后，生成响应数据，发给网络进程<br>&nbsp;&nbsp;&nbsp;&nbsp;⑧ 网络进程接收了响应行和响应头后，开始解析响应头的内容</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;（1）<strong>重定向</strong>：如果状态码是301或302，那么需要重定向到其他URL，从响应头的Location字段里读取重定向地址，然后发起新的HTTP或HTTPS请求<br><img src="https://img-blog.csdnimg.cn/45637f36fa82418abe05bd1d6c18b95a.png#pic_center" alt="在这里插入图片描述"></p>
+<p>（2）<strong>响应数据类型处理</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;Content-Type：响应数据类型（浏览器如果判断为下载类型，那么该请求会被提交给浏览器的下载管理器，同时该URL请求的导航流程就此结束；但如果是HTML，那么浏览器则会继续进行导航流程）</p>
+<h3 id="3-准备渲染进程："><a href="#3-准备渲染进程：" class="headerlink" title="3.准备渲染进程："></a>3.准备渲染进程：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;Chrome会为每个页面分配一个渲染进程（同一站点下，会让多个页面直接运行在同一个渲染进程中）<br><img src="https://img-blog.csdnimg.cn/2f0b68b8369f43a3811fa2a91237d226.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<code>同一站点：同一协议和根域名下的所有子域名和不同端口</code><br>&nbsp;&nbsp;&nbsp;&nbsp;如果一个页面打开了另一个新页面，而新页面和当前页面属于同一站点，那么新页面就会复用父页面的渲染进程</p>
+<h3 id="4-提交文档："><a href="#4-提交文档：" class="headerlink" title="4.提交文档："></a>4.提交文档：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;“文档”：URL请求的响应体数据<br>&nbsp;&nbsp;&nbsp;&nbsp;① “提交文档”由浏览器发出，渲染进程收到“提交文档”消息后，会和网络进程建立传输数据的“管道”<br>&nbsp;&nbsp;&nbsp;&nbsp;② 文档传输完成互，渲染进程会返回“确认提交”的消息给浏览器进程<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 浏览器进程收到“确认提交”后，更新浏览器界面状态，包括安全状态、地址栏URL、前进后退的历史状态，并更新Web页面<br><img src="https://img-blog.csdnimg.cn/6ab1c75a926245edb8a312e38e03b4d8.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="5-渲染阶段"><a href="#5-渲染阶段" class="headerlink" title="5.渲染阶段"></a>5.渲染阶段</h3>
         </article>
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2022/03/19/hgroup%E6%A0%87%E7%AD%BE/">hgroup标签</a></li>
+                    <li>上一篇: 看完啦 (つд⊂)</li>
                 
                 
-                    <li>下一篇: <a href="/2022/03/18/webpack(5)%20entry%E9%85%8D%E7%BD%AE%E3%80%81%E6%A8%A1%E6%9D%BF%E3%80%81%E5%A4%9A%E9%A1%B5%E9%9D%A2%E5%BA%94%E7%94%A8%E3%80%81Tree%20Shaking%E3%80%81sideEffects/">webpack(5) entry配置、模板、多页面应用、Tree Shaking、sideEffects</a></li>
+                    <li>下一篇: <a href="/2022/06/30/HTTP%E8%AF%B7%E6%B1%82%EF%BC%9A%E7%BC%93%E5%AD%98/">HTTP请求：缓存</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a><a class="-none-link" href="/tags/HTML/" rel="tag">HTML</a>
+            <a class="-none-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
             </section>
         
     
