@@ -64,21 +64,20 @@
         <article class="post-content">
         
             <p>HTTP是一种允许浏览器向服务器获取资源的协议，是Web的基础<br>HTTP也是浏览器使用最广的协议</p>
-<h2 id="浏览器端发起HTTP请求流程"><a href="#浏览器端发起HTTP请求流程" class="headerlink" title="浏览器端发起HTTP请求流程"></a>浏览器端发起HTTP请求流程</h2><p>1.构建请求：<br>&nbsp;&nbsp;&nbsp;&nbsp;浏览器构架请求行信息，并准备发起网络请求<br/></p>
-<p>2.查找缓存：<br>&nbsp;&nbsp;&nbsp;&nbsp;浏览器缓存是一种在本地保存资源副本，以供下次请求直接使用的技术（当请求的资源已在浏览器缓存中有副本，它会被拦截请求，返回资源的副本，并直接结束请求，而不会再去源服务器重新下载）<br>&nbsp;&nbsp;&nbsp;&nbsp;好处：① 缓解服务器端压力，提升性能&nbsp;&nbsp;② 缓存可以实现快速资源加载<br/></p>
-<p>3.准备IP地址和端口：<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP的内容是通过TCP的传输数据阶段来实现的<br/><br><img src="https://img-blog.csdnimg.cn/7e5989e0e67b41d9a7a0e898f93546bb.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="浏览器端发起HTTP请求流程"><a href="#浏览器端发起HTTP请求流程" class="headerlink" title="浏览器端发起HTTP请求流程"></a>浏览器端发起HTTP请求流程</h2><h3 id="1-构建请求："><a href="#1-构建请求：" class="headerlink" title="1.构建请求："></a>1.构建请求：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;浏览器构架请求行信息，并准备发起网络请求<br/></p>
+<h3 id="2-查找缓存："><a href="#2-查找缓存：" class="headerlink" title="2.查找缓存："></a>2.查找缓存：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;浏览器缓存是一种在本地保存资源副本，以供下次请求直接使用的技术（当请求的资源已在浏览器缓存中有副本，它会被拦截请求，返回资源的副本，并直接结束请求，而不会再去源服务器重新下载）<br>&nbsp;&nbsp;&nbsp;&nbsp;好处：① 缓解服务器端压力，提升性能&nbsp;&nbsp;② 缓存可以实现快速资源加载<br/></p>
+<h3 id="3-准备IP地址和端口："><a href="#3-准备IP地址和端口：" class="headerlink" title="3.准备IP地址和端口："></a>3.准备IP地址和端口：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;HTTP的内容是通过TCP的传输数据阶段来实现的<br/><br><img src="https://img-blog.csdnimg.cn/7e5989e0e67b41d9a7a0e898f93546bb.png#pic_center" alt="在这里插入图片描述"></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;IP和域名映射的系统叫做“域名系统”，DNS（第一步浏览器会请求DNS返回域名对应的IP，还提供了DNS数据缓存服务）<br>&nbsp;&nbsp;&nbsp;&nbsp;如果URL没有特别指明端口号，那么HTTP协议默认80端口<br/></p>
-<p>4.等待TCP队列：<br>&nbsp;&nbsp;&nbsp;&nbsp;同一个域名同时最多只能建立6个TCP链接，如果在同一个域名下同时有10个请求发生，那么其中4个请求会进入排队等待状态，知道进行中的请求完成<br/></p>
-<p>5.建立TCP连接<br/></p>
-<p>6.发送HTTP请求<br><img src="https://img-blog.csdnimg.cn/7341024e9eca45168544c486b5a0946b.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="服务端处理HTTP请求流程"><a href="#服务端处理HTTP请求流程" class="headerlink" title="服务端处理HTTP请求流程"></a>服务端处理HTTP请求流程</h2><p>1.返回请求<br><img src="https://img-blog.csdnimg.cn/1fd774ade4344cadac4af2b9fef93fb3.png#pic_center" alt="在这里插入图片描述"></p>
-<p>2.断开连接<br>&nbsp;&nbsp;&nbsp;&nbsp;保持TCP连接可以省去下次请求时需要建立连接的时间，提升资源加载速度</p>
-<p>3.重定向：<br><img src="https://img-blog.csdnimg.cn/7f8062623e00466096751e6191edd3c5.png#pic_center" alt="在这里插入图片描述"></p>
-<p>问题：<br>1、为什么第二次打开速度会很快？<br>&nbsp;&nbsp;&nbsp;&nbsp;DNS缓存和页面资源缓存<br><img src="https://img-blog.csdnimg.cn/439c96cd94314099b3f8229aaad34226.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="4-等待TCP队列："><a href="#4-等待TCP队列：" class="headerlink" title="4.等待TCP队列："></a>4.等待TCP队列：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;同一个域名同时最多只能建立6个TCP链接，如果在同一个域名下同时有10个请求发生，那么其中4个请求会进入排队等待状态，知道进行中的请求完成<br/></p>
+<h3 id="5-建立TCP连接"><a href="#5-建立TCP连接" class="headerlink" title="5.建立TCP连接"></a>5.建立TCP连接</h3><h3 id="6-发送HTTP请求"><a href="#6-发送HTTP请求" class="headerlink" title="6.发送HTTP请求"></a>6.发送HTTP请求</h3><p><img src="https://img-blog.csdnimg.cn/7341024e9eca45168544c486b5a0946b.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="服务端处理HTTP请求流程"><a href="#服务端处理HTTP请求流程" class="headerlink" title="服务端处理HTTP请求流程"></a>服务端处理HTTP请求流程</h2><h3 id="1-返回请求"><a href="#1-返回请求" class="headerlink" title="1.返回请求"></a>1.返回请求</h3><p><img src="https://img-blog.csdnimg.cn/1fd774ade4344cadac4af2b9fef93fb3.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="2-断开连接"><a href="#2-断开连接" class="headerlink" title="2.断开连接"></a>2.断开连接</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;保持TCP连接可以省去下次请求时需要建立连接的时间，提升资源加载速度</p>
+<h3 id="3-重定向："><a href="#3-重定向：" class="headerlink" title="3.重定向："></a>3.重定向：</h3><p><img src="https://img-blog.csdnimg.cn/7f8062623e00466096751e6191edd3c5.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><h3 id="1、为什么第二次打开速度会很快？"><a href="#1、为什么第二次打开速度会很快？" class="headerlink" title="1、为什么第二次打开速度会很快？"></a>1、为什么第二次打开速度会很快？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;DNS缓存和页面资源缓存<br><img src="https://img-blog.csdnimg.cn/439c96cd94314099b3f8229aaad34226.png#pic_center" alt="在这里插入图片描述"></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;第一次请求中，当服务器返回HTTP响应头给浏览器中，浏览器通过响应头中的Cache-Control字段来设置是否缓存该资源，同时设置一个缓存过期时长Max-age参数<br>&nbsp;&nbsp;&nbsp;&nbsp;在未过期的情况下，如果请求会直接返回缓存中的的资源给浏览器；但是如果过期了，浏览器则会继续发起网络请求，并且在HTTP请求头中带上</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-None-Match: &quot;4f80f-13c-3a1xb12a&quot;</span><br></pre></td></tr></table></figure>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;浏览器根据If-None-Match的值判断请求资源是否有更新（更新了返回304；如果没有更新，就返回最新资源给浏览器）<br/></p>
-<p>2、登录状态是如何保持的？<br>&nbsp;&nbsp;&nbsp;&nbsp;① 服务器收到登录请求，验证后把表示用户身份的字符串写到响应头的Set-Cookie字段里，然后发给浏览器<br>&nbsp;&nbsp;&nbsp;&nbsp;② 浏览器在接收到响应后，开始解析，遇到Set-Cookie后，把这个字段保存到本地<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 当用户再访问时，浏览器发起HTTP请求前，浏览器读取之前保存的Cookie数据，并把数据写到请求头的Cookie字段里，然后浏览器再将请求头发给服务器<br>&nbsp;&nbsp;&nbsp;&nbsp;④ 服务器收到HTTP请求头数据后，查找请求头中的”Cookie”字段信息，找到后在服务器查询后代，判断用户是否已登录，然后生成含有该用户信息的页面数据，并把生成的数据发生浏览器<br>&nbsp;&nbsp;&nbsp;&nbsp;⑤ 浏览器收到数据后，开始渲染<br><img src="https://img-blog.csdnimg.cn/4b4084999263481a9642821dba3dd734.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="2、登录状态是如何保持的？"><a href="#2、登录状态是如何保持的？" class="headerlink" title="2、登录状态是如何保持的？"></a>2、登录状态是如何保持的？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;① 服务器收到登录请求，验证后把表示用户身份的字符串写到响应头的Set-Cookie字段里，然后发给浏览器<br>&nbsp;&nbsp;&nbsp;&nbsp;② 浏览器在接收到响应后，开始解析，遇到Set-Cookie后，把这个字段保存到本地<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 当用户再访问时，浏览器发起HTTP请求前，浏览器读取之前保存的Cookie数据，并把数据写到请求头的Cookie字段里，然后浏览器再将请求头发给服务器<br>&nbsp;&nbsp;&nbsp;&nbsp;④ 服务器收到HTTP请求头数据后，查找请求头中的”Cookie”字段信息，找到后在服务器查询后代，判断用户是否已登录，然后生成含有该用户信息的页面数据，并把生成的数据发生浏览器<br>&nbsp;&nbsp;&nbsp;&nbsp;⑤ 浏览器收到数据后，开始渲染<br><img src="https://img-blog.csdnimg.cn/4b4084999263481a9642821dba3dd734.png#pic_center" alt="在这里插入图片描述"></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;HTTP请求所经历的各个阶段<br><img src="https://img-blog.csdnimg.cn/f4e06d9673e048eaac7bfdad8f74ad4d.png#pic_center" alt="在这里插入图片描述"></p>
 
         </article>
