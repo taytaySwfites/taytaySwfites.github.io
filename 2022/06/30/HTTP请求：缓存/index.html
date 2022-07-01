@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>到底什么是cdn？ - taytay</title>
+    <title>HTTP请求：缓存 - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content="到底什么是cdn？"/>
+    <meta property="og:title" content="HTTP请求：缓存"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -53,46 +53,48 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>到底什么是cdn？</h2>
+            <h2>HTTP请求：缓存</h2>
             <div class="post-meta">
-                <time class="date">2022.01.09</time>
+                <time class="date">2022.06.30</time>
             
-                <span class="category"><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a></span>
+                <span class="category"><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span>
             
             </div>
         </section>
         <article class="post-content">
         
-            <h1 id="到底什么是cdn？"><a href="#到底什么是cdn？" class="headerlink" title="到底什么是cdn？"></a>到底什么是cdn？</h1><p><strong>一般上线一个网站</strong>：一定要有一台服务器，存放网站文件，再买一个域名，通过DNS域名解析设置，把域名指向服务器的IP地址，配置好服务器我们就能用浏览器通过网络访问域名打开网站</p>
-<p>但随着互联网和快速增长和中小型网站的出现，有两个致命的问题：<br>1.<strong>物理位置</strong>，离服务器相对远的，速度就越慢<br>2.一旦<strong>同时访问的人多</strong>，即使距离很近，但速度依旧很慢</p>
-<p>而已CDN的出现可以解决上述问题，让每一个网站实现服务器自由：</p>
-<h2 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h2><p>1.最初的核心理念，就是将内容缓存在终端用户附近，<code>CDN——Content Delivery Network，内容分发网络</code><br><img src="https://img-blog.csdnimg.cn/b346477399744074b1b53f27e83f9096.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_19,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><br>    具体来说，CDN就是采用更多的缓存服务器（CDN边缘节点），分布放在用户访问相对集中的地区或网络中。当用户访问网站时，利用全局负载技术，<code>将用户的访问指向距离最近的缓存服务器上，由缓存服务器响应用户请求</code><br>    和电商的仓储配送机制非常类似，而近几年电商又新出了前置仓，速度更快</p>
-<p><strong>CDN = 更智能的镜像+缓存+流量导流</strong></p>
-<h2 id="网页内容：静态内容-动态内容"><a href="#网页内容：静态内容-动态内容" class="headerlink" title="网页内容：静态内容 + 动态内容"></a><strong>网页内容：静态内容 + 动态内容</strong></h2><p>静态内容：长期不需要改变的内容<br>动态内容：经常需要改变的，固定不了</p>
-<p><strong>注意</strong>：CDN并不是只能缓存视频内容，它还可以对网站的静态资源（例如各类型图片、html、css、js等）进行分发，对移动应用APP的静态内容（例如安装包apk文件、APP内的图片视频等）进行分发</p>
-<p>利用头部的cache-control，可以设置文件的缓存形式（知道哪些资源可以保存，哪些不能，哪些要保存多久等等）     </p>
-<h2 id="cdn分发内容的流程："><a href="#cdn分发内容的流程：" class="headerlink" title="cdn分发内容的流程："></a><strong>cdn分发内容的流程</strong>：</h2><p>（静态）<br>1.cdn没有网站的源内容，因此源服务器就会把静态内容提前备份给CDN，push<br>2.用户需要访问网页时，就近的cdn服务器就会把静态内容提供给用户，不需要每次都劳烦源服务器<br>3.如果源服务器没有把静态内容提前备份给CDN，那么当用户访问时，CDN就得去源服务器索取相应的静态内容，pull<br>4.源服务器还可以让CDN备份，cdn得到内容以后再提供给用户，因为有了备份，其他同时做出请求的用户也可以马上拿到内容</p>
-<p><img src="https://img-blog.csdnimg.cn/d0fb39e7052c42fca4e6efe2b322f768.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAY3FxcXFxcWNzYw==,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
-<p><code>负载均衡：利用任播，把流量转移到另外没有超载的服务器</code></p>
-<p>还会采用TLS/SSL证书来给网站进行保护</p>
-<p><code>CDN还可以把文件压缩或者最小化</code></p>
-<h2 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤</strong>：</h2><p>① 当用户点击网站上的内容，浏览器会根据URL地址去本地DNS（域名解析系统）寻求IP地址解析<br>② 本地DNS系统会将域名的解析权交给CDN专用DNS服务器<br>③ CDN专用DNS服务器，将CDN的全局负载均衡设备IP地址返回用户<br>④ 用户向CDN的负载均衡设备发起内容URL访问请求。<br>⑤ CDN负载均衡设备根据用户IP地址，以及用户请求的内容URL，选择一台用户所属区域的cdn缓存服务器<br>⑥ 负载均衡设备告诉用户这台cdn缓存服务器的IP地址，让用户向所选择的cdn缓存服务器发起请求<br>⑦ 用户向cdn缓存服务器发起请求，cdn缓存服务器响应用户请求，将用户所需内容传送到用户终端<br>⑧ 如果这台缓存服务器上并没有用户想要的内容，那么这台缓存服务器就要网站的源服务器请求内容<br>⑨ 源服务器返回内容给缓存服务器，缓存服务器发给用户，并根据用户自定义的缓存策略，判断要不要把内容缓存到cdn缓存服务器上</p>
-<h2 id="CDN的优势："><a href="#CDN的优势：" class="headerlink" title="CDN的优势："></a><strong>CDN的优势</strong>：</h2><p>1.<strong>加速了网站的访问</strong>——用户与内容之间的物理距离缩短，用户的等待时间也得以缩短<br>2.<strong>分发至不同线路的缓存服务器</strong>，也让跨运营商之间的访问得以加速<br>3.<strong>源服务器的IP被隐藏</strong>，受到攻击的概率会大幅下降<br>4.当某个服务器故障时，系统会调用临近的健康服务器，进行服务，<strong>避免对用户造成影响</strong></p>
+            <p>HTTP是一种允许浏览器向服务器获取资源的协议，是Web的基础<br>HTTP也是浏览器使用最广的协议</p>
+<h2 id="浏览器端发起HTTP请求流程"><a href="#浏览器端发起HTTP请求流程" class="headerlink" title="浏览器端发起HTTP请求流程"></a>浏览器端发起HTTP请求流程</h2><p>1.构建请求：<br>&nbsp;&nbsp;&nbsp;&nbsp;浏览器构架请求行信息，并准备发起网络请求<br/></p>
+<p>2.查找缓存：<br>&nbsp;&nbsp;&nbsp;&nbsp;浏览器缓存是一种在本地保存资源副本，以供下次请求直接使用的技术（当请求的资源已在浏览器缓存中有副本，它会被拦截请求，返回资源的副本，并直接结束请求，而不会再去源服务器重新下载）<br>&nbsp;&nbsp;&nbsp;&nbsp;好处：① 缓解服务器端压力，提升性能&nbsp;&nbsp;② 缓存可以实现快速资源加载<br/></p>
+<p>3.准备IP地址和端口：<br>&nbsp;&nbsp;&nbsp;&nbsp;HTTP的内容是通过TCP的传输数据阶段来实现的<br/><br><img src="https://img-blog.csdnimg.cn/7e5989e0e67b41d9a7a0e898f93546bb.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;IP和域名映射的系统叫做“域名系统”，DNS（第一步浏览器会请求DNS返回域名对应的IP，还提供了DNS数据缓存服务）<br>&nbsp;&nbsp;&nbsp;&nbsp;如果URL没有特别指明端口号，那么HTTP协议默认80端口<br/></p>
+<p>4.等待TCP队列：<br>&nbsp;&nbsp;&nbsp;&nbsp;同一个域名同时最多只能建立6个TCP链接，如果在同一个域名下同时有10个请求发生，那么其中4个请求会进入排队等待状态，知道进行中的请求完成<br/></p>
+<p>5.建立TCP连接<br/></p>
+<p>6.发送HTTP请求<br><img src="https://img-blog.csdnimg.cn/7341024e9eca45168544c486b5a0946b.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="服务端处理HTTP请求流程"><a href="#服务端处理HTTP请求流程" class="headerlink" title="服务端处理HTTP请求流程"></a>服务端处理HTTP请求流程</h2><p>1.返回请求<br><img src="https://img-blog.csdnimg.cn/1fd774ade4344cadac4af2b9fef93fb3.png#pic_center" alt="在这里插入图片描述"></p>
+<p>2.断开连接<br>&nbsp;&nbsp;&nbsp;&nbsp;保持TCP连接可以省去下次请求时需要建立连接的时间，提升资源加载速度</p>
+<p>3.重定向：<br><img src="https://img-blog.csdnimg.cn/7f8062623e00466096751e6191edd3c5.png#pic_center" alt="在这里插入图片描述"></p>
+<p>问题：<br>1、为什么第二次打开速度会很快？<br>&nbsp;&nbsp;&nbsp;&nbsp;DNS缓存和页面资源缓存<br><img src="https://img-blog.csdnimg.cn/439c96cd94314099b3f8229aaad34226.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;第一次请求中，当服务器返回HTTP响应头给浏览器中，浏览器通过响应头中的Cache-Control字段来设置是否缓存该资源，同时设置一个缓存过期时长Max-age参数<br>&nbsp;&nbsp;&nbsp;&nbsp;在未过期的情况下，如果请求会直接返回缓存中的的资源给浏览器；但是如果过期了，浏览器则会继续发起网络请求，并且在HTTP请求头中带上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-None-Match: &quot;4f80f-13c-3a1xb12a&quot;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;浏览器根据If-None-Match的值判断请求资源是否有更新（更新了返回304；如果没有更新，就返回最新资源给浏览器）<br/></p>
+<p>2、登录状态是如何保持的？<br>&nbsp;&nbsp;&nbsp;&nbsp;① 服务器收到登录请求，验证后把表示用户身份的字符串写到响应头的Set-Cookie字段里，然后发给浏览器<br>&nbsp;&nbsp;&nbsp;&nbsp;② 浏览器在接收到响应后，开始解析，遇到Set-Cookie后，把这个字段保存到本地<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 当用户再访问时，浏览器发起HTTP请求前，浏览器读取之前保存的Cookie数据，并把数据写到请求头的Cookie字段里，然后浏览器再将请求头发给服务器<br>&nbsp;&nbsp;&nbsp;&nbsp;④ 服务器收到HTTP请求头数据后，查找请求头中的”Cookie”字段信息，找到后在服务器查询后代，判断用户是否已登录，然后生成含有该用户信息的页面数据，并把生成的数据发生浏览器<br>&nbsp;&nbsp;&nbsp;&nbsp;⑤ 浏览器收到数据后，开始渲染<br><img src="https://img-blog.csdnimg.cn/4b4084999263481a9642821dba3dd734.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;HTTP请求所经历的各个阶段<br><img src="https://img-blog.csdnimg.cn/f4e06d9673e048eaac7bfdad8f74ad4d.png#pic_center" alt="在这里插入图片描述"></p>
 
         </article>
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2022/01/09/box%20shadow%20AND%20text%20show/">盒子阴影 和 文本阴影</a></li>
+                    <li>上一篇: 看完啦 (つд⊂)</li>
                 
                 
-                    <li>下一篇: <a href="/2022/01/07/Flex/">Flex布局</a></li>
+                    <li>下一篇: <a href="/2022/06/30/TCP%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%B5%E9%9D%A2%E6%96%87%E4%BB%B6%E8%83%BD%E8%A2%AB%E5%AE%8C%E6%95%B4%E9%80%81%E8%BE%BE%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%9F/">TCP协议：如何保证页面文件能被完整送达到浏览器？</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/CDN/" rel="tag">CDN</a><a class="-none-link" href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" rel="tag">前端优化</a>
+            <a class="-none-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
             </section>
         
     
