@@ -78,7 +78,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-None-Match: &quot;4f80f-13c-3a1xb12a&quot;</span><br></pre></td></tr></table></figure>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;浏览器根据If-None-Match的值判断请求资源是否有更新（更新了返回304；如果没有更新，就返回最新资源给浏览器）<br/></p>
 <h3 id="2、登录状态是如何保持的？"><a href="#2、登录状态是如何保持的？" class="headerlink" title="2、登录状态是如何保持的？"></a>2、登录状态是如何保持的？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;① 服务器收到登录请求，验证后把表示用户身份的字符串写到响应头的Set-Cookie字段里，然后发给浏览器<br>&nbsp;&nbsp;&nbsp;&nbsp;② 浏览器在接收到响应后，开始解析，遇到Set-Cookie后，把这个字段保存到本地<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 当用户再访问时，浏览器发起HTTP请求前，浏览器读取之前保存的Cookie数据，并把数据写到请求头的Cookie字段里，然后浏览器再将请求头发给服务器<br>&nbsp;&nbsp;&nbsp;&nbsp;④ 服务器收到HTTP请求头数据后，查找请求头中的”Cookie”字段信息，找到后在服务器查询后代，判断用户是否已登录，然后生成含有该用户信息的页面数据，并把生成的数据发生浏览器<br>&nbsp;&nbsp;&nbsp;&nbsp;⑤ 浏览器收到数据后，开始渲染<br><img src="https://img-blog.csdnimg.cn/4b4084999263481a9642821dba3dd734.png#pic_center" alt="在这里插入图片描述"></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;HTTP请求所经历的各个阶段<br><img src="https://img-blog.csdnimg.cn/f4e06d9673e048eaac7bfdad8f74ad4d.png#pic_center" alt="在这里插入图片描述"></p>
+<p><code>HTTP请求所经历的各个阶段</code><br><img src="https://img-blog.csdnimg.cn/f4e06d9673e048eaac7bfdad8f74ad4d.png#pic_center" alt="在这里插入图片描述"></p>
 
         </article>
         <section class="post-near">
