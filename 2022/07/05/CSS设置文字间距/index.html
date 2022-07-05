@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>CSS 设置文字间距 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="CSS 设置文字间距"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>CSS 设置文字间距</h2>
+            <div class="post-meta">
+                <time class="date">2022.07.05</time>
+            
+                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="1-word-spacing"><a href="#1-word-spacing" class="headerlink" title="1.word-spacing"></a>1.word-spacing</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;设置字间距（单词的间距），“字”定义为由空白字符包围的一个字符串（该属性以空格为基准进行调节间距的；如果多个字母连在一起，则会被word-spacing设为一个单词；如果汉字被空格分隔，则分隔的多个汉字就被设为不同的单词）&lt;br/?</p>
+<p><em><strong>语法</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;① normal：定义单词间的标准空间，默认值<br>&nbsp;&nbsp;&nbsp;&nbsp;② length：定义单词间的固定长度（长度值）<br>&nbsp;&nbsp;&nbsp;&nbsp;③ inherit：规定从父元素继承word-spacing属性的值</p>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;如果指定为length，会调整字之间的通常间隔，所以nromal就等同于0，允许福长度的值，这样会让字之间挤得更紧</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">word-spacing</span>: <span class="number">30px</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>你好 ni hao!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>你 好 n i h a o!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/42c1f8953fa746fc83aac9120035f86a.png#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
+<h2 id="2-letter-spacing"><a href="#2-letter-spacing" class="headerlink" title="2.letter-spacing"></a>2.letter-spacing</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;增加或减少字符间的空白（字符间距），该属性定义了在文本字符框之间插入多少空间。由于字符字型通常比其字符框要窄，指定长度值时，会调整字母之间通常的间隔<br/></p>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;一个中文文字、一个英文字母作为一个“字”</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">letter-spacing</span>: <span class="number">30px</span>;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>你好 ni hao!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>你 好 n i h a o!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/b456564b198e4e06857773ae9c2531c2.png#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
+<h2 id="3-word-spacing和letter-spacing的比较"><a href="#3-word-spacing和letter-spacing的比较" class="headerlink" title="3.word-spacing和letter-spacing的比较"></a>3.word-spacing和letter-spacing的比较</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>word-spacing</th>
+<th>letter-spacing</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>检索</td>
+<td>对象的单词之间插入的空格</td>
+<td>每个文字</td>
+</tr>
+<tr>
+<td>长度值</td>
+<td>允许允许负数</td>
+<td>允许允许负数</td>
+</tr>
+<tr>
+<td>中英文</td>
+<td>适用于英语使用</td>
+<td>中英文都适用</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>对汉字，空格分隔才有效</td>
+<td>只对文字起作用 对于图片失效的</td>
+</tr>
+</tbody></table>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/07/05/%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B%EF%BC%9AHTML%E3%80%81CSS%E5%92%8CJS%E6%98%AF%E5%A6%82%E4%BD%95%E5%8F%98%E6%88%90%E9%A1%B5%E9%9D%A2%E7%9A%84%EF%BC%9F/">渲染进程：HTML、CSS和JS是如何变成页面的？</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>老笨蛋了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/05/CSS%E8%AE%BE%E7%BD%AE%E6%96%87%E5%AD%97%E9%97%B4%E8%B7%9D/">CSS 设置文字间距</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/05/%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B%EF%BC%9AHTML%E3%80%81CSS%E5%92%8CJS%E6%98%AF%E5%A6%82%E4%BD%95%E5%8F%98%E6%88%90%E9%A1%B5%E9%9D%A2%E7%9A%84%EF%BC%9F/">渲染进程：HTML、CSS和JS是如何变成页面的？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/04/UserAgent/">UserAgent</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/01/%E5%AF%BC%E8%88%AA%E6%B5%81%E7%A8%8B%EF%BC%9A%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA/">导航流程：从输入URL到页面展示</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/06/30/HTTP%E8%AF%B7%E6%B1%82%EF%BC%9A%E7%BC%93%E5%AD%98/">HTTP请求：缓存</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/06/30/TCP%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%B5%E9%9D%A2%E6%96%87%E4%BB%B6%E8%83%BD%E8%A2%AB%E5%AE%8C%E6%95%B4%E9%80%81%E8%BE%BE%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%9F/">TCP协议：如何保证页面文件能被完整送达到浏览器？</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.43px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 12.86px;">HTML</a> <a href="/tags/JS/" style="font-size: 17.14px;">JS</a> <a href="/tags/TS/" style="font-size: 15.71px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 18.57px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 14.29px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 14.29px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15.71px;">浏览器</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
