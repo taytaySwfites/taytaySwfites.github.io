@@ -149,10 +149,33 @@
 
 <p>为了创建布局树，浏览器做了一下工作：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 遍历DOM树种的所有可见节点，并把这些节点加到布局中<br>&nbsp;&nbsp;&nbsp;&nbsp;② 而不可见元素会被布局树忽略掉，如head标签下面的全部内容，再比如body.p.span这个元素，因为它的属性包含display: none，所以这个元素也没有被包进布局树<br/></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>注意：在执行布局操作时，会把布局运算结果重新写回布局树汇总，所以布局树既是输入内容也是输出内容，这是布局阶段一个不合理的地方。所以针对这个问题，Chrome正在重构布局代码，下一代布局系统叫做LayoutNG</strong><br/></p>
-<h4 id="2-布局计算"><a href="#2-布局计算" class="headerlink" title="2.布局计算"></a>2.布局计算</h4><h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;页面中存在很多复杂效果（3D变换、页面滚动、使用z-indexing做z轴排序），渲染引擎需要为特定的节点生成专用的图层，并生成一棵对应的图层树<br>| 输入内容 | 布局树 |<br>|–|–|<br>| 处理过程 | 分层处理 |<br>| 输出内容  | 图层树 |<br><img src="https://img-blog.csdnimg.cn/dcc0674c1d9f4029a5879b606810af3e.png#pic_center" alt="在这里插入图片描述"></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<code>注意</code>：并不是布局树的每个节点都包含一个图层，如果一个节点没有对应的层，那么这个节点就从属于父节点的图层（如上图span标签没有专属图层，那么它们从属于它们的父节点图层，最终没一个节点都会直接或间接从属于一个层）</p>
-<h4 id="怎么样会创建新的层呢？"><a href="#怎么样会创建新的层呢？" class="headerlink" title="怎么样会创建新的层呢？"></a>怎么样会创建新的层呢？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 拥有层叠上下文属性的元素会被提升为单独的一层（明确定位属性的元素、定义透明属性的元素，使用CSS滤镜的元素）<br><img src="https://img-blog.csdnimg.cn/ebdc31680b214b98976123b0dced8d3b.png#pic_center" alt="在这里插入图片描述"></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;② 需要剪裁（clip）的地方会被创建为图层（如下，div中文字比较多时，文字所显示的区域会超出div区域，这时就产生了剪裁，渲染引起会把裁剪文字的一部分用于显示在div区域）</p>
+<h4 id="2-布局计算"><a href="#2-布局计算" class="headerlink" title="2.布局计算"></a>2.布局计算</h4><h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;页面中存在很多复杂效果（3D变换、页面滚动、使用z-indexing做z轴排序），渲染引擎需要为特定的节点生成专用的图层，并生成一棵对应的图层树</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输入内容</td>
+<td>布局树</td>
+</tr>
+<tr>
+<td>处理过程</td>
+<td>分层处理</td>
+</tr>
+<tr>
+<td>输出内容</td>
+<td>图层树</td>
+</tr>
+</tbody></table>
+<br/>
+
+<p><img src="https://img-blog.csdnimg.cn/dcc0674c1d9f4029a5879b606810af3e.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>注意：并不是布局树的每个节点都包含一个图层，如果一个节点没有对应的层，那么这个节点就从属于父节点的图层（如上图span标签没有专属图层，那么它们从属于它们的父节点图层，最终没一个节点都会直接或间接从属于一个层）</strong></p>
+<h4 id="怎么样会创建新的层呢？"><a href="#怎么样会创建新的层呢？" class="headerlink" title="怎么样会创建新的层呢？"></a>怎么样会创建新的层呢？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① <strong>拥有层叠上下文属性的元素</strong>会被提升为单独的一层（明确定位属性的元素、定义透明属性的元素，使用CSS滤镜的元素）<br><img src="https://img-blog.csdnimg.cn/ebdc31680b214b98976123b0dced8d3b.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;② 需要<strong>剪裁（clip）</strong>的地方会被创建为图层（如下，div中文字比较多时，文字所显示的区域会超出div区域，这时就产生了剪裁，渲染引起会把裁剪文字的一部分用于显示在div区域）</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">        <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="css">            <span class="attribute">width</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="css">            <span class="attribute">overflow</span>:auto;</span></span><br><span class="line"><span class="css">            <span class="attribute">background</span>: pink;</span></span><br><span class="line"><span class="css">        &#125;</span></span><br><span class="line"><span class="css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>所以元素有了层叠上下⽂的属性或者需要被剪裁，那么就会被提升成为单独⼀层，你可以参看下图：<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>从上图我们可以看到，document层上有A和B层，⽽B层之上⼜有两个图层。这些图层组织在⼀起也是⼀颗树状结构。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>图层树是基于布局树来创建的，为了找出哪些元素需要在哪些层中，渲染引擎会遍历布局树来创建层树（Update LayerTree）。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/59e4016f11f84c81a6c327930d06f0b6.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="图层绘制"><a href="#图层绘制" class="headerlink" title="图层绘制"></a>图层绘制</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;渲染引擎实现图层的绘制，会把一个图层拆分成很多小的绘制指令，然后再把这些指令按照顺序组成一个待绘制列表<br><img src="https://img-blog.csdnimg.cn/7b9a52ac4b184d489592bfa9ea46fb5d.png#pic_center" alt="在这里插入图片描述"></p>
