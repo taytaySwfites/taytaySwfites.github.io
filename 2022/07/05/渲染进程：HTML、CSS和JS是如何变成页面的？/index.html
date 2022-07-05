@@ -124,11 +124,15 @@
 <h2 id="布局阶段"><a href="#布局阶段" class="headerlink" title="布局阶段"></a>布局阶段</h2><table>
 <thead>
 <tr>
-<th>输入内容</th>
-<th>DOM树和ComputedStyle</th>
+<th></th>
+<th></th>
 </tr>
 </thead>
 <tbody><tr>
+<td>输入内容</td>
+<td>DOM树和ComputedStyle</td>
+</tr>
+<tr>
 <td>处理过程</td>
 <td>创建布局树、布局计算</td>
 </tr>
@@ -137,10 +141,14 @@
 <td>布局树</td>
 </tr>
 </tbody></table>
+<br/>
+
 <p>&nbsp;&nbsp;&nbsp;&nbsp;有了DOM树和DOM树中元素的样式，还不足以显示页面，我们还要计算出DOM可见元素的集合元素，布局</p>
-<h4 id="1-创建布局树"><a href="#1-创建布局树" class="headerlink" title="1.创建布局树"></a>1.创建布局树</h4><p>因为存在很多不可见的元素，所以在显示之前，要额外创建一棵只包含可见元素的布局树<br><img src="https://img-blog.csdnimg.cn/3633bd13ee4d4f96b587f0bddad44ea7.png#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="1-创建布局树"><a href="#1-创建布局树" class="headerlink" title="1.创建布局树"></a>1.创建布局树</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;因为存在很多不可见的元素，所以在显示之前，要额外创建一棵只包含可见元素的布局树<br><img src="https://img-blog.csdnimg.cn/3633bd13ee4d4f96b587f0bddad44ea7.png#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
 <p>为了创建布局树，浏览器做了一下工作：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 遍历DOM树种的所有可见节点，并把这些节点加到布局中<br>&nbsp;&nbsp;&nbsp;&nbsp;② 而不可见元素会被布局树忽略掉，如head标签下面的全部内容，再比如body.p.span这个元素，因为它的属性包含display: none，所以这个元素也没有被包进布局树<br/></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<code>注意</code>：在执行布局操作时，会把布局运算结果重新写回布局树汇总，所以布局树既是输入内容也是输出内容，这是布局阶段一个不合理的地方。所以针对这个问题，Chrome正在重构布局代码，下一代布局系统叫做LayoutNG<br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>注意：在执行布局操作时，会把布局运算结果重新写回布局树汇总，所以布局树既是输入内容也是输出内容，这是布局阶段一个不合理的地方。所以针对这个问题，Chrome正在重构布局代码，下一代布局系统叫做LayoutNG</strong><br/></p>
 <h4 id="2-布局计算"><a href="#2-布局计算" class="headerlink" title="2.布局计算"></a>2.布局计算</h4><h2 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;页面中存在很多复杂效果（3D变换、页面滚动、使用z-indexing做z轴排序），渲染引擎需要为特定的节点生成专用的图层，并生成一棵对应的图层树<br>| 输入内容 | 布局树 |<br>|–|–|<br>| 处理过程 | 分层处理 |<br>| 输出内容  | 图层树 |<br><img src="https://img-blog.csdnimg.cn/dcc0674c1d9f4029a5879b606810af3e.png#pic_center" alt="在这里插入图片描述"></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;<code>注意</code>：并不是布局树的每个节点都包含一个图层，如果一个节点没有对应的层，那么这个节点就从属于父节点的图层（如上图span标签没有专属图层，那么它们从属于它们的父节点图层，最终没一个节点都会直接或间接从属于一个层）</p>
 <h4 id="怎么样会创建新的层呢？"><a href="#怎么样会创建新的层呢？" class="headerlink" title="怎么样会创建新的层呢？"></a>怎么样会创建新的层呢？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 拥有层叠上下文属性的元素会被提升为单独的一层（明确定位属性的元素、定义透明属性的元素，使用CSS滤镜的元素）<br><img src="https://img-blog.csdnimg.cn/ebdc31680b214b98976123b0dced8d3b.png#pic_center" alt="在这里插入图片描述"></p>
