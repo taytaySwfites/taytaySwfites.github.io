@@ -68,18 +68,22 @@
 <p><img src="https://img-blog.csdnimg.cn/e9deb2dbb83547e984ef3389964426b0.png#pic_center" alt="在这里插入图片描述"><br><br/></p>
 <h2 id="2-语法"><a href="#2-语法" class="headerlink" title="2.语法"></a>2.语法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.create(proto)</span><br><span class="line"><span class="built_in">Object</span>.create(proto, propertiesObject)</span><br></pre></td></tr></table></figure>
 
-<p><em><strong>参数</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;proto：新创建对象的原型对象<br>&nbsp;&nbsp;&nbsp;&nbsp;propertiesObject（可选）：如果没有指定为undefind, 是要添加到新创建对象的不可枚举（默认）属性（即其自身定义的属性，而不是其原型链上的枚举属性）对象的属性描述符以及相应的属性名称。这些属性对应Object.defineProperties()的第二个参数</p>
-<p><em><strong>返回值</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;一个新对象，带着指定的原型对象及其属性</p>
+<p><em><strong>参数</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;proto：新创建对象的原型对象<br>&nbsp;&nbsp;&nbsp;&nbsp;propertiesObject（可选）：如果没有指定为undefind, 是要添加到新创建对象的不可枚举（默认）属性（即其自身定义的属性，而不是其原型链上的枚举属性）对象的属性描述符以及相应的属性名称。这些属性对应Object.defineProperties()的第二个参数<br/></p>
+<p><em><strong>返回值</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;一个新对象，带着指定的原型对象及其属性<br/></p>
 <p><em><strong>异常</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;proto参数需为 null 或 除基本类型包装对象以外的对象，否则抛出TypeError</p>
 <br/>
 
-<h2 id="3-使用null原型的对象"><a href="#3-使用null原型的对象" class="headerlink" title="3.使用null原型的对象"></a>3.使用null原型的对象</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;以null为原型的对象存在不可预期的行为，因为它未从Object.prototype继承任何对象方法。特别是在调试时，因为常见的对象属性的转换/检测工具可能会产生错误或丢失信息（特别是在静默模式，会忽略错误的情况下）</p>
+<h2 id="3-使用null原型的对象"><a href="#3-使用null原型的对象" class="headerlink" title="3.使用null原型的对象"></a>3.使用null原型的对象</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;以null为原型的对象存在不可预期的行为，因为它未从Object.prototype继承任何对象方法。特别是在调试时，因为常见的对象属性的转换/检测工具可能会产生错误或丢失信息（特别是在静默模式，会忽略错误的情况下）<br/></p>
 <p>如：缺少Object.prototype.toString()</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> normalObj = &#123;&#125;;   <span class="comment">// create a normal object</span></span><br><span class="line"><span class="keyword">const</span> nullProtoObj = <span class="built_in">Object</span>.create(<span class="literal">null</span>); <span class="comment">// create an object with &quot;null&quot; prototype</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;normalObj is: &quot;</span> + normalObj); <span class="comment">// shows &quot;normalObj is: [object Object]&quot;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;nullProtoObj is: &quot;</span> + nullProtoObj); <span class="comment">// throws error: Cannot convert object to primitive value</span></span><br><span class="line"></span><br><span class="line">alert(normalObj); <span class="comment">// shows [object Object]</span></span><br><span class="line">alert(nullProtoObj); <span class="comment">// throws error: Cannot convert object to primitive value</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://img-blog.csdnimg.cn/c85956d3aefb405799780e6fbd1fd303.png#pic_center" alt="在这里插入图片描述"></p>
+<br/>
+
 <p>可以为null为原型的对象添加toString方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nullProtoObj.toString = <span class="built_in">Object</span>.prototype.toString;</span><br></pre></td></tr></table></figure>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;但是nullProtoObject的toString()是本身的属性，而非继承自身对象的原型</p>
+<br/>
+
 <p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;在实践中，以null为原型的对象通常用于作为 map 的替代为，因为Object.prototype原型自有的属性的存在会导致一些错误</p>
 <br/>
 
