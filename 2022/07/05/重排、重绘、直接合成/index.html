@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>阅读笔记 - taytay</title>
+    <title>重排、重绘、直接合成 - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content=""/>
+    <meta property="og:title" content="重排、重绘、直接合成"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -52,40 +52,55 @@
 
     <main>
     <div class="wrap min">
-        <section class="home-title">
+        <section class="post-title">
+            <h2>重排、重绘、直接合成</h2>
+            <div class="post-meta">
+                <time class="date">2022.07.05</time>
             
-            <h1>“阅读笔记”</h1>
+                <span class="category"><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span>
+            
+            </div>
         </section>
-        <section class="home-posts">
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/03/20/%E3%80%8Ajs%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B-%E7%AC%94%E8%AE%B01/">《js高级程序设计》-笔记1</a>
-        </h2>
-    
-        <p>1.延迟脚本defer：脚本会被延迟到整个页面都解析完毕后再运行（立即下载，延迟执行）
+        <article class="post-content">
+        
+            <h2 id="1-更新了元素的几何属性（重排）"><a href="#1-更新了元素的几何属性（重排）" class="headerlink" title="1.更新了元素的几何属性（重排）"></a>1.更新了元素的几何属性（重排）</h2><p><img src="https://img-blog.csdnimg.cn/deb086e7711f4b488436690822c13cf5.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>重排需要更新完成的渲染流水线，开销最大</strong></p>
+<h2 id="2-更新元素的绘制属性（重绘）"><a href="#2-更新元素的绘制属性（重绘）" class="headerlink" title="2.更新元素的绘制属性（重绘）"></a>2.更新元素的绘制属性（重绘）</h2><p><img src="https://img-blog.csdnimg.cn/89673ea9f30049bba28f88ab9adc8a59.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;如果修改元素的背景颜色，<strong>布局阶段不会执行</strong>，因为并没有引起几何位置的变化，所以直接进入了绘制阶段，然后执行之后的一系列子阶段（重绘）<br>&nbsp;&nbsp;&nbsp;&nbsp;相对于重排操作，重绘省去了布局和分层阶段，所以执行效率会比重排要高一些</p>
+<h2 id="3-直接合成阶段"><a href="#3-直接合成阶段" class="headerlink" title="3.直接合成阶段"></a>3.直接合成阶段</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;更改一个既不要布局也不要绘制的属性，渲染引擎将跳过布局和绘制，只执行后续的合成操作<br><img src="https://img-blog.csdnimg.cn/a46a51328c374719ba34928cdfe3c7bf.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;如上图，我们使用CSS的transform来实现动画效果，可以避开重排和重绘阶段，直接在非主线程上执行合成动画操作。效率最高，因为在非主线程上合成，没有占用主线程的资源，<strong>另外也避开了布局和绘制两个子阶段</strong>，所以相对于重绘和重排，合成能大大提升绘制效率</p>
+<h2 id="4-问题"><a href="#4-问题" class="headerlink" title="4.问题"></a>4.问题</h2><h4 id="①-为什么减少重绘、重排能优化Web性能吗？"><a href="#①-为什么减少重绘、重排能优化Web性能吗？" class="headerlink" title="① 为什么减少重绘、重排能优化Web性能吗？"></a>① 为什么减少重绘、重排能优化Web性能吗？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;减少重排重绘，相当于少了渲染进程的主进程和非主进程的很多计算操作，能够加快web的展示</p>
+<h4 id="②-那又有那些具体的实践方法能减少重绘、重排呢？"><a href="#②-那又有那些具体的实践方法能减少重绘、重排呢？" class="headerlink" title="② 那又有那些具体的实践方法能减少重绘、重排呢？"></a>② 那又有那些具体的实践方法能减少重绘、重排呢？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;（1）使用class操作样式，而不是频繁操作style<br>&nbsp;&nbsp;&nbsp;&nbsp;（2）避免使用table布局<br>&nbsp;&nbsp;&nbsp;&nbsp;（3）批量dom操作，比如createDocumentFragment，或使用框架React、Vue<br>&nbsp;&nbsp;&nbsp;&nbsp;（4）Debounce window resize时间<br>&nbsp;&nbsp;&nbsp;&nbsp;（5）对dom属性的读写要分离<br>&nbsp;&nbsp;&nbsp;&nbsp;（6）will-change: transform做优化<br>&nbsp;&nbsp;&nbsp;&nbsp;（7）触发repaint、reflow的操作尽量放在一起，否则可能会发出两次重排（重绘）<br>&nbsp;&nbsp;&nbsp;&nbsp;（8）通过虚拟dom层计算出操作总得差异多少，然后一起交给浏览器</p>
+<h4 id="③-canvas绘制流程是怎么样的？"><a href="#③-canvas绘制流程是怎么样的？" class="headerlink" title="③ canvas绘制流程是怎么样的？"></a>③ canvas绘制流程是怎么样的？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;直接调用api在画布上绘制，没有DOM</p>
+<h4 id="④-手机端开发，body被内容撑开，超过一屏，在滑动的过程中会不会发生重排，为什么"><a href="#④-手机端开发，body被内容撑开，超过一屏，在滑动的过程中会不会发生重排，为什么" class="headerlink" title="④ 手机端开发，body被内容撑开，超过一屏，在滑动的过程中会不会发生重排，为什么?"></a>④ 手机端开发，body被内容撑开，超过一屏，在滑动的过程中会不会发生重排，为什么?</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;现代浏览器做了优化，把滚动交给合成线程处理，也就是说滚动的内容会被当成一个单独的图层，所以没有占用主线程来合成，通常不会产生重排和重回操作</p>
 
-延迟脚本不一定会按照顺序执行
-只适用于外部脚本文件
-
-2.异步脚本：指定async属性，是不让页面等待两...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.03.20</time>
-            
-                <span class="category"><a class="category-link" href="/categories/JS/">JS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/JS/" rel="tag">JS</a>，<a class="-none-link" href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" rel="tag">阅读笔记</a></span>
-            
-        </div>
-    </div>
-    
-</section>
-
-        <section class="page-navigator">
-            <span class="page-number current">1</span>
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/07/05/CSS3%E5%8A%A8%E7%94%BBanimation/">CSS3动画animation</a></li>
+                
+            </ul>
         </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>老笨蛋了...</p>
+            </div>
+        </section>
+    
     </div>
 </main>
 
