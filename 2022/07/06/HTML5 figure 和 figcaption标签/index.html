@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>2022 年 - taytay</title>
+    <title>HTML5 figure 和 figcaption标签 - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content=""/>
+    <meta property="og:title" content="HTML5 figure 和 figcaption标签"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -52,109 +52,53 @@
 
     <main>
     <div class="wrap min">
-        <section class="home-title">
+        <section class="post-title">
+            <h2>HTML5 figure 和 figcaption标签</h2>
+            <div class="post-meta">
+                <time class="date">2022.07.06</time>
             
-            <h1>“2022 年”</h1>
+                <span class="category"><a class="category-link" href="/categories/HTML/">HTML</a></span>
+            
+            </div>
         </section>
-        <section class="home-posts">
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/10/CSS3%20%E6%B8%90%E5%8F%98/">CSS3 渐变</a>
-        </h2>
-    
-        <p>一、线性渐变linear-gradient为了创建一个线性渐变，必须至少定义两种颜色。这个颜色就是你想呈现的平稳过渡的颜色，同时也可以设置一个起点和一个方向（或一个角度）
-1background...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.10</time>
-            
-                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/09/box%20shadow%20AND%20text%20show/">盒子阴影 和 文本阴影</a>
-        </h2>
-    
-        <p>盒子阴影 和 文本阴影给div或者文字添加阴影（盒子阴影、文本阴影）CSS3定义了两种阴影：盒子阴影和文本阴影其中盒子阴影需要IE9及其更新版本，而文本阴影需要IE10及其更新版本
-1.盒子阴影...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.09</time>
-            
-                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/09/what%20is%20cdn%EF%BC%9F/">到底什么是cdn？</a>
-        </h2>
-    
-        <p>到底什么是cdn？一般上线一个网站：一定要有一台服务器，存放网站文件，再买一个域名，通过DNS域名解析设置，把域名指向服务器的IP地址，配置好服务器我们就能用浏览器通过网络访问域名打开网站
-但随...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.09</time>
-            
-                <span class="category"><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CDN/" rel="tag">CDN</a>，<a class="-none-link" href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" rel="tag">前端优化</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/07/Flex/">Flex布局</a>
-        </h2>
-    
-        <p>Flex布局Flexible Box，弹性布局，用来为盒状模型提供最大的灵活性，且任何容器都能使用FLex布局：
-1display: flex;  
-行内也可以：
-1display: inlin...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.07</time>
-            
-                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
-            
-            
-                <span class="tags"><a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a>，<a class="-none-link" href="/tags/Flex%E5%B8%83%E5%B1%80/" rel="tag">Flex布局</a></span>
-            
-        </div>
-    </div>
-    
-    <div class="post-item">
-        <h2>
-            <a href="/2022/01/05/hello-world/">Hello World</a>
-        </h2>
-    
-        <p>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any ...</p>
-    
-        <div class="post-meta">
-            <time class="date">2022.01.05</time>
-            
-            
-        </div>
-    </div>
-    
-</section>
+        <article class="post-content">
+        
+            <h2 id="1-figure标签："><a href="#1-figure标签：" class="headerlink" title="1.figure标签："></a>1.figure标签：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;可附标题内容，h5中的新标签,块级双标签，常在主文中引用图片、插图、表格、代码段等，当这部分转移到附录中或者其他页面时不会影响到主体</p>
+<p><em><strong>特点：</strong></em><br>&nbsp;&nbsp;&nbsp;&nbsp;① figure含有默认外边距，浏览器不同值大小不同<br>&nbsp;&nbsp;&nbsp;&nbsp;② figure默认的宽度是100%，高度依赖于其内容高度<br>&nbsp;&nbsp;&nbsp;&nbsp;③ figure元素的内容应该与主内容相关，但如果被删除，则不应对文档流产生影响<br>&nbsp;&nbsp;&nbsp;&nbsp;④ figure可以有多个子元素，但是figcaption最好最多只有一个，其他元素无限放置</p>
+<h2 id="2-figcaption："><a href="#2-figcaption：" class="headerlink" title="2.figcaption："></a>2.figcaption：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;块级双标签，用于为figure元素添加标题和描述信息</p>
+<h2 id="3-浏览器支持："><a href="#3-浏览器支持：" class="headerlink" title="3.浏览器支持："></a>3.浏览器支持：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;Internet Explorer 9, Firefox, Opera, Chrome 以及 Safari</p>
+<h2 id="4-实例："><a href="#4-实例：" class="headerlink" title="4.实例："></a>4.实例：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">figure</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./1.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Elephant at sunset&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">figcaption</span>&gt;</span>The pudding dog<span class="tag">&lt;/<span class="name">figcaption</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">figure</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/431f37ded50a40a2a4ecf0fb7b1271b0.png#pic_center" alt="在这里插入图片描述"></p>
 
-        <section class="page-navigator">
-            <a class="extend prev" rel="prev" href="/archives/2022/page/5/">«</a><a class="page-number" href="/archives/2022/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2022/page/4/">4</a><a class="page-number" href="/archives/2022/page/5/">5</a><span class="page-number current">6</span>
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/07/05/%E9%87%8D%E6%8E%92%E3%80%81%E9%87%8D%E7%BB%98%E3%80%81%E7%9B%B4%E6%8E%A5%E5%90%88%E6%88%90/">重排、重绘、直接合成</a></li>
+                
+            </ul>
         </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/HTML/" rel="tag">HTML</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>老笨蛋了...</p>
+            </div>
+        </section>
+    
     </div>
 </main>
 
