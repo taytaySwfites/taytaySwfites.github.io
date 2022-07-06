@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>重排、重绘、直接合成 - taytay</title>
+    <title>调用栈：为什么JS代码会出现溢出？ - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content="重排、重绘、直接合成"/>
+    <meta property="og:title" content="调用栈：为什么JS代码会出现溢出？"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -53,9 +53,9 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>重排、重绘、直接合成</h2>
+            <h2>调用栈：为什么JS代码会出现溢出？</h2>
             <div class="post-meta">
-                <time class="date">2022.07.05</time>
+                <time class="date">2022.07.06</time>
             
                 <span class="category"><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span>
             
@@ -63,29 +63,30 @@
         </section>
         <article class="post-content">
         
-            <h2 id="1-更新了元素的几何属性（重排）"><a href="#1-更新了元素的几何属性（重排）" class="headerlink" title="1.更新了元素的几何属性（重排）"></a>1.更新了元素的几何属性（重排）</h2><p><img src="https://img-blog.csdnimg.cn/deb086e7711f4b488436690822c13cf5.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>重排需要更新完成的渲染流水线，开销最大</strong></p>
-<h2 id="2-更新元素的绘制属性（重绘）"><a href="#2-更新元素的绘制属性（重绘）" class="headerlink" title="2.更新元素的绘制属性（重绘）"></a>2.更新元素的绘制属性（重绘）</h2><p><img src="https://img-blog.csdnimg.cn/89673ea9f30049bba28f88ab9adc8a59.png#pic_center" alt="在这里插入图片描述"></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;如果修改元素的背景颜色，<strong>布局阶段不会执行</strong>，因为并没有引起几何位置的变化，所以直接进入了绘制阶段，然后执行之后的一系列子阶段（重绘）<br>&nbsp;&nbsp;&nbsp;&nbsp;相对于重排操作，重绘省去了布局和分层阶段，所以执行效率会比重排要高一些</p>
-<h2 id="3-直接合成阶段"><a href="#3-直接合成阶段" class="headerlink" title="3.直接合成阶段"></a>3.直接合成阶段</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;更改一个既不要布局也不要绘制的属性，渲染引擎将跳过布局和绘制，只执行后续的合成操作<br><img src="https://img-blog.csdnimg.cn/a46a51328c374719ba34928cdfe3c7bf.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;如上图，我们使用CSS的transform来实现动画效果，可以避开重排和重绘阶段，直接在非主线程上执行合成动画操作。效率最高，因为在非主线程上合成，没有占用主线程的资源，<strong>另外也避开了布局和绘制两个子阶段</strong>，所以相对于重绘和重排，合成能大大提升绘制效率</p>
-<h2 id="4-问题"><a href="#4-问题" class="headerlink" title="4.问题"></a>4.问题</h2><h4 id="①-为什么减少重绘、重排能优化Web性能吗？"><a href="#①-为什么减少重绘、重排能优化Web性能吗？" class="headerlink" title="① 为什么减少重绘、重排能优化Web性能吗？"></a>① 为什么减少重绘、重排能优化Web性能吗？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;减少重排重绘，相当于少了渲染进程的主进程和非主进程的很多计算操作，能够加快web的展示</p>
+            <h2 id="在执行之前就进行编译并生成执行上下文："><a href="#在执行之前就进行编译并生成执行上下文：" class="headerlink" title="在执行之前就进行编译并生成执行上下文："></a>在执行之前就进行编译并生成执行上下文：</h2><p>① 当JavaScript执行全局代码的时候，会编译全局代码并创建全局执行上下文，而且在整个页面的生存周期内，全局执行上下文只有⼀份<br>② 当调用⼀个函数的时候，函数体内的代码会被编译，并创建函数执行上下文，⼀般情况下，函数执行结束之后，创建的函数执行上下文会被销毁。<br>③ 当使⽤eval函数的时候，eval的代码也会被编译，并创建执行上下文</p>
+<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p><img src="https://img-blog.csdnimg.cn/663fba7451a343ef9806068125f3b07b.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;① 从全局执行上下文中，去除add函数代码<br>&nbsp;&nbsp;&nbsp;&nbsp;② 对add函数进行遍历，并创建函数的执行上下文和可执行代码<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 执行代码，输出结构<br><img src="https://img-blog.csdnimg.cn/21bfb329d09c49df9c55e4a1c216f912.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="栈结构"><a href="#栈结构" class="headerlink" title="栈结构"></a>栈结构</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>特点</strong></em>：后进先出<br><img src="https://img-blog.csdnimg.cn/9135defe73ce4f4bb8a2b361e533f3d5.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="调用栈"><a href="#调用栈" class="headerlink" title="调用栈"></a>调用栈</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;用来管理函数调用关系的一种数据结构，是JS引擎中追踪函数执行的一个机制<br>&nbsp;&nbsp;&nbsp;&nbsp;在执行上下文创建好后，JS引擎会将执行上下文压入栈中，通常把这种用来管理执行上下文的栈称为执行上下文栈，<strong>调用栈</strong></p>
+<h4 id="如何利用好栈？"><a href="#如何利用好栈？" class="headerlink" title="如何利用好栈？"></a>如何利用好栈？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 利用浏览器查看调用栈信息<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“开发者工具” =》 “Source” =》 加入断点，刷新页面 =》 “call back”查看当前的调用栈的情况<br><img src="https://img-blog.csdnimg.cn/34f126c939034fa485cc34c314fc19cd.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;“call stack”：函数调用关系，栈的最底部是anonymous（全局函数的入口）</p>
 <br/>
 
-<h4 id="②-那又有那些具体的实践方法能减少重绘、重排呢？"><a href="#②-那又有那些具体的实践方法能减少重绘、重排呢？" class="headerlink" title="② 那又有那些具体的实践方法能减少重绘、重排呢？"></a>② 那又有那些具体的实践方法能减少重绘、重排呢？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;（1）使用class操作样式，而不是频繁操作style<br>&nbsp;&nbsp;&nbsp;&nbsp;（2）避免使用table布局<br>&nbsp;&nbsp;&nbsp;&nbsp;（3）批量dom操作，比如createDocumentFragment，或使用框架React、Vue<br>&nbsp;&nbsp;&nbsp;&nbsp;（4）Debounce window resize时间<br>&nbsp;&nbsp;&nbsp;&nbsp;（5）对dom属性的读写要分离<br>&nbsp;&nbsp;&nbsp;&nbsp;（6）will-change: transform做优化<br>&nbsp;&nbsp;&nbsp;&nbsp;（7）触发repaint、reflow的操作尽量放在一起，否则可能会发出两次重排（重绘）<br>&nbsp;&nbsp;&nbsp;&nbsp;（8）通过虚拟dom层计算出操作总得差异多少，然后一起交给浏览器</p>
-<br/>
-
-<h4 id="③-canvas绘制流程是怎么样的？"><a href="#③-canvas绘制流程是怎么样的？" class="headerlink" title="③ canvas绘制流程是怎么样的？"></a>③ canvas绘制流程是怎么样的？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;直接调用api在画布上绘制，没有DOM</p>
-<br/>
-
-<h4 id="④-手机端开发，body被内容撑开，超过一屏，在滑动的过程中会不会发生重排，为什么"><a href="#④-手机端开发，body被内容撑开，超过一屏，在滑动的过程中会不会发生重排，为什么" class="headerlink" title="④ 手机端开发，body被内容撑开，超过一屏，在滑动的过程中会不会发生重排，为什么?"></a>④ 手机端开发，body被内容撑开，超过一屏，在滑动的过程中会不会发生重排，为什么?</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;现代浏览器做了优化，把滚动交给合成线程处理，也就是说滚动的内容会被当成一个单独的图层，所以没有占用主线程来合成，通常不会产生重排和重回操作</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;② 还可以通过console.trace()输出当前函数的调用关系</p>
+<h4 id="栈溢出（Stack-Overflow）"><a href="#栈溢出（Stack-Overflow）" class="headerlink" title="栈溢出（Stack Overflow）"></a>栈溢出（Stack Overflow）</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;调用栈是有大小的，超过一定数目时，JS引擎就会报错</p>
+<h2 id="尾递归调用"><a href="#尾递归调用" class="headerlink" title="尾递归调用"></a>尾递归调用</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;传统的递归缺点：① 效率低，占内存    ② 递归连过长，会statck overflow</p>
+<p><em><strong>原理</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;当编译器检测到一个函数调用是尾递归时，他就会覆盖当前的活动记录而不是去创建一个新的。因为递归调用是当前活跃期内最后一条待执行的语句，所以没有必要保存了</p>
+<p><em><strong>特点</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 在尾部调用函数自身    ② 可通过优化，使得计算仅占用常量栈空间</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">recsum</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> x + recsum(x - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改成尾递归调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tailrecsum</span>(<span class="params">x, running_total = <span class="number">0</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> running_total;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> tailrecsum(x - <span class="number">1</span>, running_total + x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </article>
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2022/07/06/HTML5%20figure%20%E5%92%8C%20figcaption%E6%A0%87%E7%AD%BE/">HTML5 figure 和 figcaption标签</a></li>
+                    <li>上一篇: 看完啦 (つд⊂)</li>
                 
                 
-                    <li>下一篇: <a href="/2022/07/05/CSS3%E5%8A%A8%E7%94%BBanimation/">CSS3动画animation</a></li>
+                    <li>下一篇: <a href="/2022/07/06/HTML5%20figure%20%E5%92%8C%20figcaption%E6%A0%87%E7%AD%BE/">HTML5 figure 和 figcaption标签</a></li>
                 
             </ul>
         </section>
