@@ -64,10 +64,14 @@
         <article class="post-content">
         
             <h2 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;从已有数组中返回选地的元素，返回一个新数组，包含start到end（不包含end）的数组元素</p>
+<br/>
+
 <p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;该方法不会改变原数组，而是返回一个子数组，如果想删除数组中的一段元素，应该使用Array.splice()</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line"><span class="built_in">console</span>.log(arr.slice(<span class="number">1</span>)); <span class="comment">// [2,3,4,5]  选择序列号从1到最后的所有元素组成的新数组。</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.slice(<span class="number">1</span>,<span class="number">3</span>)) <span class="comment">// [2,3]  不包含end，序列号为3的元素</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="splice-："><a href="#splice-：" class="headerlink" title="splice()："></a>splice()：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;向/从数组中添加/删除/替换项目，然后返回被删除的项目</p>
+<br/>
+
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayObject.splice(index, howmany, item1, ....., itemX)</span><br></pre></td></tr></table></figure>
 
 <table>
@@ -94,13 +98,13 @@
 <td></td>
 </tr>
 </tbody></table>
-<p>删除：</p>
+<p><em><strong>删除</strong></em>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">2</span>, <span class="number">1</span>)); <span class="comment">// [&quot;c&quot;]</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&quot;a&quot;, &quot;b&quot;]</span></span><br></pre></td></tr></table></figure>
 
-<p>插入：</p>
+<p><em><strong>插入</strong></em>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">1</span>, <span class="number">0</span>, <span class="string">&#x27;insert&#x27;</span>)); <span class="comment">// []</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&#x27;a&#x27;, &#x27;insert&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
 
-<p>替换：</p>
+<p><em><strong>替换</strong></em>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="built_in">console</span>.log(s.splice(<span class="number">1</span>, <span class="number">1</span>, <span class="string">&#x27;insert&#x27;</span>)); <span class="comment">// []</span></span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">// [&#x27;a&#x27;, &#x27;insert&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
 
 
@@ -145,7 +149,7 @@
             <div class="row">
                 <div class="col-m-4">
                     <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/07/splice()/">slice()、splice()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/07/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E3%80%81%E9%97%AD%E5%8C%85%EF%BC%9AJS%E6%98%AF%E6%8C%89%E7%85%A7%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%9A%84%E5%90%97%EF%BC%9F/">变量提升、作用域、作用域链、闭包：JS是按照顺序执行的吗？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/Object.create()/">Object.create()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88JS%E4%BB%A3%E7%A0%81%E4%BC%9A%E5%87%BA%E7%8E%B0%E6%BA%A2%E5%87%BA%EF%BC%9F/">调用栈：为什么JS代码会出现溢出？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/HTML5%20figure%20%E5%92%8C%20figcaption%E6%A0%87%E7%AD%BE/">HTML5 figure 和 figcaption标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/05/%E9%87%8D%E6%8E%92%E3%80%81%E9%87%8D%E7%BB%98%E3%80%81%E7%9B%B4%E6%8E%A5%E5%90%88%E6%88%90/">重排、重绘、直接合成</a></li></ul>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/07/slice()%E3%80%81splice()/">slice()、splice()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/07/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E3%80%81%E9%97%AD%E5%8C%85%EF%BC%9AJS%E6%98%AF%E6%8C%89%E7%85%A7%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%9A%84%E5%90%97%EF%BC%9F/">变量提升、作用域、作用域链、闭包：JS是按照顺序执行的吗？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/Object.create()/">Object.create()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88JS%E4%BB%A3%E7%A0%81%E4%BC%9A%E5%87%BA%E7%8E%B0%E6%BA%A2%E5%87%BA%EF%BC%9F/">调用栈：为什么JS代码会出现溢出？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/HTML5%20figure%20%E5%92%8C%20figcaption%E6%A0%87%E7%AD%BE/">HTML5 figure 和 figcaption标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/05/%E9%87%8D%E6%8E%92%E3%80%81%E9%87%8D%E7%BB%98%E3%80%81%E7%9B%B4%E6%8E%A5%E5%90%88%E6%88%90/">重排、重绘、直接合成</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-date">时光机：</h3>
