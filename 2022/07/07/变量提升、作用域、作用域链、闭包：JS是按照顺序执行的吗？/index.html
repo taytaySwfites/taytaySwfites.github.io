@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>变量提升、作用域、作用域链、闭包：JS是按照顺序执行的吗？ - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="变量提升、作用域、作用域链、闭包：JS是按照顺序执行的吗？"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>变量提升、作用域、作用域链、闭包：JS是按照顺序执行的吗？</h2>
+            <div class="post-meta">
+                <time class="date">2022.07.07</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;js引擎把变量的声明部分和函数的声明部分提升到代码开发的“行为”，变量被提升后，会给变量设置默认值，undefined<br>&nbsp;&nbsp;&nbsp;&nbsp;j实际上变量和函数声明在代码的位置不会改变，其实是在编译阶段被JS引擎放入内存中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 变量</span></span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&#x27;taytay&#x27;</span>;</span><br><span class="line"><span class="comment">// 相当于</span></span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&#x27;undefined&#x27;</span>;</span><br><span class="line">myName = <span class="string">&#x27;taytay&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数</span></span><br><span class="line"><span class="keyword">var</span> showName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;taytay&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 相当于</span></span><br><span class="line"><span class="keyword">var</span> showName = <span class="string">&#x27;undefined&#x27;</span>;</span><br><span class="line">showName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;taytay&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/486a6d18351643dd8d8aab098854c52f.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="变量提升所带来的问题"><a href="#变量提升所带来的问题" class="headerlink" title="变量提升所带来的问题"></a>变量提升所带来的问题</h2><h4 id="1-变量容易在不被察觉的情况下被覆盖掉"><a href="#1-变量容易在不被察觉的情况下被覆盖掉" class="headerlink" title="1.变量容易在不被察觉的情况下被覆盖掉"></a>1.变量容易在不被察觉的情况下被覆盖掉</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myname = <span class="string">&quot;极客时间&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">   <span class="built_in">console</span>.log(myname); </span><br><span class="line">   <span class="keyword">if</span>(<span class="number">0</span>)&#123;</span><br><span class="line">       <span class="keyword">var</span> myname = <span class="string">&quot;极客邦&quot;</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="built_in">console</span>.log(myname); </span><br><span class="line">&#125; </span><br><span class="line">showName();</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-本应销毁的变量没有被销毁"><a href="#2-本应销毁的变量没有被销毁" class="headerlink" title="2.本应销毁的变量没有被销毁"></a>2.本应销毁的变量没有被销毁</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++) &#123; &#125; </span><br><span class="line">    <span class="built_in">console</span>.log(i); </span><br><span class="line">&#125;</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="ES6带来的解决方法"><a href="#ES6带来的解决方法" class="headerlink" title="ES6带来的解决方法"></a>ES6带来的解决方法</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;引入let和const关键字，从而使js就像其他语言一样拥有块级作用域，而且js引擎不会把if块中通过let声明的变量存放到变量环境中，这意味着块通过let声明的关键字，并不会提升到全局函数可见</p>
+<h4 id="js是如何支持块级作用域的"><a href="#js是如何支持块级作用域的" class="headerlink" title="js是如何支持块级作用域的"></a>js是如何支持块级作用域的</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> b = <span class="number">2</span>; </span><br><span class="line">    &#123; </span><br><span class="line">        <span class="keyword">let</span> b = <span class="number">3</span>; </span><br><span class="line">        <span class="keyword">var</span> c = <span class="number">4</span>; </span><br><span class="line">        <span class="keyword">let</span> d = <span class="number">5</span>; </span><br><span class="line">        <span class="built_in">console</span>.log(a); </span><br><span class="line">        <span class="built_in">console</span>.log(b); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="built_in">console</span>.log(b); </span><br><span class="line">    <span class="built_in">console</span>.log(c); </span><br><span class="line">    <span class="built_in">console</span>.log(d); </span><br><span class="line">&#125; </span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/7e93e4a794aa49d587c3cfdc39912f20.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/068f259400c441e180cfe81b22f765c7.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;作用域块中通过let声明的变量，会被放在词法环境的一个单独区域，这个区域的变量并不影响作用域块外面的变量</p>
+<p><em><strong>查找</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;沿着词法环境的栈顶向下查询，如果在词法环境中的某个快中查找到了，就知己返回给Javascript引擎；如果没有查找到，那么继续在变量环境中查找</p>
+<h2 id="JS的执行流程"><a href="#JS的执行流程" class="headerlink" title="JS的执行流程"></a>JS的执行流程</h2><p><img src="https://img-blog.csdnimg.cn/4c95170e58a3401fa60bdddb299232a3.png#pic_center" alt="在这里插入图片描述">① 编译阶段<br>&nbsp;&nbsp;&nbsp;&nbsp;（1）变量提升部分<br>&nbsp;&nbsp;&nbsp;&nbsp;（2）执行部分的代码<br><img src="https://img-blog.csdnimg.cn/b13a19ba83c742e8a8799eac3950e153.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;执行上下文：是JS执行一段代码的运行环境<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;变量环境对象：保存了变量提升的内容</p>
+<p>② 执行阶段<br>&nbsp;&nbsp;&nbsp;&nbsp;按照顺序一行一行地执行</p>
+<h4 id="代码中出现相同的变量或者函数怎么办？"><a href="#代码中出现相同的变量或者函数怎么办？" class="headerlink" title="代码中出现相同的变量或者函数怎么办？"></a>代码中出现相同的变量或者函数怎么办？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;那么第二个出现的变量或函数将把第一个覆盖掉，最终只有最后一个生效</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;变量和函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期中</p>
+<p><em><strong>全局作用域</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;对象在代码中的任何地方都能访问，其生命周期伴随着页面的生命周期<br><em><strong>函数作用域</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;就是在函数内部定义的变量或者函数，并且定义的变量或者函数只能在函数内部被访问。函数执行结束之后，函数内部定义的变量会被销毁。<br><em><strong>块级作用域</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;用一对大括号包裹，比如函数、判断语句、循环语句，甚至单独的⼀个{}都可以被看作是⼀个块级作⽤域</p>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;如果一种语言支持块级作用域，那么其代码块内部定义的变量在代码块外部是访问不到的，并且等该代码块中的代码执行完成之后，代码块中定义的变量会被销毁（如Java、C、C++）<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>ES6之前是不支持块级作用域的</strong></p>
+<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p><em><strong>outer</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;每个执行上下文的变量环境中，都包含一个外部引用，用来指向外部的执行上下文。当“当前的执行上下文”中没有查找到该变量，那么Javascript引擎会继续在outer所指向的执行上下文中查找<br><img src="https://img-blog.csdnimg.cn/177e10d1ee5f42f9840425014527400d.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;是指作用域是由代码中函数声明的位置来决定的，所以词法作用域是静态的作用域，通过它就能预测代码在执行过程中如何查找标识符<br><img src="https://img-blog.csdnimg.cn/be0c0020f94e456d939b70fa3f7be3ad.png#pic_center" alt="在这里插入图片描述">&nbsp;&nbsp;&nbsp;&nbsp;词法作用域是代码阶段就决定好的，和函数调用没有关系</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">var</span> myName = <span class="string">&quot;taytay&quot;</span>; </span><br><span class="line">    <span class="keyword">let</span> test1 = <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">const</span> test2 = <span class="number">2</span>; </span><br><span class="line">    <span class="keyword">var</span> innerBar = &#123; </span><br><span class="line">        <span class="attr">getName</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">            <span class="built_in">console</span>.log(test1); </span><br><span class="line">            <span class="keyword">return</span> myName;</span><br><span class="line">        &#125;, </span><br><span class="line">        <span class="attr">setName</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newName</span>)</span>&#123;</span><br><span class="line">            <span class="comment">// 当前执⾏上下⽂‒&gt; foo函数闭包 ‒&gt; 全局执⾏上下⽂ 的顺序来查找myName变量</span></span><br><span class="line">            myName = newName;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> innerBar; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">var</span> bar = foo(); </span><br><span class="line">bar.setName(<span class="string">&quot;桃乐丝&quot;</span>);</span><br><span class="line">bar.getName(); </span><br><span class="line"><span class="built_in">console</span>.log(bar.getName());</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在Javascript中，根据词法作用域的规则，内部函数总是可以访问其外部函数中声明的变量，当通过调用一个外部函数返回一个内部函数后，即使该外部函数已经执行结束了，但是内部函数引用外部函数的变量依然保存在内存中，我们就把这些变量的集合称为闭包</p>
+<h2 id="闭包是怎么回收的呢？"><a href="#闭包是怎么回收的呢？" class="headerlink" title="闭包是怎么回收的呢？"></a>闭包是怎么回收的呢？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;如果闭包使用不正确， 会很容易造成内存泄露</p>
+<h4 id="全局变量："><a href="#全局变量：" class="headerlink" title="全局变量："></a>全局变量：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;如果引用的是全局变量，那么闭包会一直存在直到页面关闭；但如果这个闭包以后不再使用，就会造成内存泄露</p>
+<h4 id="局部变量："><a href="#局部变量：" class="headerlink" title="局部变量："></a>局部变量：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;如果引用闭包的函数是局部变量，等函数销毁后，在下次Javascript引擎执行垃圾回收时，判断闭包这块内容如果已经不再被使用了，那么Javascript引擎的垃圾回收器就会回收这块内存</p>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;如果该闭包会一直使用，那么它可以作为全局变量而存在；但如果使用频率额不高，而且占用内存又较大的话，那么就尽量让它成为一个局部变量</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/07/06/Object.create()/">Object.create()</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>老笨蛋了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/07/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E3%80%81%E9%97%AD%E5%8C%85%EF%BC%9AJS%E6%98%AF%E6%8C%89%E7%85%A7%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%9A%84%E5%90%97%EF%BC%9F/">变量提升、作用域、作用域链、闭包：JS是按照顺序执行的吗？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/Object.create()/">Object.create()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88JS%E4%BB%A3%E7%A0%81%E4%BC%9A%E5%87%BA%E7%8E%B0%E6%BA%A2%E5%87%BA%EF%BC%9F/">调用栈：为什么JS代码会出现溢出？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/HTML5%20figure%20%E5%92%8C%20figcaption%E6%A0%87%E7%AD%BE/">HTML5 figure 和 figcaption标签</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/05/%E9%87%8D%E6%8E%92%E3%80%81%E9%87%8D%E7%BB%98%E3%80%81%E7%9B%B4%E6%8E%A5%E5%90%88%E6%88%90/">重排、重绘、直接合成</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/05/CSS3%E5%8A%A8%E7%94%BBanimation/">CSS3动画animation</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.67px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 13.33px;">HTML</a> <a href="/tags/JS/" style="font-size: 18.33px;">JS</a> <a href="/tags/TS/" style="font-size: 15px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 18.33px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 13.33px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13.33px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 16.67px;">浏览器</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
