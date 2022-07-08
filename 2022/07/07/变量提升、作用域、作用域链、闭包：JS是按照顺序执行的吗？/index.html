@@ -81,6 +81,15 @@
 <h4 id="代码中出现相同的变量或者函数怎么办？"><a href="#代码中出现相同的变量或者函数怎么办？" class="headerlink" title="代码中出现相同的变量或者函数怎么办？"></a>代码中出现相同的变量或者函数怎么办？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;那么第二个出现的变量或函数将把第一个覆盖掉，最终只有最后一个生效</p>
 <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;变量和函数的可访问范围，即作用域控制着变量和函数的可见性和生命周期中</p>
 <p><em><strong>全局作用域</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;对象在代码中的任何地方都能访问，其生命周期伴随着页面的生命周期<br><em><strong>函数作用域</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;就是在函数内部定义的变量或者函数，并且定义的变量或者函数只能在函数内部被访问。函数执行结束之后，函数内部定义的变量会被销毁。<br><em><strong>块级作用域</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;用一对大括号包裹，比如函数、判断语句、循环语句，甚至单独的⼀个{}都可以被看作是⼀个块级作⽤域</p>
+<br/>
+
+<p><em><strong>分类</strong></em>：<br>① 静态作用域：词法作用域，在函数定时时就决定的（在编译时（词法解析阶段））<br>② 动态作用域：在函数调用是才决定<br>** javascript采用的是词法作用域 **</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">3</span>;</span><br><span class="line">    fn();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">bar(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<br/>
+
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;编译型语言的步骤：词法分析 -&gt; 语法分析 -&gt; 语义检查 -&gt; 代码优化 -&gt; 字节码生成<br>&nbsp;&nbsp;&nbsp;&nbsp;解释型语言的步骤：语法检查 -&gt; 预编译期（预处理、预解析、预编译、预声明变量、预定义函数） -&gt; 执行</p>
+<br/>
+
 <p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;如果一种语言支持块级作用域，那么其代码块内部定义的变量在代码块外部是访问不到的，并且等该代码块中的代码执行完成之后，代码块中定义的变量会被销毁（如Java、C、C++）<br>&nbsp;&nbsp;&nbsp;&nbsp;<strong>ES6之前是不支持块级作用域的</strong></p>
 <h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p><em><strong>outer</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;每个执行上下文的变量环境中，都包含一个外部引用，用来指向外部的执行上下文。当“当前的执行上下文”中没有查找到该变量，那么Javascript引擎会继续在outer所指向的执行上下文中查找<br><img src="https://img-blog.csdnimg.cn/177e10d1ee5f42f9840425014527400d.png#pic_center" alt="在这里插入图片描述"></p>
 <h2 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;是指作用域是由代码中函数声明的位置来决定的，所以词法作用域是静态的作用域，通过它就能预测代码在执行过程中如何查找标识符<br><img src="https://img-blog.csdnimg.cn/be0c0020f94e456d939b70fa3f7be3ad.png#pic_center" alt="在这里插入图片描述">&nbsp;&nbsp;&nbsp;&nbsp;词法作用域是代码阶段就决定好的，和函数调用没有关系</p>
