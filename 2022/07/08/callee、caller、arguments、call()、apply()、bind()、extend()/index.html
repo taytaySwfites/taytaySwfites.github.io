@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>callee、caller、arguments、call()、apply()、bind()、extend() - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="callee、caller、arguments、call()、apply()、bind()、extend()"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>callee、caller、arguments、call()、apply()、bind()、extend()</h2>
+            <div class="post-meta">
+                <time class="date">2022.07.08</time>
+            
+                <span class="category"><a class="category-link" href="/categories/JS/">JS</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="callee-和-caller"><a href="#callee-和-caller" class="headerlink" title="callee 和 caller"></a>callee 和 caller</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>callee</strong></em>：arguments的一个属性，指向其函数自身（① 只有当函数执行时才有效；② 他有一个length属性，可以获得形参的个数）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">argument.length === <span class="built_in">arguments</span>.callee.length</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>caller</strong></em>：指向调用当前函数的函数（① 返回一个函数的引用；② 只有当函数执行时才有效；③ 如果是顶层调用的，则返回null）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    alert(a.caller); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    a(); </span><br><span class="line">&#125; </span><br><span class="line">b();</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;类数组对象，arguments对象将传入的参数以数组的形式保存在里面，还保存了函数的实参的个数（length），argument对象的__proto__指向Object<br>&nbsp;&nbsp;&nbsp;&nbsp;我们可以通过不指定形参的指定参数名，而是通过arguments对象来获取实参</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>( <span class="built_in">arguments</span>.length == <span class="number">2</span> )&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">arguments</span>[<span class="number">0</span>] + <span class="built_in">arguments</span>[<span class="number">1</span>];</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&#x27;传入参数不合法&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">2</span>,<span class="number">3</span>) );</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) );</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;特殊的对象，其property名为正数组，且其length属性会随着数组成员的增减而发生变化，同时又从array构造函数总继承了一些用于操作数组的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123; <span class="number">0</span>: <span class="number">13</span>, <span class="number">1</span>: <span class="number">169</span>, <span class="number">2</span>: <span class="number">333</span>, <span class="attr">length</span>: <span class="number">3</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="argument的妙用"><a href="#argument的妙用" class="headerlink" title="argument的妙用"></a>argument的妙用</h4><p>1.利用arguments实现方法重载</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="built_in">arguments</span>.length,</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(; len--;)&#123;</span><br><span class="line">        sum += <span class="built_in">arguments</span>[len];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>));   <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>));   <span class="comment">// 26</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>2.利用arguments.callee实现递归</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">if</span>(num &lt;= <span class="number">1</span>) &#123; </span><br><span class="line">    	<span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    &#125;<span class="keyword">else</span> &#123; </span><br><span class="line">    	<span class="keyword">return</span> num * <span class="built_in">arguments</span>.callee(num - <span class="number">1</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;ECMAScript4中为了限制js的灵活度，让js变得严格，新增了严格模式，在严格模式中我们被禁止不使用var来直接声明一个全局变量，而且arguments.callee这个属性也被禁止了</p>
+<h2 id="call-和-apply"><a href="#call-和-apply" class="headerlink" title="call() 和 apply()"></a>call() 和 apply()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;可以用来重新定义函数的执行环境，也就是this的指向，call和apply都是为了改变某个函数的运行时上下文 context 而存在的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">call(obj, [arg1, arg2])</span><br><span class="line">apply(obj, [argsArray])</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>区别</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;call()接受的是参数列表，而apply接受的是参数数组</p>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;当call方法调用函数并且不指定第一个参数时，this的值将会被绑定为全局对象；但是在严格模式下，this的值将会是undefined</p>
+<h2 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;将函数绑定到某个对象，bind()会创建一个函数，函数内的this对象的值会被绑定到传入bind()中的第一个参数的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f.bind(obj) ==&gt; obj.f()</span><br></pre></td></tr></table></figure>
+
+<p>如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    <span class="attr">b</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="built_in">this</span>.c);</span><br><span class="line">        &#125;</span><br><span class="line">        func();</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">c</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">a.b(); </span><br><span class="line"><span class="built_in">console</span>.log(a.c); </span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>改变this指向：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    <span class="attr">b</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> _this = <span class="built_in">this</span>; <span class="comment">// 通过赋值的方式将this赋值给that</span></span><br><span class="line">        <span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(_this.c);</span><br><span class="line">        &#125;</span><br><span class="line">        func();</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">c</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">a.b(); <span class="comment">// hello</span></span><br><span class="line"><span class="built_in">console</span>.log(a.c); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    <span class="attr">b</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="built_in">this</span>.c);</span><br><span class="line">        &#125;.bind(<span class="built_in">this</span>);</span><br><span class="line">        func();</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">c</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">a.b(); <span class="comment">// hello</span></span><br><span class="line"><span class="built_in">console</span>.log(a.c); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    <span class="attr">b</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="built_in">this</span>.c);</span><br><span class="line">        &#125;</span><br><span class="line">        func.bind(<span class="built_in">this</span>)();</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">c</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">a.b(); <span class="comment">// hello</span></span><br><span class="line"><span class="built_in">console</span>.log(a.c); <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="原生bind实现"><a href="#原生bind实现" class="headerlink" title="原生bind实现"></a>原生bind实现</h4>
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/07/07/slice()%E3%80%81splice()/">slice()、splice()</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/JS/" rel="tag">JS</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>老笨蛋了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/08/callee%E3%80%81caller%E3%80%81arguments%E3%80%81call()%E3%80%81apply()%E3%80%81bind()%E3%80%81extend()/">callee、caller、arguments、call()、apply()、bind()、extend()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/07/slice()%E3%80%81splice()/">slice()、splice()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/07/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE%E3%80%81%E9%97%AD%E5%8C%85%EF%BC%9AJS%E6%98%AF%E6%8C%89%E7%85%A7%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%9A%84%E5%90%97%EF%BC%9F/">变量提升、作用域、作用域链、闭包：JS是按照顺序执行的吗？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/Object.create()/">Object.create()</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88JS%E4%BB%A3%E7%A0%81%E4%BC%9A%E5%87%BA%E7%8E%B0%E6%BA%A2%E5%87%BA%EF%BC%9F/">调用栈：为什么JS代码会出现溢出？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/06/HTML5%20figure%20%E5%92%8C%20figcaption%E6%A0%87%E7%AD%BE/">HTML5 figure 和 figcaption标签</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 20px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.43px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 12.86px;">HTML</a> <a href="/tags/JS/" style="font-size: 18.57px;">JS</a> <a href="/tags/TS/" style="font-size: 14.29px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 12.86px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 12.86px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15.71px;">浏览器</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
