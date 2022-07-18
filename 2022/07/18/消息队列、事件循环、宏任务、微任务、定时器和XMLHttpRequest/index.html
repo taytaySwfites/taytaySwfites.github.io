@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>调用栈：消息队列、事件循环、宏任务、微任务、定时器和XMLHttpRequest - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="调用栈：消息队列、事件循环、宏任务、微任务、定时器和XMLHttpRequest"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>调用栈：消息队列、事件循环、宏任务、微任务、定时器和XMLHttpRequest</h2>
+            <div class="post-meta">
+                <time class="date">2022.07.18</time>
+            
+                <span class="category"><a class="category-link" href="/categories/JS/">JS</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p>并不是所有的任务都是在执行之前统一安排好的，大部分情况下，新的任务是在线程运行的过程中产生的，所以想在线程运行过程中，能接收并执行新的任务，就需要采用事件循环机制<br><img src="https://img-blog.csdnimg.cn/e05d901b4105477c811589e569088e20.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;消息队列和主线程循环机制保证了页面有条不紊地运行<br><img src="https://img-blog.csdnimg.cn/be52d2c6bbd64043b25cc5464e5b7333.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;消息队列是一种数据结构，可以存放要执行的任务，先进先出（要添加任务的话，添加到队列的尾部；要取出任务的话，从队列头部去取）<br><img src="https://img-blog.csdnimg.cn/df83e8331e9743138393b887f08e2ca0.png#pic_center" alt="在这里插入图片描述"><br><em><strong>改造后，分三个步骤</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 添加一个消息队列</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TaskQueue</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>: </span><br><span class="line">    <span class="function">Task <span class="title">takeTask</span><span class="params">()</span></span>; <span class="comment">// 取出队列头部的一个任务 </span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pushTask</span><span class="params">(Task task)</span></span>; <span class="comment">// 添加一个任务到队列尾部</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;② IO线程中产生的新任务添加进消息队列尾部<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 渲染主线程会循环地从消息队列头部中读取任务、执行任务</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主线程</span></span><br><span class="line">TaskQueue task_queue;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ProcessTask</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MainThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(;;) &#123;</span><br><span class="line">        Task task = task_queue.<span class="built_in">takeTask</span>();</span><br><span class="line">        <span class="built_in">PorecessTask</span>(task);</span><br><span class="line">        ...</span><br><span class="line">        Task clickTask; <span class="comment">// 鼠标点击事件</span></span><br><span class="line">        take_queue.<span class="built_in">pushTask</span>(clickTask);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em><strong>注意</strong></em>：由于多个线程操作同一个消息队列，所以咋添加任务和取出任务时还会加上一个同步锁</p>
+<h2 id="处理其他进程发来的任务（跨进程）"><a href="#处理其他进程发来的任务（跨进程）" class="headerlink" title="处理其他进程发来的任务（跨进程）"></a>处理其他进程发来的任务（跨进程）</h2><p><img src="https://img-blog.csdnimg.cn/02b71b10bddb4cbc8e9d7b23795ac22a.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;如渲染进程就有一个专门的IO线程用来接收其他进程传进来的消息，会将这些消息组装成任务发给渲染主线程</p>
+<h2 id="消息队列中的任务"><a href="#消息队列中的任务" class="headerlink" title="消息队列中的任务"></a>消息队列中的任务</h2><h4 id="内部消息类型："><a href="#内部消息类型：" class="headerlink" title="内部消息类型："></a>内部消息类型：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;输入时间（鼠标滚动、点击、移动）、微任务、文件读写、WebSocket、js定时器</p>
+<h4 id="页面相关事件："><a href="#页面相关事件：" class="headerlink" title="页面相关事件："></a>页面相关事件：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;js执行、解析DOM、样式计算、布局计算、CSS动画等</p>
+<h2 id="如何安全退出"><a href="#如何安全退出" class="headerlink" title="如何安全退出"></a>如何安全退出</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;当页面主线程执行完成后，确定要退出当前页面时，页面主线程会设置一个退出标志的变量，在每次执行完一个任务时，判断是否有设置退出标志</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主线程</span></span><br><span class="line">TaskQueue task_queue;</span><br><span class="line"><span class="keyword">bool</span> keep_running = <span class="literal">true</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ProcessTask</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MainThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(;;) &#123;</span><br><span class="line">        Task task = task_queue.<span class="built_in">takeTask</span>();</span><br><span class="line">        <span class="built_in">PorecessTask</span>(task);</span><br><span class="line">        <span class="keyword">if</span>(!keep_running) &#123; <span class="comment">// 如果设置了退出标志，那么直接退出线程循环</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;为了协调任务在主线程上的运行，页面进程引入消息队列和事件循环机制，渲染进程内部会维护多个消息队列（延迟执行队列和普通的消息队列），<strong>把消息队列中的任务称为宏任务</strong>，每个宏任务中都包含一个<strong>微任务队列</strong>（在执行宏任务的过程中，如果DOM有变化，那么就会将该变卦添加到微任务列表中，这样就不会影响宏任务的继续执行）</p>
+<p><em><strong>包括</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 渲染事件（如解析DOM、计算布局、绘制）<br>&nbsp;&nbsp;&nbsp;&nbsp;② 用户交互事件（如鼠标事件、滚动页面、方大缩小）<br>&nbsp;&nbsp;&nbsp;&nbsp;③ js脚本执行事件<br>&nbsp;&nbsp;&nbsp;&nbsp;④ 网络请求完成、文件读写完成事件</p>
+<h2 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;等宏任务的主要功能都直接完成后，渲染引擎不是立马执行下一个宏任务，<strong>而是执行当前宏任务中的微任务</strong>，因为DOM变化的事件都在这些微任务列表中</p>
+<p><em><strong>产生</strong></em>：<br>① 使用MutationObserver监控某个DOM节点，然后通过js来修改节点，或为这个节点添加、删除部分子节点，当DOM节点发生变化时<br>② 使用Promise，当调用Promise.resolve()或Promise.reject()</p>
+<p><em><strong>如何执行</strong></em>：<br>当宏任务中的js块执行完成时（js引擎准备退出全局执行上下文并清空调用栈时），js引擎会检查全局执行上下文中的微任务队列，然后按照顺序执行队列中的微任务（WHATWG把执行微任务的时间称为检查点）</p>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 如果在执行微任务的过程中，产生了新的微任务，同样会将微任务添加到微任务队列中，v8引擎一直玄幻执行微任务队列中的任务，直到队列为空才算执行结束（<strong>在执行微任务的过程中产生的新的微任务并不会推迟到下个宏任务中执行，而是在当前的宏任务中继续执行</strong>）<br>&nbsp;&nbsp;&nbsp;&nbsp;② 微任务的执行时长会影响到当前宏任务的时长，所以需要控制微任务的执行时长</p>
+<h2 id="监听DOM变化的方法"><a href="#监听DOM变化的方法" class="headerlink" title="监听DOM变化的方法"></a>监听DOM变化的方法</h2><p>web应用需要监听DOM变化并及时做出响应，MutationObserver如何监听DOM变化：<br>1.<em><strong>轮询检测</strong></em>：早期使用，使用setTimeout和setInterval来定时检测DOM是否有改变<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：① 间隔时间太长，不够及时 ② 间隔时间过短，会浪费工作量去检查</p>
+<p>2.<em><strong>Mutation Event</strong></em>：使用观察者模式，当DOM有变动就会立刻触发相应的事件，属于同步回调<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：① 较大性能开销</p>
+<p>3.<em><strong>MutationObserver</strong></em>：<strong>异步调用 + 微任务</strong>，不用每次DOM变化都触发异步调用，而是等多次DOM变化，渲染进程将变化记录封装成<strong>微任务</strong>，并且将微任务添加到当前宏任务的微任务队列中，<strong>一次触发异步调用</strong>，并且用一个数据结构记录DOM变化 </p>
+<h2 id="使用单线程的缺点"><a href="#使用单线程的缺点" class="headerlink" title="使用单线程的缺点"></a>使用单线程的缺点</h2><p>1.如何处理高优先级的任务（如监控DOM节点的变化情况）<br>&nbsp;&nbsp;&nbsp;&nbsp;① 观察者模式：如果每次发生变化时，都直接调用响应js接口，但是这样会导致当前任务执行时间被拉长且<strong>执行效率下降</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;② 异步方式：将这些任务添加到消息队列的尾部，当这样会影响监控的实时性<br>&nbsp;&nbsp;&nbsp;&nbsp;③ 微任务：通过宏任务和微任务，既可以解决效率和时效性<br/></p>
+<p>2.单个任务执行时间过久<br><img src="https://img-blog.csdnimg.cn/25c1053f50084a5885d548237c788d2f.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;单个js任务因为执行时间过久，占用了动画单帧的时间，这样会造成卡顿，所以js可以通过回调功能来规避这种问题，就是让要执行的js任务之后执行</p>
+<h2 id="setTimeout定时器"><a href="#setTimeout定时器" class="headerlink" title="setTimeout定时器"></a>setTimeout定时器</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>延迟队列</strong></em>：在Chrome中，除了正常使用的消息队列外，还有一个队列维护了需要延迟执行的任务列表（包括定时器和Chromium内部一些需要延迟执行的任务）<br/></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DelayIncomingQueue delayed_incoming_queue;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;当通过js调⽤setTimeout设置回调函数的时候，渲染进程将会创建⼀个回调任务</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DelayTask</span> &#123;</span> <span class="comment">// 回调任务</span></span><br><span class="line">    int64 id; </span><br><span class="line">    CallBackFunction cbf; <span class="comment">// 回调函数showName</span></span><br><span class="line">    <span class="keyword">int</span> start_time; <span class="comment">// 当前发起时间</span></span><br><span class="line">    <span class="keyword">int</span> delay_time; <span class="comment">// 延迟执行时间</span></span><br><span class="line">&#125;; </span><br><span class="line">DelayTask timerTask; </span><br><span class="line">timerTask.cbf = showName; </span><br><span class="line">timerTask.start_time = <span class="built_in">getCurrentTime</span>(); <span class="comment">// 获取当前时间 </span></span><br><span class="line">timerTask.delay_time = <span class="number">200</span>; <span class="comment">// 设置延迟执⾏时间</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;创建好回调任务之后，再将该任务添加到延迟执行队列中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delayed_incoming_queue.<span class="built_in">push</span>(timerTask)；</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;执行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ProcessTimerTask</span><span class="params">()</span></span>&#123; </span><br><span class="line">    <span class="comment">// 从delayed_incoming_queue中取出已经到期的定时器任务 </span></span><br><span class="line">    <span class="comment">// 依次执⾏这些任务 </span></span><br><span class="line">&#125; </span><br><span class="line">TaskQueue task_queue; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ProcessTask</span><span class="params">()</span></span>; </span><br><span class="line"><span class="keyword">bool</span> keep_running = <span class="literal">true</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MainTherad</span><span class="params">()</span></span>&#123; </span><br><span class="line">    <span class="keyword">for</span>(;;)&#123; </span><br><span class="line">    <span class="comment">//执⾏消息队列中的任务 </span></span><br><span class="line">    Task task = task_queue.<span class="built_in">takeTask</span>(); </span><br><span class="line">    </span><br><span class="line">    <span class="built_in">ProcessTask</span>(task); <span class="comment">// 执⾏延迟队列中的任务 </span></span><br><span class="line">    <span class="built_in">ProcessDelayTask</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(!keep_running) </span><br><span class="line">        <span class="comment">// 如果设置了退出标志，那么直接退出线程循环 </span></span><br><span class="line">        <span class="keyword">break</span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>clearTimeout函数</code>：直接从delayed_incoming_queue延迟队列中，通过ID查找到对应的任务，然后将其冲队列中删除</p>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;① <strong>如果当前任务执行时间过久</strong>，会影响延迟到期定时器任务的执行（因为并不是时间到了立马执行，而是要先执行完当前任务，再执行延迟队列）<br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;② 如果setTimeout存在<strong>嵌套调用</strong>，那么系统会设置最短时间间隔4毫秒（在Chrome中，定时器被嵌套调用5次以上，系统会判断该函数方法被阻塞了，如果定时器的调用时间间隔小于4毫秒，那么浏览器会将每次调用的时间间隔设置为4毫秒）<br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;③ <strong>未激活的页面</strong>，setTimeout执行最小间隔是1s<br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;④ <strong>延迟执行有最大值</strong>（Chrome、Safari、Firefox都是32bit来存储延时值，最大2147483647毫秒（大约24.8天），否则溢出，导致立即执行）<br/></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;⑤ 使用setTimeout设置的回调函数的<strong>this不符合直觉</strong></p>
+<h2 id="回调函数（Callback-Fcuntion）"><a href="#回调函数（Callback-Fcuntion）" class="headerlink" title="回调函数（Callback Fcuntion）"></a>回调函数（Callback Fcuntion）</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;将一个函数作为参数传递给另外一个函数，那作为参数的这个函数就是回调函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am do homework&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doWork</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;start&#x27;</span>);</span><br><span class="line">    cb();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;end&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">doWork(callback);</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;循环系统在执行一个任务时，都要为了这个任务维护一个系统调用栈（Chromium的用C++维护的）</p>
+<h4 id="同步回调："><a href="#同步回调：" class="headerlink" title="同步回调："></a>同步回调：</h4><p>函数是在主函数返回之前执行的（上面callback函数是同步回调，因为在doWork执行完之前执行的），同步函数就是在当前主函数的上下文汇总执行回调函数</p>
+<br/>
+
+<h4 id="异步回调："><a href="#异步回调：" class="headerlink" title="异步回调："></a>异步回调：</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;I am do homework&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doWork</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;start&#x27;</span>);</span><br><span class="line">    <span class="built_in">setTimeout</span>(cb, <span class="number">1000</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;end&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line">doWork(callback);</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;函数并没有在主函数内部被调用，而在外部执行，而异步函数可以通过：① 异步函数做成一个任务，添加到信息队列尾部；② 异步函数添加到微任务队列中，这样可以在当前任务的末尾处执行微任务</p>
+<h2 id="XMLHttpRequst"><a href="#XMLHttpRequst" class="headerlink" title="XMLHttpRequst"></a>XMLHttpRequst</h2><p><img src="https://img-blog.csdnimg.cn/8db58922b10145d98000ab4312ff58c3.png#pic_center" alt="在这里插入图片描述"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">GetWebData</span>(<span class="params">URL</span>)</span>&#123; </span><br><span class="line">    <span class="comment">/* 1:新建XMLHttpRequest请求对象 */</span> </span><br><span class="line">    <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 2:注册相关事件回调处理函数 */</span> </span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">switch</span>(xhr.readyState) &#123; </span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>: <span class="comment">// 请求未初始化 </span></span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">&quot;请求未初始化&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>; </span><br><span class="line">           <span class="keyword">case</span> <span class="number">1</span>: <span class="comment">// OPENED </span></span><br><span class="line">               <span class="built_in">console</span>.log(<span class="string">&quot;OPENED&quot;</span>);</span><br><span class="line">               <span class="keyword">break</span>; </span><br><span class="line">           <span class="keyword">case</span> <span class="number">2</span>: <span class="comment">// HEADERS_RECEIVED </span></span><br><span class="line">               <span class="built_in">console</span>.log(<span class="string">&quot;HEADERS_RECEIVED&quot;</span>);</span><br><span class="line">               <span class="keyword">break</span>; </span><br><span class="line">           <span class="keyword">case</span> <span class="number">3</span>: <span class="comment">// LOADING</span></span><br><span class="line">               <span class="built_in">console</span>.log(<span class="string">&quot;LOADING&quot;</span>);</span><br><span class="line">               <span class="keyword">break</span>; </span><br><span class="line">           <span class="keyword">case</span> <span class="number">4</span>: <span class="comment">// DONE </span></span><br><span class="line">               <span class="keyword">if</span>(<span class="built_in">this</span>.status == <span class="number">200</span>||<span class="built_in">this</span>.status == <span class="number">304</span>) &#123; </span><br><span class="line">                   <span class="built_in">console</span>.log(<span class="built_in">this</span>.responseText); </span><br><span class="line">               &#125; </span><br><span class="line">               <span class="built_in">console</span>.log(<span class="string">&quot;DONE&quot;</span>);</span><br><span class="line">               <span class="keyword">break</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    xhr.ontimeout = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123; </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;ontimeout&#x27;</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    xhr.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123; </span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">&#x27;onerror&#x27;</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 3:打开请求 */</span> </span><br><span class="line">    xhr.open(<span class="string">&#x27;Get&#x27;</span>, URL, <span class="literal">true</span>); <span class="comment">// 创建⼀个Get请求,采⽤异步 </span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 4:配置参数 */</span> </span><br><span class="line">    xhr.timeout = <span class="number">3000</span>; <span class="comment">// 设置xhr请求的超时时间 </span></span><br><span class="line">    xhr.responseType = <span class="string">&quot;text&quot;</span>; <span class="comment">// 设置响应返回的数据格式 </span></span><br><span class="line">    xhr.setRequestHeader(<span class="string">&quot;X_TEST&quot;</span>,<span class="string">&quot;time.geekbang&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 5:发送请求 */</span> </span><br><span class="line">    xhr.send();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;渲染进程会将请求发送给网络进程，然后网络进程负责资源的下载，等网络进程接收到数据之后，就会利用IPC来通知渲染进程；渲染进程接收到消息周后，<strong>会将xhr的回调函数封装成任务添加到消息队列中</strong>，等主线程循环系统执行到该任务，就会<strong>根据相关的状态来调用对应的回调函数</strong></p>
+<p><em><strong>注意</strong></em>：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 跨域问题<br>&nbsp;&nbsp;&nbsp;&nbsp;② HTTPS混合内容的问题（HTTPS混合内容是HTTPS页面中包含了不符合HTTPS安全要求的内容，比如HTTP资源，通过HTTP加载的图像、视频、样式表、脚本等，都属于混合内容）</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/07/16/js%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">js的垃圾回收</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/JS/" rel="tag">JS</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>老笨蛋了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/18/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E3%80%81%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E3%80%81%E5%AE%8F%E4%BB%BB%E5%8A%A1%E3%80%81%E5%BE%AE%E4%BB%BB%E5%8A%A1%E3%80%81%E5%AE%9A%E6%97%B6%E5%99%A8%E5%92%8CXMLHttpRequest/">调用栈：消息队列、事件循环、宏任务、微任务、定时器和XMLHttpRequest</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/16/js%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">js的垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/14/JS%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6%EF%BC%9A%E6%A0%88%E7%A9%BA%E9%97%B4%E5%92%8C%E5%A0%86%E7%A9%BA%E9%97%B4/">JS内存机制：栈空间和堆空间</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/14/this%EF%BC%9A%E4%BB%8EJavascipt%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E8%A7%86%E8%A7%92%E5%87%BA%E5%8F%91/">this：从Javascipt执行上下文的视角出发</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/08/%E8%B0%83%E7%94%A8%E6%A0%88%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88JS%E4%BB%A3%E7%A0%81%E4%BC%9A%E5%87%BA%E7%8E%B0%E6%BA%A2%E5%87%BA%EF%BC%9F/">调用栈：为什么JS代码会出现溢出？</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/08/callee%E3%80%81caller%E3%80%81arguments%E3%80%81call()%E3%80%81apply()%E3%80%81bind()%E3%80%81extend()/">callee、caller、arguments、call()、apply()、bind()、extend()</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 18.57px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.43px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 12.86px;">HTML</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/TS/" style="font-size: 14.29px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 12.86px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 12.86px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15.71px;">浏览器</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
