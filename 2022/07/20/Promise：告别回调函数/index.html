@@ -100,9 +100,9 @@
 
 <h4 id="出错后，怎么通过“冒泡”传递给最后捕获异常的函数？"><a href="#出错后，怎么通过“冒泡”传递给最后捕获异常的函数？" class="headerlink" title="出错后，怎么通过“冒泡”传递给最后捕获异常的函数？"></a><em><strong>出错后，怎么通过“冒泡”传递给最后捕获异常的函数？</strong></em></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;promise内部有resolved_和rejected_变量保存成功和失败的回调，进入.then（resolved, rejected）时会判断rejected参数是否为函数，若是函数，错误时使用rejected处理错误，若不是，则错误时直接throw错误，一直传递到最后捕获，若最后没有被捕获，则会报错（可通过监听unhandledrejection事件捕获未处理的promise错误）</p>
 <h2 id="Promise与微任务"><a href="#Promise与微任务" class="headerlink" title="Promise与微任务"></a>Promise与微任务</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;Promise中的执行函数都是同步进行的，但是里面存在着异步操作，在异步操作结束后会调用resolve()，或遇到错误调用reject()，这都是微任务进入到EventLoop中</p>
-<h3 id="解决回调的方式："><a href="#解决回调的方式：" class="headerlink" title="解决回调的方式："></a>解决回调的方式：</h3><p>1.使用同步回调，知道异步任务进行完，再进行后面的任务<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：同步函数会使整个脚本阻塞，当前任务等待，后面的任务都无法得到执行，导致CPU的利用率非常低，而且还<strong>无法实现延迟绑定的效果</strong></p>
-<p>2.使用异步调用，将回调函数放在进行宏任务队列的队尾<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：执行回调（resolve/reject）的时机应该是在前面所有的宏任务完成之后，<strong>若当前的任务队列很长，那么回调不会得到执行</strong>，造成应用卡顿</p>
-<p>3.<strong>使用异步调用，将回调函数放在进行宏任务队列的最后面（微任务队列中）</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;优点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 采用异步回调替代同步回调解决了浪费了CPU的性能问题<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② 放到当前宏任务最后执行，解决了回调执行的实时性问题</p>
+<h3 id="解决回调的方式："><a href="#解决回调的方式：" class="headerlink" title="解决回调的方式："></a>解决回调的方式：</h3><p>1.使用同步回调，知道异步任务进行完，再进行后面的任务<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>缺点</code>：同步函数会使整个脚本阻塞，当前任务等待，后面的任务都无法得到执行，导致CPU的利用率非常低，而且还<strong>无法实现延迟绑定的效果</strong></p>
+<p>2.使用异步调用，将回调函数放在进行宏任务队列的队尾<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>缺点</code>：执行回调（resolve/reject）的时机应该是在前面所有的宏任务完成之后，<strong>若当前的任务队列很长，那么回调不会得到执行</strong>，造成应用卡顿</p>
+<p>3.<strong>使用异步调用，将回调函数放在进行宏任务队列的最后面（微任务队列中）</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>优点</code>：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 采用异步回调替代同步回调解决了浪费了CPU的性能问题<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② 放到当前宏任务最后执行，解决了回调执行的实时性问题</p>
 
         </article>
         <section class="post-near">
