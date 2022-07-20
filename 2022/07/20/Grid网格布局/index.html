@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>Grid网格布局 - taytay</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="taytay">
+    <meta property="og:title" content="Grid网格布局"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>taytay</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/CSS/">CSS</a><a class="category-link" href="/categories/ES6/">ES6</a><a class="category-link" href="/categories/HTML/">HTML</a><a class="category-link" href="/categories/JS/">JS</a><a class="category-link" href="/categories/TS/">TS</a><a class="category-link" href="/categories/Vscode/">Vscode</a><a class="category-link" href="/categories/Vue/">Vue</a><a class="category-link" href="/categories/Webpack/">Webpack</a><a class="category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a><a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>Grid网格布局</h2>
+            <div class="post-meta">
+                <time class="date">2022.07.20</time>
+            
+                <span class="category"><a class="category-link" href="/categories/CSS/">CSS</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h2 id="display属性"><a href="#display属性" class="headerlink" title="display属性"></a>display属性</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;当一个HTML元素将display设置为 grid 或 inline-grid，就变成了网格容器，这个元素的所有直系子元素将成为网格元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid-container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">display</span>: inline-grid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>7<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grid-item&quot;</span>&gt;</span>9<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="grid属性"><a href="#grid属性" class="headerlink" title="grid属性"></a>grid属性</h2><ul>
+<li>显式网格属性： grid-template-rows、grid-template-columns 和 grid-template-areas</li>
+<li>隐式网格属性： grid-auto-rows、grid-auto-columns 和 grid-auto-flow</li>
+<li>间距属性： grid-column-gap 和 grid-row-gap<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">grid: grid-template-rows / grid-template-columns / grid-template-areas / </span><br><span class="line">    grid-auto-rows / grid-auto-columns / grid-auto-flow;</span><br><span class="line">// 默认值: one none none auto auto row</span><br><span class="line"></span><br><span class="line">.grid-container &#123;</span><br><span class="line">    display: grid;</span><br><span class="line">    grid:</span><br><span class="line">        <span class="string">&#x27;header header header header header&#x27;</span></span><br><span class="line">        <span class="string">&#x27;menu main main main right right&#x27;</span></span><br><span class="line">        <span class="string">&#x27;menu footer footer footer footer&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="网格轨道"><a href="#网格轨道" class="headerlink" title="网格轨道"></a>网格轨道</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;通过grid-template-columns和grid-template-rows,来定义网格中的行和列，这些属性定义了网络的轨道，一个网络轨道就是网络中任意两条线之间的空格</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid-container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    grid-template-<span class="attribute">columns</span>: auto auto auto auto;</span><br><span class="line">    grid-template-rows: <span class="number">100px</span> <span class="number">150px</span> <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="fr单位"><a href="#fr单位" class="headerlink" title="fr单位"></a>fr单位</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;轨道可以使用任何单位进行定义，网格引入了fr单位来帮助我们创建灵活的网络轨道，1fr = 可用空间的一等份，轨道会随着可用空间增长和收缩</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid-container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    grid-template-<span class="attribute">columns</span>: <span class="number">1</span>fr <span class="number">1</span>fr <span class="number">1</span>fr;</span><br><span class="line">    grid-template-rows: <span class="number">100px</span> <span class="number">150px</span> <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="网格单元"><a href="#网格单元" class="headerlink" title="网格单元"></a>网格单元</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;一个网格单元是一个网格元素的最小单位</p>
+<h2 id="网格区域"><a href="#网格区域" class="headerlink" title="网格区域"></a>网格区域</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;网格元素可以向行向列方向扩展一个或多个单元，并且会创建一个网格区域</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">grid-area: grid-row-start / grid-column-start / </span><br><span class="line">    grid-row-end /grid-column-end;</span><br><span class="line">// 默认值: auto auto auto auto</span><br><span class="line"></span><br><span class="line">.item8 &#123;</span><br><span class="line">    grid-area: <span class="number">2</span> / <span class="number">1</span> / span <span class="number">2</span> / span <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>grid-column： grid-column-start 和 grid-column-end的简写属性</li>
+<li>grid-row： grid-row-start 和 grid-row-end的简写属性</li>
+</ul>
+<h2 id="网格列"><a href="#网格列" class="headerlink" title="网格列"></a>网格列</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;网格元素的垂直方向成为列（Column）<br><img src="https://img-blog.csdnimg.cn/f3970e78e6364591aa9af24b35ea50f1.png#pic_center" alt="在这里插入图片描述"><br>&nbsp;&nbsp;&nbsp;&nbsp;grid-auto-rows：设置网格中行的默认大小（默认值：auto）</p>
+<h2 id="网格行"><a href="#网格行" class="headerlink" title="网格行"></a>网格行</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;网格元素的水平方向成为行（Row）<br><img src="https://img-blog.csdnimg.cn/1f5d654935d74f8eb937ecf18b22c2ca.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;grid-auto-columns：设置网格中列的默认大小（默认值：auto）</p>
+<h2 id="grid-auto-flow属性"><a href="#grid-auto-flow属性" class="headerlink" title="grid-auto-flow属性"></a>grid-auto-flow属性</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-<span class="attribute">auto</span>-flow: row | column | dense | row dense | column dense;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>row</td>
+<td>默认值，通过填充每一行来放置网格元素，在必要时增加新行</td>
+</tr>
+<tr>
+<td>column</td>
+<td>通过填充每一列来放置网格元素，在必要时增加新列</td>
+</tr>
+<tr>
+<td>dense</td>
+<td>该关键字指定自动布局算法使用一种”稠密”堆积算法，如果后面出现了稍小的元素，则会试图去填充网格中前面留下的空白。这样做会填上稍大元素留下的空白，但同时也可能导致原来出现的次序被打乱</td>
+</tr>
+<tr>
+<td>row dense</td>
+<td>按行来填充网格中前面留下的空白</td>
+</tr>
+<tr>
+<td>column dense</td>
+<td>按列来填充网格中前面留下的空白</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="网格间距"><a href="#网格间距" class="headerlink" title="网格间距"></a>网格间距</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;网格间距（Column Gap）指的是两个网格单元之间的网格横向间距或网格纵向间距<br><img src="https://img-blog.csdnimg.cn/bb40ef31c12449d48b3de5a57e8db1a8.png#pic_center" alt="在这里插入图片描述"></p>
+<ul>
+<li>grid-column-gap </li>
+<li>grid-row-gap grid-gap：grid-row-gap grid-column-gap（被gap代替）</li>
+<li>column-gap: length | normal </li>
+<li>row-gap: length | normal </li>
+<li>gap： row-gap column-gap（默认值：normal normal)</li>
+</ul>
+<h2 id="网格线"><a href="#网格线" class="headerlink" title="网格线"></a>网格线</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;列与列，行与行之间的交接处就是网格线，Grid会为我们创建编号的网格线来让我们定位每个网格元素<br><img src="https://img-blog.csdnimg.cn/be7a377218aa4abca6d8d6dbc517b493.png#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/4a93743f4b7545038516e5d110c664b4.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="order"><a href="#order" class="headerlink" title="order"></a>order</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;使用order属性来重写它的顺序，默认情况下，所有的网格项的order都是0，但是顺序也可以被任意设置为正数或者负数</p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: 看完啦 (つд⊂)</li>
+                
+                
+                    <li>下一篇: <a href="/2022/07/20/Promise%EF%BC%9A%E5%91%8A%E5%88%AB%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">Promise：告别回调函数</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/CSS/" rel="tag">CSS</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://img-blog.csdnimg.cn/f95155028bb7406ebed9c30d266359bd.jpeg#pic_centerr" alt="taytay" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>taytay</h4>
+                <p>老笨蛋了...</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/07/20/Grid%E7%BD%91%E6%A0%BC%E5%B8%83%E5%B1%80/">Grid网格布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/20/Promise%EF%BC%9A%E5%91%8A%E5%88%AB%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">Promise：告别回调函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/18/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E3%80%81%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E3%80%81%E5%AE%8F%E4%BB%BB%E5%8A%A1%E3%80%81%E5%BE%AE%E4%BB%BB%E5%8A%A1%E3%80%81%E5%AE%9A%E6%97%B6%E5%99%A8%E5%92%8CXMLHttpRequest/">消息队列、事件循环、宏任务、微任务、定时器和XMLHttpRequest</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/16/js%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">js的垃圾回收</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/14/JS%E5%86%85%E5%AD%98%E6%9C%BA%E5%88%B6%EF%BC%9A%E6%A0%88%E7%A9%BA%E9%97%B4%E5%92%8C%E5%A0%86%E7%A9%BA%E9%97%B4/">JS内存机制：栈空间和堆空间</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/07/14/this%EF%BC%9A%E4%BB%8EJavascipt%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E8%A7%86%E8%A7%92%E5%87%BA%E5%8F%91/">this：从Javascipt执行上下文的视角出发</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/CDN/" style="font-size: 10px;">CDN</a> <a href="/tags/CSS/" style="font-size: 18.57px;">CSS</a> <a href="/tags/ES6/" style="font-size: 11.43px;">ES6</a> <a href="/tags/Flex%E5%B8%83%E5%B1%80/" style="font-size: 10px;">Flex布局</a> <a href="/tags/HTML/" style="font-size: 12.86px;">HTML</a> <a href="/tags/JS/" style="font-size: 20px;">JS</a> <a href="/tags/TS/" style="font-size: 14.29px;">TS</a> <a href="/tags/Vscode/" style="font-size: 10px;">Vscode</a> <a href="/tags/Vue/" style="font-size: 17.14px;">Vue</a> <a href="/tags/Webpack/" style="font-size: 12.86px;">Webpack</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/" style="font-size: 10px;">前端优化</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 12.86px;">小程序</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 15.71px;">浏览器</a> <a href="/tags/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">阅读笔记</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2022 <a href="/">taytay</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":true,"night":true});</script>
+
+  </body>
+</html>
