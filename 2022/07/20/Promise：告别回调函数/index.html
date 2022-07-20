@@ -86,7 +86,7 @@
 
 <br/>
 
-<p>####*** 造成的原因***：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 嵌套调用<br>&nbsp;&nbsp;&nbsp;&nbsp;② 任务的不确定性，执行每个任务都有两种可能的结果</p>
+<h4 id="造成的原因-："><a href="#造成的原因-：" class="headerlink" title="*** 造成的原因***："></a>*** 造成的原因***：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 嵌套调用<br>&nbsp;&nbsp;&nbsp;&nbsp;② 任务的不确定性，执行每个任务都有两种可能的结果</p>
 <br/>
 
 <h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a><em><strong>解决</strong></em>：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 消灭嵌套调用（Promise实现了回调函数的延迟绑定、将回调函数onResolve的返回值穿透到最外层）<br>&nbsp;&nbsp;&nbsp;&nbsp;② 合并多个任务的错误处理（使用最后一个对象来捕获所有异常，因为Promise对象的错误具有“冒泡”性质，会一直向后传递，知道被onReject函数处理或catch语句捕获为止）</p>
