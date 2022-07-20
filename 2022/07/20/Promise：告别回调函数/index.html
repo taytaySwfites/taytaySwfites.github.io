@@ -72,10 +72,10 @@
 
 
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1.<strong>状态不受外界影响</strong>，有三种状态：pending、resolved、rejected，只有异步操作的结果可以决定是哪一种状态，任何其他操作无法改变这种状态<br>2.<strong>一旦状态改变，就不会再变</strong>，且任何时候都可以获得这个结果</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>1.<code>then</code>：为Promise实例添加状态改变时的回调函数，接收两个回调作为参数（状态变为resolved时的回调函数 和 状态变为rejected时的回调函数）<br>返回值：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 返回Promise实例对象，返回的该实例多想会调用下一个then<br>&nbsp;&nbsp;&nbsp;&nbsp;② 返回普通值，直接传递给下一个then，通过then参数中函数的参数接受该值，这种情况下then会默认产生一个Promise实例对象</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>1.<code>then</code>：为Promise实例添加状态改变时的回调函数，接收两个回调作为参数（状态变为resolved时的回调函数 和 状态变为rejected时的回调函数）<br><strong>返回值</strong>：<br>&nbsp;&nbsp;&nbsp;&nbsp;① <strong>返回Promise实例对象</strong>，返回的该实例多想会调用下一个then<br>&nbsp;&nbsp;&nbsp;&nbsp;② <strong>返回普通值</strong>，直接传递给下一个then，通过then参数中函数的参数接受该值，这种情况下then会默认产生一个Promise实例对象</p>
 <p>2.<code>catch</code></p>
 <p>3.<code>finally</code>：指定不管最后状态如何都会执行的回调函数</p>
-<p>4.<code>Promise.all(</code>：并发处理多个异步任务，所有任务都执行完成才能得到结果</p>
+<p>4.<code>Promise.all()</code>：并发处理多个异步任务，所有任务都执行完成才能得到结果</p>
 <p>5.<code>Promise.race()</code>：并发处理多个异步任务，只要有一个任务完后就能得到结果</p>
 <p><em><strong>注意</strong></em>：then和catch都属于实例方法，通过实例调用（定义在Promise原型链上）；all和race是两个对象方法，直接通过Promise对象调用</p>
 <h2 id="封装异步代码和回调地狱"><a href="#封装异步代码和回调地狱" class="headerlink" title="封装异步代码和回调地狱"></a>封装异步代码和回调地狱</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;我们重点关注输入内容（请求信息）和输出内容（回复信息），至于中间的异步请求过程，不太关心，所以将异步代码封装<br><img src="https://img-blog.csdnimg.cn/eaaf4f09a7e440b3a35d6cc749b9dc4c.png#pic_center" alt="在这里插入图片描述"></p>
@@ -86,7 +86,8 @@
 
 <br/>
 
-<h4 id="造成的原因："><a href="#造成的原因：" class="headerlink" title="造成的原因："></a>造成的原因：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 嵌套调用<br>&nbsp;&nbsp;&nbsp;&nbsp;② 任务的不确定性，执行每个任务都有两种可能的结果<br/></p>
+<h4 id="造成的原因："><a href="#造成的原因：" class="headerlink" title="造成的原因："></a>造成的原因：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 嵌套调用<br>&nbsp;&nbsp;&nbsp;&nbsp;② 任务的不确定性，执行每个任务都有两种可能的结果</p>
+<p><br/><br/></p>
 <h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 消灭嵌套调用（Promise实现了回调函数的延迟绑定、将回调函数onResolve的返回值穿透到最外层）<br>&nbsp;&nbsp;&nbsp;&nbsp;② 合并多个任务的错误处理（使用最后一个对象来捕获所有异常，因为Promise对象的错误具有“冒泡”性质，会一直向后传递，知道被onReject函数处理或catch语句捕获为止）</p>
 <br/>
 
@@ -98,8 +99,8 @@
 
 <h3 id="出错后，怎么通过“冒泡”传递给最后捕获异常的函数？"><a href="#出错后，怎么通过“冒泡”传递给最后捕获异常的函数？" class="headerlink" title="出错后，怎么通过“冒泡”传递给最后捕获异常的函数？"></a>出错后，怎么通过“冒泡”传递给最后捕获异常的函数？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;promise内部有resolved_和rejected_变量保存成功和失败的回调，进入.then（resolved, rejected）时会判断rejected参数是否为函数，若是函数，错误时使用rejected处理错误，若不是，则错误时直接throw错误，一直传递到最后捕获，若最后没有被捕获，则会报错（可通过监听unhandledrejection事件捕获未处理的promise错误）</p>
 <h2 id="Promise与微任务"><a href="#Promise与微任务" class="headerlink" title="Promise与微任务"></a>Promise与微任务</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;Promise中的执行函数都是同步进行的，但是里面存在着异步操作，在异步操作结束后会调用resolve()，或遇到错误调用reject()，这都是微任务进入到EventLoop中</p>
-<h4 id="解决回调的方式："><a href="#解决回调的方式：" class="headerlink" title="解决回调的方式："></a>解决回调的方式：</h4><p>1.使用同步回调，知道异步任务进行完，再进行后面的任务<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：同步函数会使整个脚本阻塞，当前任务等待，后面的任务都无法得到执行，导致CPU的利用率非常低，而且还<strong>无法实现延迟绑定的效果</strong></p>
-<p>2.使用异步调用，将回调函数放在进行宏任务队列的队尾<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：执行回调（resolve/reject）的时机应该是在前面所有的宏任务完成之后，若当前的任务队列很长，那么回调不会得到执行，造成应用卡顿</p>
+<h3 id="解决回调的方式："><a href="#解决回调的方式：" class="headerlink" title="解决回调的方式："></a>解决回调的方式：</h3><p>1.使用同步回调，知道异步任务进行完，再进行后面的任务<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：同步函数会使整个脚本阻塞，当前任务等待，后面的任务都无法得到执行，导致CPU的利用率非常低，而且还<strong>无法实现延迟绑定的效果</strong></p>
+<p>2.使用异步调用，将回调函数放在进行宏任务队列的队尾<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：执行回调（resolve/reject）的时机应该是在前面所有的宏任务完成之后，<strong>若当前的任务队列很长，那么回调不会得到执行</strong>，造成应用卡顿</p>
 <p>3.<strong>使用异步调用，将回调函数放在进行宏任务队列的最后面（微任务队列中）</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;优点：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;① 采用异步回调替代同步回调解决了浪费了CPU的性能问题<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;② 放到当前宏任务最后执行，解决了回调执行的实时性问题</p>
 
         </article>
