@@ -86,18 +86,19 @@
 
 <br/>
 
-<h4 id="造成的原因："><a href="#造成的原因：" class="headerlink" title="造成的原因："></a>造成的原因：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 嵌套调用<br>&nbsp;&nbsp;&nbsp;&nbsp;② 任务的不确定性，执行每个任务都有两种可能的结果</p>
-<p><br/><br/></p>
-<h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 消灭嵌套调用（Promise实现了回调函数的延迟绑定、将回调函数onResolve的返回值穿透到最外层）<br>&nbsp;&nbsp;&nbsp;&nbsp;② 合并多个任务的错误处理（使用最后一个对象来捕获所有异常，因为Promise对象的错误具有“冒泡”性质，会一直向后传递，知道被onReject函数处理或catch语句捕获为止）</p>
+<p>####*** 造成的原因***：<br>&nbsp;&nbsp;&nbsp;&nbsp;① 嵌套调用<br>&nbsp;&nbsp;&nbsp;&nbsp;② 任务的不确定性，执行每个任务都有两种可能的结果</p>
 <br/>
 
-<h3 id="如何实现回调函数返回值穿透的？"><a href="#如何实现回调函数返回值穿透的？" class="headerlink" title="如何实现回调函数返回值穿透的？"></a>如何实现回调函数返回值穿透的？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;① Promise的执行结果保存在primise的data变量中<br>&nbsp;&nbsp;&nbsp;&nbsp;② .then()方法返回值使用resolved或rejected回调方法新建一个promise对象（如成功返回new Promise(resolved)，将前一个promise的data值赋值给新建的promise）</p>
+<h4 id="解决："><a href="#解决：" class="headerlink" title="解决："></a><em><strong>解决</strong></em>：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① 消灭嵌套调用（Promise实现了回调函数的延迟绑定、将回调函数onResolve的返回值穿透到最外层）<br>&nbsp;&nbsp;&nbsp;&nbsp;② 合并多个任务的错误处理（使用最后一个对象来捕获所有异常，因为Promise对象的错误具有“冒泡”性质，会一直向后传递，知道被onReject函数处理或catch语句捕获为止）</p>
 <br/>
 
-<h3 id="如何实现错误合并的？"><a href="#如何实现错误合并的？" class="headerlink" title="如何实现错误合并的？"></a>如何实现错误合并的？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;之所以可以通过最后一个对象来捕获所有异常，是因为Promise对象的错误具有“<strong>冒泡性</strong>”，会一直向后传递，直到被onReject函数处理或catch语句捕获</p>
+<h4 id="如何实现回调函数返回值穿透的？"><a href="#如何实现回调函数返回值穿透的？" class="headerlink" title="如何实现回调函数返回值穿透的？"></a><em><strong>如何实现回调函数返回值穿透的？</strong></em></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;① Promise的执行结果保存在primise的data变量中<br>&nbsp;&nbsp;&nbsp;&nbsp;② .then()方法返回值使用resolved或rejected回调方法新建一个promise对象（如成功返回new Promise(resolved)，将前一个promise的data值赋值给新建的promise）</p>
 <br/>
 
-<h3 id="出错后，怎么通过“冒泡”传递给最后捕获异常的函数？"><a href="#出错后，怎么通过“冒泡”传递给最后捕获异常的函数？" class="headerlink" title="出错后，怎么通过“冒泡”传递给最后捕获异常的函数？"></a>出错后，怎么通过“冒泡”传递给最后捕获异常的函数？</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;promise内部有resolved_和rejected_变量保存成功和失败的回调，进入.then（resolved, rejected）时会判断rejected参数是否为函数，若是函数，错误时使用rejected处理错误，若不是，则错误时直接throw错误，一直传递到最后捕获，若最后没有被捕获，则会报错（可通过监听unhandledrejection事件捕获未处理的promise错误）</p>
+<h4 id="如何实现错误合并的？"><a href="#如何实现错误合并的？" class="headerlink" title="如何实现错误合并的？"></a><em><strong>如何实现错误合并的？</strong></em></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;之所以可以通过最后一个对象来捕获所有异常，是因为Promise对象的错误具有“<strong>冒泡性</strong>”，会一直向后传递，直到被onReject函数处理或catch语句捕获</p>
+<br/>
+
+<h4 id="出错后，怎么通过“冒泡”传递给最后捕获异常的函数？"><a href="#出错后，怎么通过“冒泡”传递给最后捕获异常的函数？" class="headerlink" title="出错后，怎么通过“冒泡”传递给最后捕获异常的函数？"></a><em><strong>出错后，怎么通过“冒泡”传递给最后捕获异常的函数？</strong></em></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;promise内部有resolved_和rejected_变量保存成功和失败的回调，进入.then（resolved, rejected）时会判断rejected参数是否为函数，若是函数，错误时使用rejected处理错误，若不是，则错误时直接throw错误，一直传递到最后捕获，若最后没有被捕获，则会报错（可通过监听unhandledrejection事件捕获未处理的promise错误）</p>
 <h2 id="Promise与微任务"><a href="#Promise与微任务" class="headerlink" title="Promise与微任务"></a>Promise与微任务</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;Promise中的执行函数都是同步进行的，但是里面存在着异步操作，在异步操作结束后会调用resolve()，或遇到错误调用reject()，这都是微任务进入到EventLoop中</p>
 <h3 id="解决回调的方式："><a href="#解决回调的方式：" class="headerlink" title="解决回调的方式："></a>解决回调的方式：</h3><p>1.使用同步回调，知道异步任务进行完，再进行后面的任务<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：同步函数会使整个脚本阻塞，当前任务等待，后面的任务都无法得到执行，导致CPU的利用率非常低，而且还<strong>无法实现延迟绑定的效果</strong></p>
 <p>2.使用异步调用，将回调函数放在进行宏任务队列的队尾<br>&nbsp;&nbsp;&nbsp;&nbsp;缺点：执行回调（resolve/reject）的时机应该是在前面所有的宏任务完成之后，<strong>若当前的任务队列很长，那么回调不会得到执行</strong>，造成应用卡顿</p>
