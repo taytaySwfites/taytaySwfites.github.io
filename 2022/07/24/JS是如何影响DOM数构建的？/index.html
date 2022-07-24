@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>TCP协议：如何保证页面文件能被完整送达到浏览器？ - taytay</title>
+    <title>JS是如何影响DOM数构建的？ - taytay</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="taytay">
-    <meta property="og:title" content="TCP协议：如何保证页面文件能被完整送达到浏览器？"/>
+    <meta property="og:title" content="JS是如何影响DOM数构建的？"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -53,9 +53,9 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>TCP协议：如何保证页面文件能被完整送达到浏览器？</h2>
+            <h2>JS是如何影响DOM数构建的？</h2>
             <div class="post-meta">
-                <time class="date">2022.06.30</time>
+                <time class="date">2022.07.24</time>
             
                 <span class="category"><a class="category-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></span>
             
@@ -63,26 +63,38 @@
         </section>
         <article class="post-content">
         
-            <p>衡量Web页面性能的重要指标“FP(First Paint)”，从页面加载到首次开始绘制的时长<br>什么影响FP指标？  网络加载速度</p>
-<h2 id="一个数据包的“旅程”"><a href="#一个数据包的“旅程”" class="headerlink" title="一个数据包的“旅程”"></a>一个数据包的“旅程”</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;互联网，实际上是一套理念和协议组成的体系结构<br/></p>
-<h3 id="1-Ip：把数据包送达目的主机"><a href="#1-Ip：把数据包送达目的主机" class="headerlink" title="1.Ip：把数据包送达目的主机"></a>1.Ip：把数据包送达目的主机</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;网际协议(Internet Protocol,IP)：计算机的地址就称为IP地址，访问任何网站实际上只是你的计算机向另外一台计算机请求信息<br><img src="https://img-blog.csdnimg.cn/40ed94adb9094a2e996f23e1be5b1a0f.png#pic_center" alt="在这里插入图片描述"></p>
-<h3 id="2-UDP：把数据包送达应用程序"><a href="#2-UDP：把数据包送达应用程序" class="headerlink" title="2.UDP：把数据包送达应用程序"></a>2.UDP：把数据包送达应用程序</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;用户数据协议(User Datagram Protocol，UDP)：IP通过IP地址信息把数据包发送给指定的主机，而UDP通过端口号把数据包分发给正确的程序<br><img src="https://img-blog.csdnimg.cn/a526dde1569b4d52b2860f413a8fe139.png#pic_center" alt="在这里插入图片描述"></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<code>UDP不能保证数据可靠性，但是传输速度却非常快</code></p>
-<h3 id="3-TCP：把数据完整地送达应用程序"><a href="#3-TCP：把数据完整地送达应用程序" class="headerlink" title="3.TCP：把数据完整地送达应用程序"></a>3.TCP：把数据完整地送达应用程序</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;传输控制协议(Transmission Control Protocol, TCP)，是一种面向连接的、可靠的、基于字节流的传输层通信协议<br/><br>相对于UDP，TCP有两个特点：<br>① 对于数据包丢失的情况，TCP提供重传机制<br>② TCP引入了数据包排序机制，用来保证把乱序的数据包组合成一个完整的文件<br><img src="https://img-blog.csdnimg.cn/3b8925bbeca648db99b94fd75480ce81.png#pic_center" alt="在这里插入图片描述"></p>
-<h2 id="完整的TCP连接"><a href="#完整的TCP连接" class="headerlink" title="完整的TCP连接"></a>完整的TCP连接</h2><p><img src="https://img-blog.csdnimg.cn/bed744c58afb4f89ac36f05d3b777360.png#pic_center" alt="在这里插入图片描述"></p>
-<h3 id="1-三次握手："><a href="#1-三次握手：" class="headerlink" title="1.三次握手："></a>1.三次握手：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;面向连接是指在数据通信开始之前先做好两端之间的准备工作，通过客户端和服务器发送三个数据包以确认连接的建立</p>
-<h3 id="2-传输数据："><a href="#2-传输数据：" class="headerlink" title="2.传输数据："></a>2.传输数据：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;接收端需要对每个数据包进行确认操作（在接收到数据包后，需要发送确认数据包给发送端，所以当发送端在规定时间内没有接收到接收端的反馈信息，则认为数据包丢失，并触发重传机制；一个大的文件的传输过程中会被拆分成很多小包，这些数据包到达接收端后，接收端按照TCP头中序号排序，从而保证完整性）</p>
-<h3 id="3-四次挥手"><a href="#3-四次挥手" class="headerlink" title="3.四次挥手"></a>3.四次挥手</h3><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;TCP为了保证数据传输可靠性，牺牲了数据包的传输速度，但是“三次握手”和“数据包校验机制”等把传输过程中的数据包的数据提高了一倍
+            <h2 id="DOM树"><a href="#DOM树" class="headerlink" title="DOM树"></a>DOM树</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;从网络传给渲染引擎的HTML⽂件字节流是无法直接被渲染引擎理解的，所以要将其转化为渲染引擎能够理解的内部结构——DOM<br/></p>
+<ul>
+<li>页面：DOM是生成页面的基础数据结构</li>
+<li>js脚本：DOM提供给jd脚本操作的接口，通过这套接口，js可以对DOM结构进行访问，从而改变文档的结构、样式和内容</li>
+<li>安全：DOM可以将不安全的内容在DOM解析阶段被拦截</li>
+</ul>
+<br/>
+
+<p><em><strong>注意</strong></em>：DOM是HTML的内部数据结构，将Web页面和js脚本连接起来，并过滤⼀些不安全的内容</p>
+<h2 id="DOM树如何生成"><a href="#DOM树如何生成" class="headerlink" title="DOM树如何生成"></a>DOM树如何生成</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;在渲染引擎内部，有HTML解析器（HTMLParser），将HTML字节流转换为DOM结构<br/></p>
+<h3 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h3><p><img src="https://img-blog.csdnimg.cn/a9b32da0182a4a15b0ea3894c0597176.png#pic_center" alt="在这里插入图片描述"><br>.网络进程接收到响应头，会根据请求头中的content-type字段判断文件的类型，如“text/html”，就会判断为HTML文件，<strong>然后创建一个渲染进程，网络进程和渲染进程之间会建立一个共享数据的管道</strong>，网络进程从中放，渲染进程从中读取，并同时将读取的数据给HTML解析器<br/><br>2. 通过分词器将字节流转换为Token<br>Token：Tag Token（StartTag+EndTag） + 文本 Token<br><img src="https://img-blog.csdnimg.cn/6ae57bf063124a02be1c90c6bb276a13.png#pic_center" alt="在这里插入图片描述"><br><em><strong>注意</strong></em>：HTML解析器维护了Token栈结构，用来计算节点之间的父子关系<br>&nbsp;&nbsp;&nbsp;&nbsp;① StartTag Token：将该节点加入到DOM树中，它的父节点就是栈中相邻的那个元素生成的节点<br>&nbsp;&nbsp;&nbsp;&nbsp;② 文本Token：Token是不需要压入到栈中，它的父节点就是当前栈顶Token所对应的DOM节点<br>&nbsp;&nbsp;&nbsp;&nbsp;③ EndTag：如是EndTag div，先查看Token栈顶的元素是否是StartTag div，是的话就将StartTag div弹出，表示该div元素解析完成<br/></p>
+<p><em><strong>例如</strong></em>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>test<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;① HTML解析器开始工作时，会默认创建一个根为document的空DOM结构，同时将StartTag document的Token压入栈底<br>&nbsp;&nbsp;&nbsp;&nbsp;② 经过分词器解析第一个StartTag html Token会被压入栈中，并创建一个html的DOM节点，添加到document上<br><img src="https://img-blog.csdnimg.cn/fa75b442281c4fbbb235392d896f6023.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;③ 接着解析StartTag body和StartTag div<br><img src="https://img-blog.csdnimg.cn/d4ac66964aba4153b28789df1eee28af.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;④ 接着解析div的文本Token，创建一个文本节点，并将该Token添加到DOM中，它的父节点就是当前Token栈顶元素对应的节点，它的父节点就是当前Token栈顶元素对应的节点<br><img src="https://img-blog.csdnimg.cn/e2c97ec2757f4bca9f8a95916cfd1007.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;⑤ 接着EndTag div，HTML解析器会判断当前栈顶的元素是否是StartTag div，如果是就从栈顶弹出StartTag div<br><img src="https://img-blog.csdnimg.cn/ba8c339e61654b9fb6db685fb532a46e.png#pic_center" alt="在这里插入图片描述"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;⑥ 最终<br><img src="https://img-blog.csdnimg.cn/1035ba571a53412d947210105345df98.png#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="js是如何影响DOM生成的"><a href="#js是如何影响DOM生成的" class="headerlink" title="js是如何影响DOM生成的"></a>js是如何影响DOM生成的</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;js文件的下载过程会阻塞DOM解析</p>
+<h3 id="1-预解析操作："><a href="#1-预解析操作：" class="headerlink" title="1.预解析操作："></a>1.预解析操作：</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;当渲染引擎收到字节流之后，会开启一个预解析线程，用来分析HTML文件中包含的js、css等相关文件，解析到相关文件后，预解析会提前下载这些文件</p>
+<h3 id="2-CDN来加速JavaScript⽂件的加载"><a href="#2-CDN来加速JavaScript⽂件的加载" class="headerlink" title="2.CDN来加速JavaScript⽂件的加载"></a>2.CDN来加速JavaScript⽂件的加载</h3><h3 id="3-压缩JavaScript文件的体积"><a href="#3-压缩JavaScript文件的体积" class="headerlink" title="3.压缩JavaScript文件的体积"></a>3.压缩JavaScript文件的体积</h3><h3 id="4-async或defer"><a href="#4-async或defer" class="headerlink" title="4.async或defer"></a>4.async或defer</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;当js文件中没有操作DOM相关代码，可以将该js脚本设置为异步加载，通过async或defer来标记<br/><br>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>async</strong></em>：指外部js文件和当前html页面同时加载（异步加载），在当前js文件一旦加载完成后，会立即执行js代码脚本文件<br>&nbsp;&nbsp;&nbsp;&nbsp;<em><strong>defer</strong></em>：指外部js文件和当前html页面同时加载（异步加载），但需要等到DOMContentLoaded事件之后执行<br/></p>
+<p><em><strong>注意</strong></em>：在解析js时，是不知道js是否操纵了CSSOM的，所以渲染引擎在遇到js脚本时，不管该脚本是否操纵了CSSOM，都会执行CSS文件下载，解析操作，再执行js脚本</p>
+<p><em><strong>另外</strong></em>：渲染引擎还有一个安全检查模块：XSSAuditor，用来检测词法安全的</p>
 
         </article>
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2022/06/30/HTTP%E8%AF%B7%E6%B1%82%EF%BC%9A%E7%BC%93%E5%AD%98/">HTTP请求：缓存</a></li>
+                    <li>上一篇: 看完啦 (つд⊂)</li>
                 
                 
-                    <li>下一篇: <a href="/2022/06/30/Chrome%E6%9E%B6%E6%9E%84%EF%BC%9A%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">Chrome架构：进程和线程</a></li>
+                    <li>下一篇: <a href="/2022/07/22/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">生命周期</a></li>
                 
             </ul>
         </section>
